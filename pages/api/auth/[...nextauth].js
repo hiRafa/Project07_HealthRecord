@@ -17,7 +17,7 @@ export default NextAuth({
           email: credentials.enteredEmail,
         });
         if (!user) {
-          client.close();
+          connectMongo.close();
           throw new Error("Email not found!");
         }
 
@@ -28,12 +28,12 @@ export default NextAuth({
         );
 
         if (!passwordIsValid) {
-          client.close();
-          throw new Error("Could not log you in!");
+          connectMongo.close();
+          throw new Error("Invalid Password!");
         }
 
-        if (user && passwordIsValid) return user;
-        client.close();
+        connectMongo.close();
+        return user;
       },
     }),
   ],

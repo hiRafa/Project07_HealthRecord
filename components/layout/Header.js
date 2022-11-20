@@ -7,7 +7,7 @@ import classes from "./UI.module.css";
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(true);
   const { data: session, status } = useSession();
-  console.log(session);
+  session && console.log("Session ongoing, need to logout");
   console.log(status);
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
@@ -30,6 +30,11 @@ const Header = () => {
           <li className={`${"showOnPc"}  ${classes.navLink}`}>
             <Link href="">Clinics</Link>
           </li>
+          <li className={`${"showOnPc"}  ${classes.navLink}`}>
+            <Link href="" onClick={handleSignout}>
+              Log out
+            </Link>
+          </li>
           {/* <li className={`${"showOnPc"}  ${classes.navLink}`}>
             <Link href="/protectedRoute">Protected</Link>
           </li>
@@ -43,9 +48,7 @@ const Header = () => {
               <li className={`${"showOnPc"}  ${classes.navLink}`}>
                 <Link href="/account">Account</Link>
               </li>
-              <li className={`${"showOnPc"}  ${classes.navLink}`}>
-                <button onClick={handleSignout}>Log out</button>
-              </li>
+      
             </Fragment>
           )}
           <li

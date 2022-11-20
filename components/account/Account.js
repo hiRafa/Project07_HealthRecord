@@ -53,13 +53,17 @@ const Account = () => {
     }
     // if trying to log in
     if (isLogin) {
-
       const response = await signIn("credentials", {
         redirect: false,
         enteredEmail: enteredEmail,
         enteredPassword: enteredPassword,
       });
       console.log(response);
+      if (response.ok) {
+        successfullNotification("Log in sucessful!");
+      } else {
+        errorNotification(response.error);
+      }
     } else {
       const enteredPassword2 = password2InputRef.current.value;
       if (enteredPassword !== enteredPassword2) {
