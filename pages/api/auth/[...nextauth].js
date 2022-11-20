@@ -14,7 +14,7 @@ export default NextAuth({
         // connecting to DataBase to check
         const connectMongo = await connectToMongoDB();
         const user = await connectMongo.db().collection("users").findOne({
-          email: credentials.email,
+          email: credentials.enteredEmail,
         });
         if (!user) {
           client.close();
@@ -23,7 +23,7 @@ export default NextAuth({
 
         // if user email was found in DataBase, check password
         const passwordIsValid = await verifyPassword(
-          credentials.password,
+          credentials.enteredPassword,
           user.password
         );
 
@@ -32,8 +32,8 @@ export default NextAuth({
           throw new Error("Could not log you in!");
         }
 
+        if (user && passwordIsValid) return user;
         client.close();
-        return user;
       },
     }),
   ],

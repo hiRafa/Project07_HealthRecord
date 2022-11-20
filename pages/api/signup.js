@@ -28,7 +28,7 @@ async function handler(req, res) {
     });
     return;
   }
-  // if not valid, return
+  // if email and password not valid, return
 
   // if valid, proceed ↓
   const client = await connectToMongoDB();
@@ -51,7 +51,7 @@ async function handler(req, res) {
     email: enteredEmail,
     password: hashedPassword,
   });
-
+  console.log(result);
   res.status(201).json({ message: "User Created!" });
   // client.close();
 }

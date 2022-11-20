@@ -24,7 +24,7 @@ async function signUp(enteredEmail, enteredPassword) {
 }
 
 const Account = () => {
-  const [loginORsignup, setloginORsignup] = useState(true);
+  const [isLogin, setisLogin] = useState(true);
   const { successfullNotification, errorNotification } = useNotification();
   // console.log(errorNotification);
   const emailInputRef = useRef();
@@ -32,33 +32,28 @@ const Account = () => {
   const password2InputRef = useRef();
 
   function switchLoginSignup() {
-    setloginORsignup((prevState) => !prevState);
+    setisLogin((prevState) => !prevState);
   }
 
   async function submitHandler(e) {
     e.preventDefault();
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    const enteredPassword2 = password2InputRef.current.value;
 
     // check on the front the email and password validation
     const isEmailValidFront = checkEmail(enteredEmail); // true or false
     const isPasswordValidFront = checkPassword(enteredPassword); // true or false
-    if (enteredPassword !== enteredPassword2) {
-      errorNotification("Passwords not matching");
-      return;
-    }
     if (!isEmailValidFront) {
-      errorNotification("Invalid Email invalid!");
+      errorNotification("Invalid Email!");
       return;
     }
     if (!isPasswordValidFront) {
       errorNotification("Weak Password!");
       return;
     }
-
     // if trying to log in
-    if (loginORsignup) {
+    if (isLogin) {
+
       const response = await signIn("credentials", {
         redirect: false,
         enteredEmail: enteredEmail,
@@ -66,6 +61,11 @@ const Account = () => {
       });
       console.log(response);
     } else {
+      const enteredPassword2 = password2InputRef.current.value;
+      if (enteredPassword !== enteredPassword2) {
+        errorNotification("Passwords not matching");
+        return;
+      }
       // if trying to sign up
       try {
         const result = await signUp(enteredEmail, enteredPassword);
@@ -82,7 +82,7 @@ const Account = () => {
   return (
     <section>
       <form onSubmit={submitHandler}>
-        <h2>{loginORsignup ? "Login" : "Sign Up"}</h2>
+        <h2>{isLogin ? "Login" : "Sign Up"}</h2>
         <div>
           <label htmlFor="email">Your Email</label>
           <input type="email" id="email" required ref={emailInputRef} />
@@ -96,7 +96,7 @@ const Account = () => {
             ref={passwordInputRef}
           />
         </div>
-        {loginORsignup ? (
+        {isLogin ? (
           ""
         ) : (
           <div>
@@ -111,11 +111,9 @@ const Account = () => {
         )}
 
         <div>
-          <button>{loginORsignup ? "Login" : "Create Account"}</button>
+          <button>{isLogin ? "Login" : "Create Account"}</button>
           <button type="button" onClick={switchLoginSignup}>
-            {loginORsignup
-              ? "Create new account"
-              : "Login with existing account"}
+            {isLogin ? "Create new account" : "Login with existing account"}
           </button>
         </div>
       </form>

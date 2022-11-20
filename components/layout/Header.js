@@ -7,8 +7,8 @@ import classes from "./UI.module.css";
 const Header = () => {
   const [activeMenu, setActiveMenu] = useState(true);
   const { data: session, status } = useSession();
-  // console.log(session);
-  // console.log(status);
+  console.log(session);
+  console.log(status);
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
