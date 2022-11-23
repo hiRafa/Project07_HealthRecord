@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 
-import classes from "./UI.module.css";
+import classes from "./Layout.module.css";
 import useNotification from "../../contexts/notifications-context";
 
 function Notification(props) {

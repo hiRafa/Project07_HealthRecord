@@ -1,8 +1,11 @@
 import React, { useRef, useState } from "react";
+import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
+import { redirect } from "next/dist/server/api-utils";
 
 import { checkEmail, checkPassword } from "../../helpers/auth-helper";
 import useNotification from "../../contexts/notifications-context";
+import Input from "../layout-units/Input";
 
 // local helper function for signup
 async function signUp(enteredEmail, enteredPassword) {
@@ -27,6 +30,7 @@ const Account = () => {
   const [isLogin, setisLogin] = useState(true);
   const { successfullNotification, errorNotification } = useNotification();
   // console.log(errorNotification);
+  const router = useRouter();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const password2InputRef = useRef();
@@ -60,6 +64,7 @@ const Account = () => {
       });
       console.log(response);
       if (response.ok) {
+        router.replace("/account");
         successfullNotification("Log in sucessful!");
       } else {
         errorNotification(response.error);
@@ -88,28 +93,33 @@ const Account = () => {
       <form onSubmit={submitHandler}>
         <h2>{isLogin ? "Login" : "Sign Up"}</h2>
         <div>
-          <label htmlFor="email">Your Email</label>
-          <input type="email" id="email" required ref={emailInputRef} />
+          <Input
+            label="Your Email"
+            htmlFor="email"
+            type="email"
+            id="email"
+            reference={emailInputRef}
+          />
         </div>
         <div>
-          <label htmlFor="password">Your Password</label>
-          <input
+          <Input
+            label="Your Password"
+            htmlFor="password"
             type="password"
             id="password"
-            required
-            ref={passwordInputRef}
+            reference={passwordInputRef}
           />
         </div>
         {isLogin ? (
           ""
         ) : (
           <div>
-            <label htmlFor="password2">Confirm Password</label>
-            <input
+            <Input
+              label="Confirm Password"
+              htmlFor="password2"
               type="password2"
               id="password2"
-              required
-              ref={password2InputRef}
+              reference={password2InputRef}
             />
           </div>
         )}

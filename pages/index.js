@@ -1,10 +1,14 @@
+import { Fragment } from "react";
+import { useSession } from "next-auth/react";
+
 import Head from "next/head";
 import Image from "next/image";
-import { Fragment } from "react";
 import Account from "../components/account/Account";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+export default function HomePage() {
+  const { data: session, status } = useSession();
+
   return (
     <Fragment>
       <Head>
@@ -13,14 +17,24 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <h1>Welcome to your Medical Records platform at Health Memory</h1>
       <section>
-        <h1>Welcome to your Medical Records platform at Health Memory</h1>
-        <div>
-          <h2>Looking for health care around you?</h2>
-          <button>Check out our list</button>
-        </div>
+        <h2>Featured Health Articles</h2>
+        <article>
+          <h3> Slider </h3>
+          <p>Is water enough?</p>
+        </article>
       </section>
-      <Account />
+
+      <section>
+        <section>
+          <div>
+            <h2>Looking for health care around you?</h2>
+            <button>Check out our list</button>
+          </div>
+        </section>
+        {!session && <Account />}
+      </section>
 
       <footer className={styles.footer}></footer>
     </Fragment>

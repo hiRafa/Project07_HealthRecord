@@ -1,0 +1,15 @@
+.buttonAll {
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem 2rem;
+}
+
+.label {
+  margin: 0 auto 0 1rem;
+}
+.input {
+  width: 30%;
+}
+.userData {
+  margin: 0;
+}

@@ -1,16 +1,17 @@
-import Link from "next/link";
 import React, { Fragment, useState } from "react";
+
+import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
-import classes from "./UI.module.css";
+import classes from "./Layout.module.css";
 
 const Header = () => {
-  const [activeMenu, setActiveMenu] = useState(true);
+  // const [activeMenu, setActiveMenu] = useState(true);
   const { data: session, status } = useSession();
   session && console.log("Session ongoing, need to logout");
   console.log(status);
 
-  const handleActiveMenu = () => setActiveMenu(!activeMenu);
+  // const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
   const handleSignout = (e) => {
     e.preventDefault();
@@ -25,15 +26,23 @@ const Header = () => {
       <nav className={classes.navigation}>
         <ul>
           <li className={`${"showOnPc"}  ${classes.navLink}`}>
-            <Link href="/products">Account</Link>
+            <Link href="/">Home</Link>
           </li>
           <li className={`${"showOnPc"}  ${classes.navLink}`}>
-            <Link href="">Clinics</Link>
+            {session ? (
+              <Link href="/account">Account</Link>
+            ) : (
+              <Link href="/">Account</Link>
+            )}
           </li>
           <li className={`${"showOnPc"}  ${classes.navLink}`}>
-            <Link href="" onClick={handleSignout}>
-              Log out
-            </Link>
+            <Link href="/centers">Health Centers!</Link>
+          </li>
+          <li
+            className={`${"showOnPc"}  ${classes.navLink}`}
+            onClick={handleSignout}
+          >
+            <Link href="/">Log out</Link>
           </li>
           {/* <li className={`${"showOnPc"}  ${classes.navLink}`}>
             <Link href="/protectedRoute">Protected</Link>
