@@ -30,21 +30,6 @@ const ProfileMainForm = () => {
 
   const submitHandler = () => {};
 
-  let currentDate = new Date();
-  // let userTimeZone = currentDate.getTimezoneOffset() / 60; // return timezone in minutes, divide by 60 for hours
-  // const timeElapsed = currentDate.now();
-  // const now = new Date(timeElapsed);
-  let currentFormatDate = currentDate.toLocaleString();
-  // console.log(currentDate.toLocaleString());
-  // console.log(currentDate.toTimeString());
-  // console.log(currentDate.toString());
-  // console.log(currentDate);
-  // console.log(currentDate.getDay());
-  // console.log(currentDate.getDate());
-  // console.log(currentDate.getMonth());
-  // console.log(currentDate.getFullYear());
-  // console.log(currentDate.getTime());
-  // console.log(userTimeZone);
   const inputs = [
     {
       type: "text",
@@ -100,7 +85,6 @@ const ProfileMainForm = () => {
 
   return (
     <section>
-      <p>{currentFormatDate}</p>
       <form onSubmit={submitHandler}>
         {isEditing ? (
           <Fragment>

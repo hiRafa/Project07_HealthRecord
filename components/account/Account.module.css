@@ -2,3 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 5fr;
 }
+
+.input_radio {
+  width: 4%;
+}

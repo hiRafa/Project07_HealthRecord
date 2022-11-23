@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import Head from "next/head";
 import Image from "next/image";
 import Account from "../components/account/Account";
-import styles from "../styles/Home.module.css";
 
 export default function HomePage() {
   const { data: session, status } = useSession();
@@ -36,7 +35,7 @@ export default function HomePage() {
         {!session && <Account />}
       </section>
 
-      <footer className={styles.footer}></footer>
+      <footer></footer>
     </Fragment>
   );
 }

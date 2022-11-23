@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 import classes from "./Layout.module.css";
+import { useRouter } from "next/router";
 
 const Header = () => {
   // const [activeMenu, setActiveMenu] = useState(true);
@@ -38,12 +39,14 @@ const Header = () => {
           <li className={`${"showOnPc"}  ${classes.navLink}`}>
             <Link href="/centers">Health Centers!</Link>
           </li>
-          <li
-            className={`${"showOnPc"}  ${classes.navLink}`}
-            onClick={handleSignout}
-          >
-            <Link href="/">Log out</Link>
-          </li>
+          {session && (
+            <li
+              className={`${"showOnPc"}  ${classes.navLink}`}
+              onClick={handleSignout}
+            >
+              <Link href="/">Log out</Link>
+            </li>
+          )}
           {/* <li className={`${"showOnPc"}  ${classes.navLink}`}>
             <Link href="/protectedRoute">Protected</Link>
           </li>

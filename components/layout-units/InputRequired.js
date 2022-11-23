@@ -8,49 +8,89 @@ const InputRequired = ({
   id,
   reference,
   dummyData,
-  className,
+  classNameLabel,
+  classNameInput,
+  onClick,
+
   list,
   options,
+
+  name,
+  value,
+  checked,
 }) => {
-  return (
-    <Fragment>
-      {!list ? (
-        // General Input
-        <Fragment>
-          <label htmlFor={htmlFor} className={`${classes.label} ${className}`}>
-            {label}
-          </label>
-          <input
-            type={type}
-            id={id}
-            ref={reference}
-            defaultValue={dummyData ? dummyData : ""}
-            required
-            className={`${classes.input} ${className}`}
-            list={list}
-          />
-        </Fragment>
-      ) : (
-        // List Options Input
-        <Fragment>
-          <label htmlFor={htmlFor} className={`${classes.label} ${className}`}>
-            {label}
-          </label>
-          <input
-            list={list}
-            defaultValue={dummyData ? dummyData : ""}
-            required
-            className={`${classes.input} ${className}`}
-          />
-          <datalist id={list}>
-            {options.map((option) => (
-              <option value={option} />
-            ))}
-          </datalist>
-        </Fragment>
-      )}
-    </Fragment>
+  console.log(dummyData);
+  const labelCustom = (
+    <label htmlFor={htmlFor} className={`${classes.label} ${classNameLabel}`}>
+      {label}
+    </label>
   );
+
+  let input;
+  if (list) {
+    input = (
+      <Fragment>
+        {labelCustom}
+        <input
+          list={list}
+          defaultValue={dummyData ? dummyData : ""}
+          required
+          ref={reference}
+          className={`${classes.input} ${classNameInput}`}
+        />
+        <datalist id={list}>
+          {options.map((option) => (
+            <option value={option} />
+          ))}
+        </datalist>
+      </Fragment>
+    );
+  } else if (name) {
+    input = (
+      <Fragment>
+        <label htmlFor="yes" className={`${classes.label} ${classNameLabel}`}>
+          Yes
+        </label>
+        <input
+          type="radio"
+          id="yes"
+          value="yes"
+          name={name}
+          required
+          className={`${classes.input} ${classNameInput}`}
+          checked={dummyData === true ? true : false}
+        />
+        <label htmlFor="no" className={`${classes.label} ${classNameLabel}`}>
+          NO
+        </label>
+        <input
+          type="radio"
+          id="no"
+          value="no"
+          name={name}
+          required
+          className={`${classes.input} ${classNameInput}`}
+          checked={dummyData === true ? false : true}
+        />
+      </Fragment>
+    );
+  } else {
+    input = (
+      <Fragment>
+        {labelCustom}
+        <input
+          type={type}
+          id={id}
+          defaultValue={dummyData ? dummyData : ""}
+          required
+          ref={reference}
+          className={`${classes.input} ${classNameInput}`}
+        />
+      </Fragment>
+    );
+  }
+
+  return <Fragment>{input}</Fragment>;
 };
 
 export default InputRequired;

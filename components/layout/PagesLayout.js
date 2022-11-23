@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import classes from "./Layout.module.css";
 
 import useNotification from "../../contexts/notifications-context";
 
@@ -13,15 +14,16 @@ const PagesLayout = (props) => {
     <Fragment>
       <Header />
 
-      <main>{props.children}</main>
-
-      {activeNotification && (
-        <Notification
-          title={activeNotification.title}
-          message={activeNotification.message}
-          status={activeNotification.status}
-        />
-      )}
+      <main className={classes.pagesLayout_main}>
+        {props.children}
+        {activeNotification && (
+          <Notification
+            title={activeNotification.title}
+            message={activeNotification.message}
+            status={activeNotification.status}
+          />
+        )}
+      </main>
     </Fragment>
   );
 };

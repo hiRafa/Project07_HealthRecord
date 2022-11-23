@@ -1,7 +1,8 @@
 import React from "react";
+import PagesLayoutInAccount from "../../components/layout/PagesLayoutInAccount";
 
-const DNA = () => {
-  return <div>DNA</div>;
+const DNAPage = () => {
+  return <PagesLayoutInAccount>DNA</PagesLayoutInAccount>;
 };
 
-export default DNA;
+export default DNAPage;
