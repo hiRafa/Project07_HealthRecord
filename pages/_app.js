@@ -5,13 +5,13 @@ import "../styles/globals.css";
 
 import { NotificationContextProvider } from "../contexts/notifications-context";
 
-import PagesLayout from "../components/layout/PagesLayout";
+import PagesLayoutApp from "../components/layout/PagesLayoutApp";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
     <SessionProvider session={session}>
       <NotificationContextProvider>
-        <PagesLayout>
+        <PagesLayoutApp>
           <Head>
             <title>Ori Craft & Hobbies</title>
             <meta />
@@ -23,9 +23,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
             />
             <link rel="icon" href="/favicon.ico" />
           </Head>
-
           <Component {...pageProps} />
-        </PagesLayout>
+        </PagesLayoutApp>
       </NotificationContextProvider>
     </SessionProvider>
   );

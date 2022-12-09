@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
-import { redirect } from "next/dist/server/api-utils";
+import classes from "./Home.module.css";
 
 import { checkEmail, checkPassword } from "../../helpers/auth-helper";
 import useNotification from "../../contexts/notifications-context";
@@ -26,7 +26,7 @@ async function signUp(enteredEmail, enteredPassword) {
   return data;
 }
 
-const Account = () => {
+const AccountAccess = () => {
   const [isLogin, setisLogin] = useState(true);
   const { successfullNotification, errorNotification } = useNotification();
   // console.log(errorNotification);
@@ -89,10 +89,13 @@ const Account = () => {
   }
 
   return (
-    <section>
-      <form onSubmit={submitHandler}>
+    <section className={classes.section_form}>
+      <form
+        onSubmit={submitHandler}
+        className={`flex_column ${classes.form_account}`}
+      >
         <h2>{isLogin ? "Login" : "Sign Up"}</h2>
-        <div>
+        <div className={classes.form_account_in}>
           <Input
             label="Your Email"
             htmlFor="email"
@@ -101,7 +104,7 @@ const Account = () => {
             reference={emailInputRef}
           />
         </div>
-        <div>
+        <div className={classes.form_account_in}>
           <Input
             label="Your Password"
             htmlFor="password"
@@ -124,15 +127,20 @@ const Account = () => {
           </div>
         )}
 
-        <div>
+        <div className={`flex_column ${classes.account_buttons}`}>
           <button>{isLogin ? "Login" : "Create Account"}</button>
-          <button type="button" onClick={switchLoginSignup}>
-            {isLogin ? "Create new account" : "Login with existing account"}
-          </button>
+          <p
+            onClick={switchLoginSignup}
+            className={`${classes.account_buttons_switch}`}
+          >
+            {isLogin
+              ? "Or Create new account"
+              : "Or Login with existing account"}
+          </p>
         </div>
       </form>
     </section>
   );
 };
 
-export default Account;
+export default AccountAccess;

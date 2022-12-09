@@ -21,7 +21,7 @@ const PagesLayoutInAccount = ({ children }) => {
   return (
     <Fragment>
       <h1>Welcome to your profile</h1>
-      <p>{currentFormatDate}</p>
+      {/* <p>{currentFormatDate}</p> */}
       <nav className={classes.nav_account}>
         <ul>
           <Link href="/account">

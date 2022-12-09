@@ -2,11 +2,13 @@ import { Fragment } from "react";
 import { useSession } from "next-auth/react";
 
 import Head from "next/head";
-import Image from "next/image";
-import Account from "../components/account/Account";
+import SectionFeaturedArticles from "../components/home/SectionFeaturedArticles";
+import SectionTop from "../components/home/SectionTop";
+import SectionTopIn from "../components/home/SectionTopIn";
+import SectionStories from "../components/home/SectionStories";
 
 export default function HomePage() {
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   return (
     <Fragment>
@@ -16,26 +18,12 @@ export default function HomePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>Welcome to your Medical Records platform at Health Memory</h1>
-      <section>
-        <h2>Featured Health Articles</h2>
-        <article>
-          <h3> Slider </h3>
-          <p>Is water enough?</p>
-        </article>
-      </section>
-
-      <section>
-        <section>
-          <div>
-            <h2>Looking for health care around you?</h2>
-            <button>Check out our list</button>
-          </div>
-        </section>
-        {!session && <Account />}
-      </section>
-
-      <footer></footer>
+      <SectionTop>
+        <SectionTopIn />
+      </SectionTop>
+      <SectionFeaturedArticles />
+      <SectionStories />
+      
     </Fragment>
   );
 }

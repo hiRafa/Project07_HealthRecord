@@ -1,0 +1,279 @@
+/* HOME  */
+.top {
+  width: 100%;
+  height: 500px;
+  padding-top: var(--top-bottom-spacing);
+  position: relative;
+  color: var(--color-white);
+}
+.top > * {
+  position: relative;
+}
+
+/* -------- WAVES  */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+.waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 50%;
+}
+.wave1 {
+  fill: var(--color-secondary-waves);
+}
+.wave2 {
+  fill: var(--color-secondary-waves);
+}
+.wave3 {
+  fill: var(--color-secondary-waves);
+}
+.wave4 {
+  fill: var(--color-secondary-waves);
+}
+
+/* HOME TOP */
+.topIn {
+  height: 100%;
+}
+
+.topIn_body {
+  width: 100%;
+  gap: 1rem;
+  height: 100%;
+}
+.body_intro {
+  width: 100%;
+}
+
+/* ----------- Account Log in Register */
+.section_form {
+  width: 80%;
+}
+.form_account {
+  /* background: var(--color-primary-light); */
+  color: var(--color-white);
+  width: 50%;
+  min-width: 300px;
+  max-width: 450px;
+  margin: 0 0 0 auto;
+  padding: 2rem;
+  border-radius: var(--borderRadius-card);
+  box-shadow: 0px 0px 15px var(--color-primary-dark);
+  align-items: center;
+  position: relative;
+}
+.form_account:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../public/bg_dnatree.png);
+  background-size: cover;
+  background-position: center center;
+  filter: blur(4px) saturate(0.5);
+}
+.form_account > * {
+  position: relative;
+}
+
+.form_account_in {
+  display: grid;
+  grid-template-columns: minmax(30%, 150px) 1fr;
+  justify-content: center;
+  align-items: center;
+}
+.form_account_in input {
+  height: 30px;
+  min-width: 100px;
+  width: 100%;
+}
+
+.account_buttons {
+  gap: 1rem;
+}
+
+.account_buttons button {
+  width: 100%;
+  gap: 1rem;
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+}
+
+.account_buttons_switch {
+  text-decoration: underline;
+}
+.account_buttons_switch:hover {
+  cursor: pointer;
+}
+
+/* ----------- FEATURED  */
+
+.featured {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  gap: 1rem;
+  padding: 2rem;
+}
+.featured::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../public/bg_grasswave.png);
+  background-size: cover;
+  background-position: top center;
+  filter: blur(1px) saturate(0.8);
+}
+.featured > * {
+  position: inherit;
+}
+
+.featured h2 {
+  text-align: center;
+}
+
+.featured_slide {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--borderRadius-card);
+  color: var(--color-black);
+  gap: var(--gap-pc);
+}
+.featured_slide > * {
+  width: 100%;
+}
+
+.slide_title {
+  text-align: center;
+}
+
+.slide_body {
+  gap: var(--gap-pc);
+  display: flex;
+  /* grid-template-columns: 30% 65%; */
+  /* grid-auto-rows: auto; */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.body_img {
+  width: 100%;
+  height: 100%;
+}
+.body_p {
+  width: 100%;
+  height: 100%;
+}
+
+.slide_by {
+  gap: var(--gap-pc);
+  justify-content: flex-end;
+}
+
+.by_img {
+  border-radius: var(--borderRadius-rounded);
+}
+
+.searchORlogin {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* STORIES  */
+.section_stories {
+  position: relative;
+}
+.stories_bg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.stories_cards {
+  justify-content: space-between;
+  position: relative;
+}
+
+.storyCard {
+  clip-path: inset(2px round 10px 20px 30px 10px);
+  width: 30%;
+  border-radius: var(--borderRadius-card);
+  padding: 1rem 1rem 0 1rem;
+  border-radius: var(--borderRadius-card);
+}
+.storyCard::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../public/bg_grasswave.png);
+  background-size: cover;
+  background-position: bottom center;
+  z-index: -1;
+}
+
+.storyCard img {
+  border-radius: var(--borderRadius-card);
+  position: relative;
+  bottom: -30px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 5;
+}
+
+@media screen and (max-width: 720px) {
+  .main {
+    height: 100%;
+    padding-bottom: var(--top-bottom-spacing);
+  }
+  .top {
+    gap: var(--gap-pc);
+  }
+  .top_body {
+    gap: var(--gap-pc);
+  }
+  .form_account {
+    margin: 0 auto;
+  }
+
+  .slide_body {
+  }
+}

@@ -45,35 +45,6 @@ const InputRequired = ({
         </datalist>
       </Fragment>
     );
-  } else if (name) {
-    input = (
-      <Fragment>
-        <label htmlFor="yes" className={`${classes.label} ${classNameLabel}`}>
-          Yes
-        </label>
-        <input
-          type="radio"
-          id="yes"
-          value="yes"
-          name={name}
-          required
-          className={`${classes.input} ${classNameInput}`}
-          checked={dummyData === true ? true : false}
-        />
-        <label htmlFor="no" className={`${classes.label} ${classNameLabel}`}>
-          NO
-        </label>
-        <input
-          type="radio"
-          id="no"
-          value="no"
-          name={name}
-          required
-          className={`${classes.input} ${classNameInput}`}
-          checked={dummyData === true ? false : true}
-        />
-      </Fragment>
-    );
   } else {
     input = (
       <Fragment>

@@ -6,7 +6,7 @@ import useNotification from "../../contexts/notifications-context";
 import Header from "./Header";
 import Notification from "./Notification";
 
-const PagesLayout = (props) => {
+const PagesLayoutApp = (props) => {
   const { activeNotification } = useNotification();
   //   console.log(activeNotification);
 
@@ -14,7 +14,7 @@ const PagesLayout = (props) => {
     <Fragment>
       <Header />
 
-      <main className={classes.pagesLayout_main}>
+      <main className={classes.main}>
         {props.children}
         {activeNotification && (
           <Notification
@@ -24,8 +24,10 @@ const PagesLayout = (props) => {
           />
         )}
       </main>
+      
+      <footer></footer>
     </Fragment>
   );
 };
 
-export default PagesLayout;
+export default PagesLayoutApp;

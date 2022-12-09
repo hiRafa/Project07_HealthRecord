@@ -4,11 +4,10 @@
   padding: 0.5rem 2rem;
 }
 
-.label {
-  margin: 0 auto 0 1rem;
-}
 .input {
   width: 30%;
+  min-width: 100px;
+  height: 30px;
 }
 .userData {
   margin: 0;
