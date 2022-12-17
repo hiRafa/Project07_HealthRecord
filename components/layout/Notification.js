@@ -1,5 +1,6 @@
 import classes from "./Layout.module.css";
 import useNotification from "../../contexts/notifications-context";
+import { useRef } from "react";
 
 function Notification(props) {
   const { hideNotification } = useNotification();

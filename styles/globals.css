@@ -22,19 +22,22 @@
   --color-pending: #177cbe;
   --color-error: #e65035;
 
-  --borderRadius-card: 1rem;
+  --borderRadius-card: 10px;
   --borderRadius-button: 5px;
   --borderRadius-rounded: 50px;
   --transition: all 1s linear;
+  --transition-disappear: all 0.25s linear;
 
   --gap-pc: 2rem;
   --top-bottom-spacing: 2rem;
+  --boxShadow: 0px 0px 15px;
 }
 
 html,
 body {
   padding: 0;
   margin: 0;
+  scroll-behavior: "smooth";
   overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
@@ -43,6 +46,9 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+li {
+  list-style: none;
 }
 
 * {

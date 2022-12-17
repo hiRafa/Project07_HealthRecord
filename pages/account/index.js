@@ -1,3 +1,4 @@
+import Head from "next/head";
 import React, { Fragment, useState } from "react";
 import ProfileMainForm from "../../components/account/ProfileMainForm";
 import ProfileRecordsForm from "../../components/account/ProfileRecordsForm";

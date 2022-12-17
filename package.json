@@ -9,11 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/react-refresh-utils": "^13.0.6",
     "bcryptjs": "^2.4.3",
+    "eslint-config-next": "^13.0.6",
     "mongodb": "^4.12.0",
-    "next": "13.0.3",
-    "next-auth": "^4.16.4",
-    "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "next": "^13.0.6",
+    "next-auth": "^4.18.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "swr": "^2.0.0",
+    "dns": "file:./src/mock/dns"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.3.22",
+    "swc-loader": "^0.2.3"
   }
 }

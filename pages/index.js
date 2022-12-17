@@ -1,13 +1,30 @@
 import { Fragment } from "react";
-import { useSession } from "next-auth/react";
 
 import Head from "next/head";
 import SectionFeaturedArticles from "../components/home/SectionFeaturedArticles";
 import SectionTop from "../components/home/SectionTop";
-import SectionTopIn from "../components/home/SectionTopIn";
 import SectionStories from "../components/home/SectionStories";
 
-export default function HomePage() {
+import {
+  getFeaturedArticles,
+  getUserStories,
+} from "../helpers/firebaseData-helper";
+
+export async function getStaticProps() {
+  const featuredArticles = await getFeaturedArticles();
+  const userStories = await getUserStories();
+  return {
+    props: {
+      featuredArticles: featuredArticles,
+      userStories: userStories,
+    },
+  };
+}
+export default function HomePage(props) {
+  const { featuredArticles, userStories } = props;
+  console.log(props);
+  // console.log(featuredArticles);
+  console.log(userStories.length);
   // const { data: session, status } = useSession();
 
   return (
@@ -18,12 +35,9 @@ export default function HomePage() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SectionTop>
-        <SectionTopIn />
-      </SectionTop>
-      <SectionFeaturedArticles />
-      <SectionStories />
-      
+      <SectionTop />
+      <SectionFeaturedArticles featuredArticles={featuredArticles} />
+      <SectionStories userStories={userStories} />
     </Fragment>
   );
 }

@@ -24,8 +24,10 @@ const PagesLayoutApp = (props) => {
           />
         )}
       </main>
-      
-      <footer></footer>
+
+      <footer className={`flex_center ${classes.footer}`}>
+        <p>Web app created by Hirashiki Rafael, 2022 </p>
+      </footer>
     </Fragment>
   );
 };

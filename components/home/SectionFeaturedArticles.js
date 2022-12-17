@@ -1,45 +1,80 @@
 import Image from "next/image";
-import React from "react";
+import React, { Fragment, useState } from "react";
 import classes from "./Home.module.css";
 
-const SectionFeaturedArticles = () => {
+const SectionFeaturedArticles = ({ featuredArticles }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const formatedText = (text) => {
+    return `${text.substring(0, 500)}...`;
+  };
+
+  const goToSlide = (slideIndex) => {
+    setCurrentIndex(slideIndex);
+  };
+  console.log(currentIndex);
+
+  const containerIcons = featuredArticles.map((article, iconIndex) => (
+    <span
+      key={iconIndex}
+      className={`material-symbols-outlined ${classes.slider_icon} ${
+        currentIndex === iconIndex && classes.iconActive
+      }`}
+      onClick={() => goToSlide(iconIndex)}
+    >
+      medical_services
+    </span>
+  ));
+
+  // console.log(articles[0].key);
+  // console.log(articles.length);
+
   return (
     <section className={`section  ${classes.featured}`}>
-      <h2>Featured Health Articles</h2>
-      <article
-        className={`flex_center flex_column section_container  ${classes.featured_slide}`}
-      >
-        <h3 className={` ${classes.slide_title}`}>Is water enough?</h3>
-        <div className={`flex_column_mobile ${classes.slide_body}`}>
-          <Image
-            src="/water.jpg"
-            className={`${classes.body_img}`}
-            width={200}
-            height={100}
-          />
-          <p className={`${classes.body_p}`}>
-            Water (chemical formula H2O) is an inorganic, transparent,
-            tasteless, odorless, and nearly colorless chemical substance, which
-            is the main constituent of Earth's hydrosphere and the fluids of all
-            known living organisms (in which it acts as a solvent[1]). It is
-            vital for all known forms of life, despite providing neither food,
-            energy, nor organic micronutrients. Its chemical formula, H2O,
-            indicates that each of its molecules contains one oxygen and two
-            hydrogen atoms, connected by covalent bonds. The hydrogen atoms are
-            attached to the oxygen atom at an angle of 104.45°.[2] "Water" is
-            also the name of the liquid state of ...
-          </p>
+      <div className={`section_container flex_column ${classes.featured_in}`}>
+        <h2>Featured Health Articles</h2>
+        {featuredArticles.map((article, articleIndex) => (
+          <Fragment>
+            <div className={`${classes.featured_in_imgdiv}`}>
+              <img
+                src={article.image}
+                className={`${classes.featured_in_img}  ${
+                  currentIndex === articleIndex && classes.featured_in_imgActive
+                }`}
+              />
+            </div>
+            <article
+              className={`flex_center flex_column   
+      ${classes.featured_slide} 
+      ${currentIndex === articleIndex && classes.slideActive}`}
+              key={articleIndex}
+            >
+              <h3 className={` ${classes.slide_title}`}>{article.title}</h3>
+              <div
+                className={`flex_center flex_column_mobile ${classes.slide_body}`}
+              >
+                <div className={`${classes.body_imgdiv}`}>
+                  <img src={article.image} className={`${classes.body_img}`} />
+                </div>
+                <p className={`${classes.body_p}`}>
+                  {formatedText(article.text)}
+                </p>
+              </div>
+              <div className={`flex_center ${classes.slide_by}`}>
+                <p>{article.author}</p>
+                <img
+                  src={article.photo}
+                  className={`flex_center ${classes.by_img}`}
+                />
+              </div>
+            </article>
+          </Fragment>
+        ))}
+
+        <div className={`flex_center ${classes.slider_iconContainer}`}>
+          {containerIcons}
         </div>
-        <div className={`flex_center ${classes.slide_by}`}>
-          <p>Heliol Faria, Nutrologist</p>
-          <Image
-            src="/water.jpg"
-            width={80}
-            height={80}
-            className={`flex_center ${classes.by_img}`}
-          />
-        </div>
-      </article>
+      </div>
     </section>
   );
 };

@@ -8,3 +8,14 @@ export async function connectToMongoDB() {
   // it is possible to create an extra collection by inserting a title here mongodb.net/(inserthere)?retryWrites
   //  "mongodb+srv://rflhajime:academind123@maincluster.mh4flrs.mongodb.net/newcollection?retryWrites=true&w=majority"
 }
+
+export async function fetchFeatured(client, collection = {}) {
+  // try {
+  //   MongoClientConnection = await connectToMongoDB();
+  // } catch (error) {
+  //   res.status(500).json({ message: "Connecting to the database failed!" });
+  //   return;
+  // }
+
+  return await client.db().collection(collection);
+}

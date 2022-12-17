@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header className={classes.header}>
-      <Image width={80} height={80} className={`${classes.bg_img}`} />
+      <img className={`${classes.bg_img}`} />
       <div className={classes.logo}>
         <Link href="/">Logo</Link>
       </div>

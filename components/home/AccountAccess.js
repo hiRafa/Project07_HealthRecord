@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
-import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
+
+import { useRouter } from "next/router";
 import classes from "./Home.module.css";
 
 import { checkEmail, checkPassword } from "../../helpers/auth-helper";
@@ -57,19 +58,23 @@ const AccountAccess = () => {
     }
     // if trying to log in
     if (isLogin) {
-      const response = await signIn("credentials", {
+      let response;
+      await signIn("credentials", {
         redirect: false,
         enteredEmail: enteredEmail,
         enteredPassword: enteredPassword,
-      });
-      console.log(response);
-      if (response.ok) {
-        router.replace("/account");
+      }).then((data) => (response = data));
+      // console.log(response);
+      if (response.ok || response.status === 302) {
+        router.push("/account");
+        router.reload();
         successfullNotification("Log in sucessful!");
       } else {
         errorNotification(response.error);
       }
-    } else {
+    }
+    // Sign up conditions
+    else {
       const enteredPassword2 = password2InputRef.current.value;
       if (enteredPassword !== enteredPassword2) {
         errorNotification("Passwords not matching");
@@ -113,10 +118,8 @@ const AccountAccess = () => {
             reference={passwordInputRef}
           />
         </div>
-        {isLogin ? (
-          ""
-        ) : (
-          <div>
+        {isLogin ? null : (
+          <div className={classes.form_account_in}>
             <Input
               label="Confirm Password"
               htmlFor="password2"

@@ -53,7 +53,7 @@ export const NotificationContextProvider = (props) => {
   const errorNotification = (error) =>
     showNotification({
       title: "Error!",
-      message: error  || "Something went wrong...",
+      message: error || "Something went wrong...",
       status: "error",
     });
 

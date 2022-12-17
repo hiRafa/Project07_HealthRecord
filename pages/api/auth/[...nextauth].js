@@ -10,7 +10,7 @@ export default NextAuth({
   },
   providers: [
     CredentialsProvider({
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         // connecting to DataBase to check
         const connectMongo = await connectToMongoDB();
         const user = await connectMongo.db().collection("users").findOne({

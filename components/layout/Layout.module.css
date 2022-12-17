@@ -160,4 +160,10 @@
   background-color: var(--color-error);
 }
 
-/* SectionContainer is on global.css */
+/* FOOTER */
+
+.footer {
+  padding: 2rem;
+  background-color: black;
+  color: var(--color-primary-light);
+}
