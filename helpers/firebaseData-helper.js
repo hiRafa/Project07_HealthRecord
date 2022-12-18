@@ -28,6 +28,10 @@ export async function getFeaturedArticles() {
   // console.log(allFeaturedArtArr);
   return allFeaturedArtArr;
 }
+export async function getArticleByID(id) {
+  const allArticlesArr = await getFeaturedArticles();
+  return allArticlesArr.find((article) => article.id === id);
+}
 
 // export async function getFeaturedProducts() {
 //   const allFeaturedArt = await getFeaturedArticles();
@@ -81,4 +85,8 @@ export async function getUserStories() {
   });
   // console.log(allUserStoriesArr);
   return allUserStoriesArr;
+}
+export async function getStoryID(id) {
+  const allStoriesArr = await getUserStories();
+  return allStoriesArr.find((story) => story.id === id);
 }

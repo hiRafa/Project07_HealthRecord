@@ -66,6 +66,20 @@
 .navMenuIcon {
   color: var(--color-white);
 }
+.navMenu_button {
+  position: relative;
+  z-index: 100;
+}
+
+.navMobile {
+  background-color: var(--color-white);
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 3rem 2rem;
+  z-index: 100;
+  gap: 4rem;
+}
 
 @media (min-width: 768px) {
   .logo {

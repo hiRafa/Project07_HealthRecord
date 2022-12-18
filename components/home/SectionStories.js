@@ -1,6 +1,9 @@
 import Image from "next/image";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import classes from "./Home.module.css";
+
+import modalCtxt from "../../contexts/modal-context";
+import ButtonAll from "../layout-units/ButtonAll";
 
 const SectionStories = ({ userStories }) => {
   const cardsContainerRef = useRef();
@@ -39,18 +42,28 @@ const SectionStories = ({ userStories }) => {
   };
 
   // list of items
+  const { openModalHandler, modalIsOpen } = modalCtxt();
+  console.log(openModalHandler);
   const userStory = userStories.map((story) => (
-    <li className={` ${classes.storyCard}`} key={story.id}>
+    <li
+      onClick={openModalHandler}
+      className={` ${classes.storyCard}`}
+      key={story.id}
+    >
       <div className={`flex_column ${classes.storyCard_in}`}>
         <img alt="something" src={story.photo} width={80} height={80} />
         <h3>{story.title}</h3>
         <p>{story.text}</p>
+        <ButtonAll
+          href={`/publicationslist/stories/${story.id}`}
+          text={`Read More`}
+        />
       </div>
     </li>
   ));
 
   return (
-    <section className={`section_container  ${classes.section_stories}`}>
+    <section className={`${classes.section_stories}`}>
       <h2>Check out the stories users are sharing with us!</h2>
       <ul
         className={`flex_center ${classes.stories_cardsContainer}`}
@@ -58,23 +71,23 @@ const SectionStories = ({ userStories }) => {
       >
         {userStory}
       </ul>
-      <div
-        className={`section_container flex_center ${classes.stories_buttons}`}
-      >
-        <button
+      <div className={`flex_center ${classes.stories_buttons}`}>
+        <span
           onClick={() => scrollLeft()}
-          className={`button_test ${
+          className={`material-symbols-outlined ${classes.button_icon_left}  ${
             scrollLeftIsZero && classes.button_inactive
           }`}
         >
-          Left
-        </button>
-        <button
+          input
+        </span>
+        <span
           onClick={() => scrollRight()}
-          className={`button_test ${scrollRightMax && classes.button_inactive}`}
+          className={`material-symbols-outlined  ${
+            scrollRightMax && classes.button_inactive
+          }`}
         >
-          Right
-        </button>
+          input
+        </span>
       </div>
     </section>
   );

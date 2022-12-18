@@ -1,5 +1,6 @@
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
+import ButtonAll from "../layout-units/ButtonAll";
 import classes from "./Home.module.css";
 
 const SectionFeaturedArticles = ({ featuredArticles }) => {
@@ -53,12 +54,17 @@ const SectionFeaturedArticles = ({ featuredArticles }) => {
               <div
                 className={`flex_center flex_column_mobile ${classes.slide_body}`}
               >
-                <div className={`${classes.body_imgdiv}`}>
+                <div className={`flex_center ${classes.body_imgdiv}`}>
                   <img src={article.image} className={`${classes.body_img}`} />
                 </div>
-                <p className={`${classes.body_p}`}>
-                  {formatedText(article.text)}
-                </p>
+                <div className={`${classes.body_p}`}>
+                  <p>{formatedText(article.text)}</p>
+                  <ButtonAll
+                    href={`/publicationslist/articles/${article.id}`}
+                    text={`Keep Reading`}
+                    className={classes.body_button}
+                  />
+                </div>
               </div>
               <div className={`flex_center ${classes.slide_by}`}>
                 <p>{article.author}</p>

@@ -148,26 +148,11 @@
   padding: 4rem 0;
   background-color: var(--color-primary-dark);
 }
-/* .featured::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  top: 0;
-  right: 0;
-  margin: auto;
-  width: 95%;
-  height: 95%;
-  background-image: url(../../public/bg_dnatree.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
-  filter: blur(1px) saturate(0.8);
-} */
 
 .featured_in {
   height: 100%;
-  width: 96%;
+  min-height: 660px;
+  width: 80%;
   margin: auto;
   position: relative;
   color: white;
@@ -270,9 +255,8 @@
   align-items: center;
 }
 .body_imgdiv {
-  max-height: 230px;
+  height: 230px;
   width: 30%;
-  text-align: center;
 }
 .body_img {
   width: 100%;
@@ -285,6 +269,10 @@
   color: var(--color-primary-dark);
   padding: 2rem;
   border-radius: var(--borderRadius-card);
+}
+.body_button {
+  margin: 2rem 0 0;
+  color: var(--color-primary-dark);
 }
 .slide_by {
   gap: var(--gap-pc);
@@ -319,7 +307,9 @@
 }
 .section_stories h2 {
   text-align: center;
-  color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  background-color: var(--color-white);
+  padding: 1rem 0;
 }
 .stories_bg {
   position: absolute;
@@ -329,8 +319,8 @@
 }
 
 .stories_cardsContainer {
-  padding: 2rem;
-  width: 80%;
+  padding: 3rem 1rem;
+  width: 100%;
   margin: auto;
   justify-content: space-between;
   position: relative;
@@ -354,6 +344,7 @@
   box-shadow: var(--boxShadow) white;
   border-radius: var(--borderRadius-card);
 }
+
 .storyCard_in {
   height: 100%;
   clip-path: inset(2px round var(--borderRadius-card));
@@ -388,9 +379,23 @@
   width: 25%;
   margin: 0 auto;
   justify-content: space-around;
+  gap: 2rem;
+}
+.stories_buttons > * {
+  color: var(--color-primary-light);
+
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+.stories_buttons > *:hover {
+  cursor: pointer;
+}
+.button_icon_left {
+  rotate: 180deg;
 }
 .button_inactive {
-  background: #ccc;
+  color: #ccc;
 }
 .button_inactive:hover {
   cursor: initial;

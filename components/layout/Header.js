@@ -1,19 +1,20 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 
 import classes from "./Layout.module.css";
-import { useRouter } from "next/router";
-import Image from "next/image";
+
+import Backdrop from "./Backdrop";
 
 const Header = () => {
-  // const [activeMenu, setActiveMenu] = useState(true);
+  const [openNav, setOpenNav] = useState(false);
   const { data: session, status } = useSession();
   // session && console.log("Session ongoing, need to logout");
   // console.log(status);
 
-  // const handleActiveMenu = () => setActiveMenu(!activeMenu);
+  const handleopenNav = () => setOpenNav(true);
+  const handlecloseNav = () => setOpenNav(false);
 
   const handleSignout = (e) => {
     e.preventDefault();
@@ -49,28 +50,44 @@ const Header = () => {
               <Link href="/">Log out</Link>
             </li>
           )}
-          {/* <li className={`showOnPc  ${classes.navLink}`}>
-            <Link href="/protectedRoute">Protected</Link>
+          <li className={`showOnPc  ${classes.navLink}`}>
+            <Link href="/publicationslist">Publications</Link>
           </li>
-          {!session && (
-            <li className={`showOnPc  ${classes.navLink}`}>
-              <Link href="/account">Log in</Link>
-            </li>
-          )}
-          {session && (
-            <Fragment>
-              <li className={`showOnPc  ${classes.navLink}`}>
-                <Link href="/account">Account</Link>
-              </li>
-      
-            </Fragment>
-          )}
           <li
-            className={`showOnMobile  ${classes.navMenuIcon}`}
-            onClick={handleActiveMenu}
+            className={`showOnMobile  ${classes.navLink} ${classes.navMenu_button}`}
+            onClick={handleopenNav}
           >
             Menu
-          </li> */}
+          </li>
+          {openNav && <Backdrop onClick={handlecloseNav} />}
+          {openNav && (
+            <div className={`flex_column ${classes.navMobile}`}>
+              <li className={`showOnMobile ${classes.navLink}`}>
+                <Link href="/">Home</Link>
+              </li>
+              <li className={`showOnMobile  ${classes.navLink}`}>
+                {session ? (
+                  <Link href="/account">Account</Link>
+                ) : (
+                  <Link href="/">Account</Link>
+                )}
+              </li>
+              <li className={`showOnMobile  ${classes.navLink}`}>
+                <Link href="/centers">Health Centers!</Link>
+              </li>
+              {session && (
+                <li
+                  className={`showOnMobile  ${classes.navLink}`}
+                  onClick={handleSignout}
+                >
+                  <Link href="/">Log out</Link>
+                </li>
+              )}
+              <li className={`showOnMobile  ${classes.navLink}`}>
+                <Link href="/publicationslist">Publications</Link>
+              </li>
+            </div>
+          )}
         </ul>
       </nav>
     </header>
