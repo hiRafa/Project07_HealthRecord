@@ -1,0 +1,48 @@
+.publications_nav {
+  font-size: 1.5rem;
+}
+.pub_navUL {
+  gap: var(--gap-pc);
+}
+.pub_navUL_li {
+  background-color: var(--color-white);
+  padding: 1rem 2rem;
+  margin: 2rem 0;
+  border-radius: var(--borderRadius-button);
+}
+
+.activeLi {
+  background-color: var(--color-primary-light);
+}
+
+/* CARDS LIST  */
+
+.publications_container {
+  width: 100%;
+  flex-wrap: wrap;
+  gap: var(--gap-pc);
+}
+.publications_card {
+  background-color: white;
+  padding: 2rem;
+  width: 45%;
+  height: 50vh;
+  overflow: hidden;
+  border-radius: var(--borderRadius-card);
+}
+.publications_card > * {
+  width: 100%;
+}
+.card_by {
+  gap: 1rem;
+  justify-content: right;
+}
+.card_byStories {
+  gap: 1rem;
+  justify-content: space-between;
+}
+.card_by_photo {
+  border-radius: var(--borderRadius-rounded);
+  height: 100px;
+  width: 100px;
+}

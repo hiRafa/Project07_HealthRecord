@@ -45,14 +45,14 @@ export async function getArticleByID(id) {
 // }
 
 // export async function getFilteredProducts(dateFilter) {
-//   const { filteredYear, filteredMonth } = dateFilter;
+//   const { selectedYear, selectedMonth } = dateFilter;
 //   const allFeaturedArt = await getFeaturedArticles();
 
 //   let filteredEvents = allFeaturedArt.filter((event) => {
 //     const eventDate = new Date(event.date);
 //     return (
-//       eventDate.getFullYear() === filteredYear &&
-//       eventDate.getMonth() === filteredMonth - 1
+//       eventDate.getFullYear() === selectedYear &&
+//       eventDate.getMonth() === selectedMonth - 1
 //     );
 //   });
 
@@ -89,4 +89,43 @@ export async function getUserStories() {
 export async function getStoryID(id) {
   const allStoriesArr = await getUserStories();
   return allStoriesArr.find((story) => story.id === id);
+}
+
+import { formatDate } from "./general-helper";
+
+//selectedYear and selectedMonth
+export async function getFilteredPublications({ selectedYear, selectedMonth }) {
+  const articlesArr = await getFeaturedArticles();
+  const storiesArr = await getUserStories();
+
+  let filteredPub = [];
+  let filteredArticles = articlesArr
+    .map((art) => {
+      const year = +art.date.toString().slice(0, 4);
+      const month = +art.date.toString().substring(4, 6);
+      const key = art.id;
+      // console.log(year, month);
+      return { year, month, ...art, key };
+    })
+    .filter((art) => {
+      // console.log(art);
+      if (art.year === selectedYear && art.month === selectedMonth)
+        filteredPub.push(art);
+    });
+  let filteredStories = storiesArr
+    .map((sto) => {
+      const year = +sto.date.toString().slice(0, 4);
+      const month = +sto.date.toString().substring(4, 6);
+      const key = sto.id;
+      // console.log(year, month);
+      return { year, month, ...sto, key };
+    })
+    .filter((sto) => {
+      // console.log(sto);
+      if (sto.year === selectedYear && sto.month === selectedMonth)
+        filteredPub.push(sto);
+    });
+  // let filteredPub = [filteredArticles, filteredStories];
+
+  return filteredPub;
 }
