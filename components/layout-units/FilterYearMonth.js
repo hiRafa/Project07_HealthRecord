@@ -19,8 +19,9 @@ const FilterYearMonth = ({ currentYear, currentMonth }) => {
     const selectedMonth = monthInputRef.current.value;
 
     // getting method from parent
-
-    onFindPublication(router, selectedYear, selectedMonth);
+    if (selectedMonth !== "")
+      onFindPublication(router, selectedYear, selectedMonth);
+    else if (selectedMonth === "") onFindPublication(router, selectedYear);
   }
 
   return (
@@ -41,7 +42,7 @@ const FilterYearMonth = ({ currentYear, currentMonth }) => {
         <div className={classes.control}>
           <label htmlFor="month" />
           <select id="month" ref={monthInputRef}>
-            {/* <option value="">Month</option> */}
+            <option value="">Month</option>
             <option value="1">Jan</option>
             <option value="2">Feb</option>
             <option value="3">Mar</option>

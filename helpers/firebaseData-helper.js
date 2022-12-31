@@ -1,3 +1,5 @@
+// --------------------------------------------
+// ----------- Fetch Featured Articles from FireBase
 export async function getFeaturedArticles() {
   const response = await fetch(
     "https://project-healthrecords-default-rtdb.asia-southeast1.firebasedatabase.app/featured.json"
@@ -39,26 +41,8 @@ export async function getArticleByID(id) {
 //   return allFeaturedArt.filter((product) => product.featured);
 // }
 
-// export async function getProductById(id) {
-//   const allFeaturedArt = await getFeaturedArticles();
-//   return allFeaturedArt.find((product) => product.id === id);
-// }
-
-// export async function getFilteredProducts(dateFilter) {
-//   const { selectedYear, selectedMonth } = dateFilter;
-//   const allFeaturedArt = await getFeaturedArticles();
-
-//   let filteredEvents = allFeaturedArt.filter((event) => {
-//     const eventDate = new Date(event.date);
-//     return (
-//       eventDate.getFullYear() === selectedYear &&
-//       eventDate.getMonth() === selectedMonth - 1
-//     );
-//   });
-
-//   return filteredEvents;
-// }
-
+// --------------------------------------------
+// ----------- Fetch User Stories from FireBase
 export async function getUserStories() {
   const response = await fetch(
     "https://project-healthrecords-default-rtdb.asia-southeast1.firebasedatabase.app/stories.json"
@@ -91,9 +75,8 @@ export async function getStoryID(id) {
   return allStoriesArr.find((story) => story.id === id);
 }
 
-import { formatDate } from "./general-helper";
-
-//selectedYear and selectedMonth
+// --------------------------------------------
+// ----------- FILTER Publications by selectedYear and selectedMonth
 export async function getFilteredPublications({ selectedYear, selectedMonth }) {
   const articlesArr = await getFeaturedArticles();
   const storiesArr = await getUserStories();
@@ -109,8 +92,11 @@ export async function getFilteredPublications({ selectedYear, selectedMonth }) {
     })
     .filter((art) => {
       // console.log(art);
-      if (art.year === selectedYear && art.month === selectedMonth)
+      if (art.year === selectedYear && art.month === selectedMonth) {
         filteredPub.push(art);
+      } else if (art.year === selectedYear) {
+        filteredPub.push(art);
+      }
     });
   let filteredStories = storiesArr
     .map((sto) => {
@@ -122,8 +108,11 @@ export async function getFilteredPublications({ selectedYear, selectedMonth }) {
     })
     .filter((sto) => {
       // console.log(sto);
-      if (sto.year === selectedYear && sto.month === selectedMonth)
+      if (sto.year === selectedYear && sto.month === selectedMonth) {
         filteredPub.push(sto);
+      } else if (sto.year === selectedYear) {
+        filteredPub.push(sto);
+      }
     });
   // let filteredPub = [filteredArticles, filteredStories];
 

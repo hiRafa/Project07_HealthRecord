@@ -22,15 +22,17 @@
   --color-pending: #177cbe;
   --color-error: #e65035;
 
+  --border-card: 2px solid;
   --borderRadius-card: 10px;
   --borderRadius-button: 5px;
   --borderRadius-rounded: 50px;
   --transition: all 1s linear;
-  --transition-disappear: all 0.25s linear;
+  --transition-25ms: all 0.25s linear;
 
   --gap-pc: 2rem;
-  --top-bottom-spacing: 2rem;
+  --top-bottom-spacing: 3rem;
   --boxShadow: 0px 0px 15px;
+  --padding3: 3rem;
 }
 
 html,
@@ -72,15 +74,18 @@ li:hover {
 }
 
 main {
-  padding: 0 0 var(--top-bottom-spacing);
+  padding: var(--top-bottom-spacing) 0;
   background-color: var(--color-primary-dark);
 }
 
 h1 {
   text-align: center;
+  font-size: 32px;
+  color: var(--color-white);
 }
 h2 {
   margin-bottom: 1rem;
+  font-size: 28px;
 }
 
 button {
@@ -94,9 +99,10 @@ button:hover {
   cursor: pointer;
 }
 
-.section {
-  margin: 0 auto 2rem;
+section {
+  margin: 0 auto;
 }
+
 .section_container {
   width: 90%;
   max-width: 1140px;

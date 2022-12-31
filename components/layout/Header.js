@@ -42,6 +42,11 @@ const Header = () => {
           <li className={`showOnPc  ${classes.navLink}`}>
             <Link href="/centers">Health Centers!</Link>
           </li>
+          <li className={`showOnPc  ${classes.navLink}`}>
+            <Link href="/publicationslist">Publications</Link>
+          </li>
+
+          {/* Log Out and Menu */}
           {session && (
             <li
               className={`showOnPc  ${classes.navLink}`}
@@ -50,9 +55,6 @@ const Header = () => {
               <Link href="/">Log out</Link>
             </li>
           )}
-          <li className={`showOnPc  ${classes.navLink}`}>
-            <Link href="/publicationslist">Publications</Link>
-          </li>
           <li
             className={`showOnMobile  ${classes.navLink} ${classes.navMenu_button}`}
             onClick={handleopenNav}
@@ -75,6 +77,10 @@ const Header = () => {
               <li className={`showOnMobile  ${classes.navLink}`}>
                 <Link href="/centers">Health Centers!</Link>
               </li>
+              <li className={`showOnMobile  ${classes.navLink}`}>
+                <Link href="/publicationslist">Publications</Link>
+              </li>
+
               {session && (
                 <li
                   className={`showOnMobile  ${classes.navLink}`}
@@ -83,9 +89,6 @@ const Header = () => {
                   <Link href="/">Log out</Link>
                 </li>
               )}
-              <li className={`showOnMobile  ${classes.navLink}`}>
-                <Link href="/publicationslist">Publications</Link>
-              </li>
             </div>
           )}
         </ul>

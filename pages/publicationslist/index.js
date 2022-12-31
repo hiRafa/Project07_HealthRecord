@@ -1,18 +1,17 @@
 import Head from "next/head";
 import React, { Fragment, useState } from "react";
-import { formatDate } from "../../helpers/general-helper";
 
-import FilterYearMonth from "../../components/layout-units/FilterYearMonth";
 import SectionContainer from "../../components/layout-units/SectionContainer";
 import PublicationsCard from "../../components/publications/PublicationsCard";
 import PublicationsList from "../../components/publications/PublicationsList";
 
-import classes from "../../components/publications/Articles.module.css";
+import classes from "../../components/publications/Publications.module.css";
 
 import {
   getFeaturedArticles,
   getUserStories,
 } from "../../helpers/firebaseData-helper";
+import SectionTopPub from "../../components/publications/SectionTopPub";
 
 export async function getStaticProps(context) {
   //  featuredProductID identifier on file name
@@ -75,14 +74,9 @@ const PublicationsListPage = ({ articles, stories }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <h1>
-        Find amazing articles written by our specialists and interesting stories
-        from our users
-      </h1>
+      <SectionTopPub />
 
-      <FilterYearMonth />
-
-      <SectionContainer>
+      <section>
         <nav className={` ${classes.publications_nav} `}>
           <ul className={`flex_center ${classes.pub_navUL} `}>
             <li
@@ -117,7 +111,7 @@ const PublicationsListPage = ({ articles, stories }) => {
             </li>
           </ul>
         </nav>
-      </SectionContainer>
+      </section>
 
       <PublicationsList>
         {showPublications === 0 && allArticlesCards}

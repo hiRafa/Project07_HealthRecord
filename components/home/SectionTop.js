@@ -8,7 +8,7 @@ const SectionTop = ({ children }) => {
   const { data: session, status } = useSession();
 
   return (
-    <section className={classes.top}>
+    <section className={classes.section_top}>
       <svg
         className={classes.waves}
         xmlns="http://www.w3.org/2000/svg"
@@ -32,10 +32,10 @@ const SectionTop = ({ children }) => {
       </svg>
       <SectionContainer className={`flex_center flex_column ${classes.topIn}`}>
         <h1>Welcome to your Medical Records platform at Health Memory</h1>
-        <section
+        <div
           className={`${classes.topIn_body} flex_center flex_column_mobile `}
         >
-          <section className={classes.body_intro}>
+          <div className={classes.body_intro}>
             <h2>Webapp introduction</h2>
             <p>
               Health Records is your webapplication for registaring and securing
@@ -49,9 +49,9 @@ const SectionTop = ({ children }) => {
               DNA test results, scheduling with health centers*, and even with
               specialists available for online consultation* <br />
             </p>
-          </section>
+          </div>
           {!session && <AccountAccess />}
-        </section>
+        </div>
       </SectionContainer>
     </section>
   );

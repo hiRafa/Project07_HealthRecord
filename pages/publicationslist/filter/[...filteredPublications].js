@@ -1,17 +1,14 @@
 // 2 slashes /allProducts/xyz/123
 
-import React, { Fragment, useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, { Fragment } from "react";
 
-import { getFilteredPublications } from "../../helpers/firebaseData-helper";
-import { onFindPublication } from "../../helpers/general-helper";
+import { getFilteredPublications } from "../../../helpers/firebaseData-helper";
 
-import FilterYearMonth from "../../components/layout-units/FilterYearMonth";
-import useNotification from "../../contexts/notifications-context";
-import PublicationsList from "../../components/publications/PublicationsList";
+import FilterYearMonth from "../../../components/layout-units/FilterYearMonth";
+import PublicationsList from "../../../components/publications/PublicationsList";
 import Head from "next/head";
-import ButtonAll from "../../components/layout-units/ButtonAll";
-import PublicationsCard from "../../components/publications/PublicationsCard";
+import PublicationsCard from "../../../components/publications/PublicationsCard";
+import SectionTopPub from "../../../components/publications/SectionTopPub";
 
 export async function getServerSideProps(context) {
   const { params } = context;
@@ -26,12 +23,11 @@ export async function getServerSideProps(context) {
 
   //check validity of filter
   if (
+    !selectedYear ||
+    (!selectedYear && !selectedMonth) ||
     isNaN(selectedYear) ||
-    isNaN(selectedMonth) ||
-    selectedYear < 2015 ||
-    selectedMonth > 2025 ||
-    selectedMonth < 1 ||
-    selectedMonth > 12
+    selectedYear < 2017 ||
+    selectedYear > 2025
   ) {
     return {
       props: { hasError: true },
@@ -41,35 +37,51 @@ export async function getServerSideProps(context) {
       // },
     };
   }
-  const filteredPublications = await getFilteredPublications({
-    selectedYear,
-    selectedMonth,
-  });
+  if (selectedYear && selectedMonth) {
+    const filteredPublications = await getFilteredPublications({
+      selectedYear,
+      selectedMonth,
+    });
+    return {
+      props: {
+        filteredPublications: filteredPublications,
+        selectedDate: { selectedYear, selectedMonth },
+      },
+    };
+  } else if (selectedYear) {
+    const filteredPublications = await getFilteredPublications({
+      selectedYear,
+    });
+    return {
+      props: {
+        filteredPublications: filteredPublications,
+        selectedDate: { selectedYear },
+      },
+    };
+  }
   // check if products exist with the selected date in the filter
   // getFilteredPublications will filter the array with the selected year and month
-  // that returns the filtered array we will expose below with props to be called / used somewhere else
-
-  return {
-    props: {
-      filteredPublications: filteredPublications,
-      selectedDate: { selectedYear, selectedMonth },
-    },
-  };
+  // that returns the filtered array we will expose below with props
+  // different props will be returned for different conditions using the same filter
+  // only for years or for years and months.
 }
 
 function ProductsFilteredPage(props) {
-  const { errorNotification } = useNotification();
-
   const { filteredPublications, selectedDate, hasError } = props;
   // console.log(filteredPublications);
   // console.log(selectedDate);
-  const humanReadableDate = new Date(
-    selectedDate.selectedYear,
-    selectedDate.selectedMonth - 1
-  ).toLocaleDateString("en-US", {
-    month: "long",
-    year: "numeric",
-  });
+  let humanReadableDate;
+  if (selectedDate.selectedYear && selectedDate.selectedMonth) {
+    humanReadableDate = new Date(
+      selectedDate.selectedYear,
+      selectedDate.selectedMonth - 1
+    ).toLocaleDateString("en-US", {
+      month: "long",
+      year: "numeric",
+    });
+  } else if (selectedDate.selectedYear) {
+    humanReadableDate = selectedDate.selectedYear;
+  }
 
   let pageHead = (
     <Head>
@@ -116,26 +128,22 @@ function ProductsFilteredPage(props) {
   // Real months values range 1~12 but "new Date" months range 0~11.
   // substracting 1 is necessary
 
-  const filteredPubCards = filteredPublications.map((story) => (
-    <PublicationsCard
-      id={story.id}
-      title={story.title}
-      date={story.date}
-      text={story.text}
-      photo={story.photo}
-    />
-  ));
-
   return (
     <div>
       {pageHead}
-      <section>
-        <h1>Events in </h1>
-        <ButtonAll href="/publicationslist" text={"Show all events"} />
-      </section>
-      {humanReadableDate}
-      <FilterYearMonth />
-      <PublicationsList>{filteredPubCards}</PublicationsList>
+      <SectionTopPub humanReadableDate={humanReadableDate} />
+
+      <PublicationsList>
+        {filteredPublications.map((story) => (
+          <PublicationsCard
+            id={story.id}
+            title={story.title}
+            date={story.date}
+            text={story.text}
+            photo={story.photo}
+          />
+        ))}
+      </PublicationsList>
     </div>
   );
 }

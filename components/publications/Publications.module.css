@@ -1,0 +1,117 @@
+.section_top {
+  color: var(--color-white);
+  gap: 1rem;
+}
+
+.section_top p {
+  font-style: italic;
+}
+
+.publications_nav {
+  font-size: 1.5rem;
+  padding: 0;
+}
+.pub_navUL {
+  gap: var(--gap-pc);
+}
+.pub_navUL_li {
+  background-color: var(--color-white);
+  padding: 1rem 2rem;
+  margin: 2rem 0;
+  border-radius: var(--borderRadius-button);
+}
+
+.activeLi {
+  background-color: var(--color-primary-light);
+}
+
+/* CARDS LIST  */
+
+.publications_container {
+  width: 100%;
+  flex-wrap: wrap;
+  gap: var(--gap-pc);
+}
+.publications_card {
+  background-color: var(--color-white);
+  padding: 2rem;
+  width: 45%;
+  min-width: 500px;
+  height: 32vh;
+  min-height: 100%;
+  overflow: hidden;
+  border-radius: var(--borderRadius-card);
+  position: relative;
+  border: var(--border-card) transparent;
+  transition: var(--transition-25ms);
+}
+.publications_card:hover {
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  border: var(--border-card) var(--color-white);
+  transition: var(--transition-25ms);
+}
+
+.publications_card a {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card_img {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100%;
+  filter: blur(1px) opacity(0.2);
+}
+.card_by {
+  gap: 1rem;
+  justify-content: right;
+}
+.card_by {
+  gap: 1rem;
+  justify-content: space-between;
+}
+.card_by div {
+  align-self: flex-start;
+}
+.card_by_photo {
+  border-radius: var(--borderRadius-rounded);
+  height: 100px;
+  width: 100px;
+}
+.card_date {
+  align-self: flex-end;
+  justify-self: flex-end;
+}
+
+/* Publications DETAILS  */
+.pub_details_container {
+  gap: var(--gap-pc);
+}
+.pub_details_top {
+}
+
+.details_body_by {
+  gap: var(--gap-pc);
+  justify-content: flex-end;
+  margin: 0;
+}
+.details_body_by img {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--borderRadius-rounded);
+}
+.details_top_img {
+  height: 300px;
+}
+.pub_details_body {
+  background-color: var(--color-white);
+  padding: var(--padding3);
+  border-radius: var(--borderRadius-card);
+  gap: var(--gap-pc);
+}

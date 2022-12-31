@@ -6,7 +6,8 @@ import {
   getStoryID,
 } from "../../../helpers/firebaseData-helper";
 
-import StoryDetails from "../../../components/publications/StoryDetails";
+import PublicationsDetails from "../../../components/publications/PublicationsDetails";
+import ButtonAll from "../../../components/layout-units/ButtonAll";
 
 export async function getStaticPaths() {
   const allStories = await getUserStories();
@@ -36,7 +37,7 @@ export async function getStaticProps(context) {
 
 const StoryPage = (props) => {
   const story = props.selectedStory;
-  console.log(story);
+  // console.log(story);
   if (!story) {
     return (
       <div className="center">
@@ -52,7 +53,12 @@ const StoryPage = (props) => {
         <meta name="description" content={story.title} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <StoryDetails title={story.title} text={story.text} photo={story.photo} />
+      <PublicationsDetails
+        id={story.id}
+        title={story.title}
+        text={story.text}
+        photo={story.photo}
+      />
     </Fragment>
   );
 };

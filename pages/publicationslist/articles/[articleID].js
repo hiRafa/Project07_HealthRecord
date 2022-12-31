@@ -6,20 +6,21 @@ import {
   getArticleByID,
 } from "../../../helpers/firebaseData-helper";
 
-import ArticleDetails from "../../../components/publications/ArticleDetails";
+import PublicationsDetails from "../../../components/publications/PublicationsDetails";
 
 export async function getStaticPaths() {
   const allArticles = await getFeaturedArticles();
   const idsForPaths = allArticles.map((article) => ({
     params: { articleID: article.id },
-    // this  connects to getStaticProps context.params
-    // articleID needs to match with the file name
   }));
+  // this  connects to getStaticProps context.params
+  // articleID needs to match with the file name
+
   return {
     paths: idsForPaths,
     fallback: "blocking",
-    // in case there are more possible urls for [productID] beyond what we just set
-    // with idsForPaths
+    // set fallback: "blocking" in case there are more possible urls for [articleID]
+    // beyond what we just set with idsForPaths
   };
 }
 
@@ -29,15 +30,17 @@ export async function getStaticProps(context) {
   const selectedArticle = await getArticleByID(eachArticleID);
   return {
     props: { selectedArticle: selectedArticle },
-    revalidate: 30000, // featuredProduct info changes reupdated every 500 minutes
+    revalidate: 30000, // featuredProduct info reupdated every 500 minutes
   };
-  // this  connects to the main function props
+  // this connects to the main function through props
 }
 
 const ArticlePage = (props) => {
-  const article = props.selectedArticle;
-  //   console.log(article);
-  if (!article) {
+  const { selectedArticle } = props;
+  // console.log(selectedArticle);
+  // console.log(eachArticleID);
+
+  if (!selectedArticle) {
     return (
       <div className="center">
         <p>Loading...</p>;
@@ -48,16 +51,18 @@ const ArticlePage = (props) => {
   return (
     <Fragment>
       <Head>
-        <title>Article: {article.title}</title>
-        <meta name="description" content={article.title} />
+        <title>Article: {selectedArticle.title}</title>
+        <meta name="description" content={selectedArticle.title} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ArticleDetails
-        title={article.title}
-        text={article.text}
-        image={article.image}
-        photo={article.photo}
-        author={article.author}
+
+      <PublicationsDetails
+        id={selectedArticle.id}
+        title={selectedArticle.title}
+        text={selectedArticle.text}
+        image={selectedArticle.image}
+        photo={selectedArticle.photo}
+        author={selectedArticle.author}
       />
     </Fragment>
   );

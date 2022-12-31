@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
 import ButtonAll from "../layout-units/ButtonAll";
+import SectionContainer from "../layout-units/SectionContainer";
 import classes from "./Home.module.css";
 
 const SectionFeaturedArticles = ({ featuredArticles }) => {
@@ -31,8 +32,8 @@ const SectionFeaturedArticles = ({ featuredArticles }) => {
   // console.log(articles.length);
 
   return (
-    <section className={`section  ${classes.featured}`}>
-      <div className={`section_container flex_column ${classes.featured_in}`}>
+    <SectionContainer className={`  ${classes.section_featured}`}>
+      <div className={` flex_column ${classes.featured_in}`}>
         <h2>Featured Health Articles</h2>
         {featuredArticles.map((article, articleIndex) => (
           <Fragment>
@@ -46,8 +47,8 @@ const SectionFeaturedArticles = ({ featuredArticles }) => {
             </div>
             <article
               className={`flex_center flex_column   
-      ${classes.featured_slide} 
-      ${currentIndex === articleIndex && classes.slideActive}`}
+                ${classes.featured_slide} 
+                ${currentIndex === articleIndex && classes.slideActive}`}
               key={articleIndex}
             >
               <h3 className={` ${classes.slide_title}`}>{article.title}</h3>
@@ -81,7 +82,7 @@ const SectionFeaturedArticles = ({ featuredArticles }) => {
           {containerIcons}
         </div>
       </div>
-    </section>
+    </SectionContainer>
   );
 };
 

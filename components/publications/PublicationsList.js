@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./Articles.module.css";
+import classes from "./Publications.module.css";
 import SectionContainer from "../../components/layout-units/SectionContainer";
 
 const PublicationsList = ({ children }) => {
