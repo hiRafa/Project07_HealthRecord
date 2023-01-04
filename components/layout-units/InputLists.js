@@ -11,7 +11,9 @@ const InputRequired = ({ input, getDataFromChild }) => {
     dummyData,
     classNameLabel,
     classNameInput,
+    onClick,
 
+    select,
     list,
     options,
   } = input;
@@ -20,28 +22,12 @@ const InputRequired = ({ input, getDataFromChild }) => {
 
   // console.log(dummyData);
 
-  // LABEL
   const labelCustom = (
     <label htmlFor={htmlFor} className={`${classes.label} ${classNameLabel}`}>
       {label}
     </label>
   );
-
-  // INPUT
-  let inputCustom = (
-    <input
-      type={type}
-      id={id}
-      defaultValue={dummyData ? dummyData : ""}
-      required
-      ref={inputRef}
-      className={`${classes.input} ${classNameInput}`}
-      onBlur={() => {
-        getDataFromChild(id, inputRef.current.value);
-        console.log(`outside of input`);
-      }}
-    />
-  );
+  let inputCustom;
 
   if (list) {
     inputCustom = (
@@ -54,21 +40,28 @@ const InputRequired = ({ input, getDataFromChild }) => {
           required
           ref={inputRef}
           className={`${classes.input} ${classNameInput}`}
-          onBlur={() => {
-            getDataFromChild(id, inputRef.current.value);
-            console.log(`outside of input`);
-          }}
         />
         <datalist id={list}>
           {options.map((option) => (
-            <option
-              value={option}
-              className={` ${classNameInput}`}
-              key={option}
-            />
+            <option value={option} className={` ${classNameInput}`} />
           ))}
         </datalist>
       </Fragment>
+    );
+  } else {
+    inputCustom = (
+      <input
+        type={type}
+        id={id}
+        defaultValue={dummyData ? dummyData : ""}
+        required
+        ref={inputRef}
+        className={`${classes.input} ${classNameInput}`}
+        onBlur={() => {
+          getDataFromChild(id, inputRef.current.value);
+          console.log(`outside of input`);
+        }}
+      />
     );
   }
 

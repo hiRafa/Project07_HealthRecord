@@ -82,7 +82,7 @@ export async function getFilteredPublications({ selectedYear, selectedMonth }) {
   const storiesArr = await getUserStories();
 
   let filteredPub = [];
-  let filteredArticles = articlesArr
+  articlesArr
     .map((art) => {
       const year = +art.date.toString().slice(0, 4);
       const month = +art.date.toString().substring(4, 6);
@@ -98,7 +98,7 @@ export async function getFilteredPublications({ selectedYear, selectedMonth }) {
         filteredPub.push(art);
       }
     });
-  let filteredStories = storiesArr
+  storiesArr
     .map((sto) => {
       const year = +sto.date.toString().slice(0, 4);
       const month = +sto.date.toString().substring(4, 6);
@@ -117,4 +117,23 @@ export async function getFilteredPublications({ selectedYear, selectedMonth }) {
   // let filteredPub = [filteredArticles, filteredStories];
 
   return filteredPub;
+}
+
+import useSWR from "swr";
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+export const useUser = (id) => {
+  const { data, error, isLoading } = useSWR(
+    `https://project-healthrecords-default-rtdb.asia-southeast1.firebasedatabase.app/users.json`,
+    fetcher
+  );
+
+  return {
+    userData: data,
+    isLoading,
+    isError: error,
+  };
+};
+
+export const fetchPOST = () => {
+  
 }

@@ -1,4 +1,5 @@
 import { MongoClient } from "mongodb";
+import { useSession } from "next-auth/react";
 
 export async function connectToMongoDB() {
   const MongoClientConnection = await MongoClient.connect(
@@ -12,3 +13,25 @@ export async function connectToMongoDB() {
 export async function registerNewsLetterUser(client, collection, email) {
   return await client.db().collection(collection).insertOne(email);
 }
+
+// export async function getUserData(client, collection, filter = {}, sort) {
+//   return await client
+//     .db()
+//     .collection(collection)
+//     .find(filter)
+//     .sort(sort)
+//     .toArray();
+// }
+
+// export async function updateUserData(
+//   client,
+//   collection,
+//   filter = {},
+//   formsData
+// ) {
+//   return await client
+//     .db()
+//     .collection(collection)
+//     .find(filter)
+//     .update(formsData);
+// }
