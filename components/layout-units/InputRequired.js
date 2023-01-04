@@ -8,7 +8,7 @@ const InputRequired = ({ input, getDataFromChild }) => {
     type,
     id,
 
-    dummyData,
+    data,
     classNameLabel,
     classNameInput,
 
@@ -18,7 +18,7 @@ const InputRequired = ({ input, getDataFromChild }) => {
 
   const inputRef = useRef();
 
-  // console.log(dummyData);
+  // console.log(data);
 
   // LABEL
   const labelCustom = (
@@ -32,8 +32,8 @@ const InputRequired = ({ input, getDataFromChild }) => {
     <input
       type={type}
       id={id}
-      defaultValue={dummyData ? dummyData : ""}
-      required
+      defaultValue={data ? data : ""}
+      // required
       ref={inputRef}
       className={`${classes.input} ${classNameInput}`}
       onBlur={() => {
@@ -50,8 +50,8 @@ const InputRequired = ({ input, getDataFromChild }) => {
           list={list}
           id={`${list}-list`}
           name={`${list}-list`}
-          defaultValue={dummyData ? dummyData : ""}
-          required
+          defaultValue={data ? data : ""}
+          // required
           ref={inputRef}
           className={`${classes.input} ${classNameInput}`}
           onBlur={() => {
