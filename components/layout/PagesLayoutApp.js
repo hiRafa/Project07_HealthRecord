@@ -5,6 +5,7 @@ import useNotification from "../../contexts/notifications-context";
 
 import Header from "./Header";
 import Notification from "./Notification";
+import NewsletterSignup from "./NewsLetterSignup";
 
 const PagesLayoutApp = (props) => {
   const { activeNotification } = useNotification();
@@ -25,7 +26,8 @@ const PagesLayoutApp = (props) => {
         )}
       </main>
 
-      <footer className={`flex_center ${classes.footer}`}>
+      <footer className={`flex_center flex_column ${classes.footer}`}>
+        <NewsletterSignup />
         <p>Web app created by Hirashiki Rafael, 2022 </p>
       </footer>
     </Fragment>

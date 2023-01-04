@@ -1,8 +1,80 @@
-.grid_info {
-  display: grid;
-  grid-template-columns: 1fr 5fr;
+/* Navigation 2 */
+
+.nav_account {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 2rem 0 0;
 }
 
-.input_radio {
-  width: 4%;
+.nav_account ul {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+}
+.nav_account li {
+  padding: 0.5rem;
+  list-style: none;
+  border-top-left-radius: var(--borderRadius-card);
+  border-top-right-radius: var(--borderRadius-card);
+  border: var(--border-card) var(--color-primary-main);
+  border-bottom: none;
+  color: var(--color-primary-light);
+  display: flex;
+  justify-content: center;
+}
+
+.nav_account a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1rem;
+}
+
+.pagesLayout_main {
+  margin: 1rem auto;
+  width: 90%;
+}
+
+/* FORMS shared CSS*/
+.section_accountinfo,
+.section_noyes {
+  background-color: var(--color-white);
+  padding: var(--padding3);
+}
+.buttonSave {
+  width: 30%;
+  margin: 0 auto;
+}
+
+/* MainFORM FORMS  */
+.maininfo_form {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  row-gap: var(--gap-pc);
+}
+
+/* NO YES FORM */
+.section_noyes {
+  gap: var(--gap-pc);
+}
+
+.noyes_form {
+  gap: var(--gap-pc);
+}
+
+@media screen and (max-width: 768px) {
+  .nav_account ul {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+  }
+}
+@media screen and (max-width: 376px) {
+  .nav_account ul {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
 }

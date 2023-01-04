@@ -2,21 +2,23 @@ import React, { Fragment, useRef, useState } from "react";
 import classes from "./Account.module.css";
 
 import ButtonAll from "../layout-units/ButtonAll";
-import Input from "../layout-units/Input";
 import InputRequired from "../layout-units/InputRequired";
 import InputSaved from "../layout-units/InputSaved";
+import SectionContainer from "../layout-units/SectionContainer";
+import { togglePrevCurrent } from "../../helpers/general-helper";
 
 const dummy = {
   fullname: "Cassio Albert Feinstein",
   address: "Tokyo Bay Bitch",
   dob: "2022/02/10",
-  sex: "undefined",
+  sex: "bicha",
   weight: "80",
   height: "172",
 };
 
 const ProfileMainForm = () => {
   const [isEditing, setIsEditing] = useState(false);
+
   const fullNameInputRef = useRef();
   const addressInputRef = useRef();
   const dobInputRef = useRef();
@@ -24,11 +26,9 @@ const ProfileMainForm = () => {
   const weightInputRef = useRef();
   const heightInputRef = useRef();
 
-  const switchEdit = () => {
-    setIsEditing((prevState) => !prevState);
+  const submitHandler = (e) => {
+    e.preventDefault();
   };
-
-  const submitHandler = () => {};
 
   const inputs = [
     {
@@ -84,47 +84,40 @@ const ProfileMainForm = () => {
   ];
 
   return (
-    <section>
-      <form onSubmit={submitHandler}>
-        {isEditing ? (
-          <Fragment>
-            <div className={classes.grid_info}>
-              {inputs.map((input) => (
-                <InputRequired
-                  type={input.type}
-                  label={input.label}
-                  htmlFor={input.id}
-                  id={input.id}
-                  reference={input.reference}
-                  dummyData={input.dummyData}
-                  key={input.id}
-                  //only for selections
-                  list={input.list}
-                  options={input.options}
-                />
-              ))}
-            </div>
-
-            <ButtonAll text="Save" onClick={switchEdit} />
-          </Fragment>
-        ) : (
-          <Fragment>
-            <div className={classes.grid_info}>
-              {inputs.map((input) => (
-                <InputSaved
-                  label={input.label}
-                  htmlFor={input.id}
-                  dummyData={input.dummyData}
-                  className
-                  key={input.id}
-                />
-              ))}
-            </div>
-            <ButtonAll text="Edit" onClick={switchEdit} />
-          </Fragment>
-        )}
+    <SectionContainer className={`flex_column ${classes.section_accountinfo}`}>
+      <h2>Main</h2>
+      <form onSubmit={submitHandler} className={classes.maininfo_form}>
+        {isEditing
+          ? inputs.map((input) => (
+              <InputRequired
+                type={input.type}
+                label={input.label}
+                htmlFor={input.id}
+                id={input.id}
+                reference={input.reference}
+                dummyData={input.dummyData}
+                key={input.id}
+                //only for selections
+                list={input.list}
+                options={input.options}
+              />
+            ))
+          : inputs.map((input) => (
+              <InputSaved
+                label={input.label}
+                htmlFor={input.id}
+                dummyData={input.dummyData}
+                className
+                key={input.id}
+              />
+            ))}
       </form>
-    </section>
+      <ButtonAll
+        text={isEditing ? "Save" : "Edit"}
+        onClick={() => togglePrevCurrent(setIsEditing)}
+        className={`${classes.buttonSave}`}
+      />
+    </SectionContainer>
   );
 };
 

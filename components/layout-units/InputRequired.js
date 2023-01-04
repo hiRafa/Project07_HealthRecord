@@ -1,38 +1,40 @@
 import React, { Fragment } from "react";
 import classes from "./LayoutUnits.module.css";
 
-const InputRequired = ({
-  label,
-  htmlFor,
-  type,
-  id,
-  reference,
-  dummyData,
-  classNameLabel,
-  classNameInput,
-  onClick,
+const InputRequired = (props) => {
+  const {
+    label,
+    htmlFor,
+    type,
+    id,
+    reference,
+    dummyData,
+    classNameLabel,
+    classNameInput,
+    onClick,
 
-  list,
-  options,
+    select,
+    list,
+    options,
+  } = props;
+  const { name, value, checked } = props;
 
-  name,
-  value,
-  checked,
-}) => {
   console.log(dummyData);
+
   const labelCustom = (
     <label htmlFor={htmlFor} className={`${classes.label} ${classNameLabel}`}>
       {label}
     </label>
   );
+  let inputCustom;
 
-  let input;
   if (list) {
-    input = (
+    inputCustom = (
       <Fragment>
-        {labelCustom}
         <input
           list={list}
+          id={`${list}-list`}
+          name={`${list}-list`}
           defaultValue={dummyData ? dummyData : ""}
           required
           ref={reference}
@@ -40,28 +42,30 @@ const InputRequired = ({
         />
         <datalist id={list}>
           {options.map((option) => (
-            <option value={option} />
+            <option value={option} className={` ${classNameInput}`} />
           ))}
         </datalist>
       </Fragment>
     );
   } else {
-    input = (
-      <Fragment>
-        {labelCustom}
-        <input
-          type={type}
-          id={id}
-          defaultValue={dummyData ? dummyData : ""}
-          required
-          ref={reference}
-          className={`${classes.input} ${classNameInput}`}
-        />
-      </Fragment>
+    inputCustom = (
+      <input
+        type={type}
+        id={id}
+        defaultValue={dummyData ? dummyData : ""}
+        required
+        ref={reference}
+        className={`${classes.input} ${classNameInput}`}
+      />
     );
   }
 
-  return <Fragment>{input}</Fragment>;
+  return (
+    <Fragment>
+      {labelCustom}
+      {inputCustom}
+    </Fragment>
+  );
 };
 
 export default InputRequired;

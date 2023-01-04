@@ -9,13 +9,6 @@ export async function connectToMongoDB() {
   //  "mongodb+srv://rflhajime:academind123@maincluster.mh4flrs.mongodb.net/newcollection?retryWrites=true&w=majority"
 }
 
-export async function fetchFeatured(client, collection = {}) {
-  // try {
-  //   MongoClientConnection = await connectToMongoDB();
-  // } catch (error) {
-  //   res.status(500).json({ message: "Connecting to the database failed!" });
-  //   return;
-  // }
-
-  return await client.db().collection(collection);
+export async function registerNewsLetterUser(client, collection, email) {
+  return await client.db().collection(collection).insertOne(email);
 }

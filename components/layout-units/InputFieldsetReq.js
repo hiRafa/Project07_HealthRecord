@@ -13,38 +13,47 @@ const InputFieldsetReq = ({
   children,
   name,
 }) => {
-
   return (
-    <fieldset>
-      <legend>
-        <h2>{legend}</h2>
+    <fieldset className={`${classes.fieldset}`}>
+      <legend className={`${classes.fiedlset_legend}`}>
+        <h4>{legend}</h4>
       </legend>
-      <label htmlFor="no" className={`${classes.label} ${classNameLabel}`}>
-        No
-      </label>
-      <input
-        type="radio"
-        id="no"
-        value="no"
-        required
-        name={name}
-        className={`${classes.input} ${classNameInput}`}
-        defaultChecked={dummyData === false && true}
-        ref={(el) => (reference.current[0] = el)}
-      />
-      <label htmlFor="yes" className={`${classes.label} ${classNameLabel}`}>
-        Yes
-      </label>
-      <input
-        type="radio"
-        id="yes"
-        value="yes"
-        required
-        name={name}
-        className={`${classes.input} ${classNameInput}`}
-        defaultChecked={dummyData === true && true}
-        ref={(el) => (reference.current[1] = el)}
-      />
+
+      <div className={`flex_center ${classes.fieldset_option}`}>
+        <label
+          htmlFor="no"
+          className={`${classes.option_label} ${classNameLabel}`}
+        >
+          No
+        </label>
+        <input
+          type="radio"
+          id="no"
+          value="no"
+          required
+          name={name}
+          className={`${classes.option_input} ${classNameInput}`}
+          defaultChecked={dummyData === false && true}
+          ref={(el) => (reference.current[0] = el)}
+        />
+
+        <label
+          htmlFor="yes"
+          className={`${classes.option_label} ${classNameLabel}`}
+        >
+          Yes
+        </label>
+        <input
+          type="radio"
+          id="yes"
+          value="yes"
+          required
+          name={name}
+          className={`${classes.option_input} ${classNameInput}`}
+          defaultChecked={dummyData === true && true}
+          ref={(el) => (reference.current[1] = el)}
+        />
+      </div>
       {children}
     </fieldset>
   );

@@ -8,17 +8,8 @@ const ProfileInfo = () => {
   const [hasProfileData, setHasProfileData] = useState(false);
   return (
     <Fragment>
-      {hasProfileData ? (
-        <div>
-          <ProfileMain />
-          <ProfileRecords />
-        </div>
-      ) : (
-        <div>
-          <ProfileMainForm />
-          <ProfileRecordsForm />
-        </div>
-      )}
+      {hasProfileData ? <ProfileMain /> : <ProfileMainForm />}
+      {hasProfileData ? <ProfileRecords /> : <ProfileRecordsForm />}
     </Fragment>
   );
 };

@@ -1,9 +1,11 @@
+/* BUTTON */
 .buttonAll {
   border: none;
   border-radius: 1rem;
   padding: 0.5rem 2rem;
 }
 
+/* INPUT COMPONENT  */
 .input {
   width: 30%;
   min-width: 100px;
@@ -82,4 +84,77 @@
   .form button {
     width: 20%;
   }
+}
+
+/* INPUT FIELDSET REQUESTED  */
+.fieldset {
+  padding: 1rem;
+}
+
+.fiedlset_legend,
+.option_label {
+  margin-left: 1rem;
+  padding: 0 1rem;
+}
+
+.fieldset_option {
+  width: 25%;
+}
+
+.option_input {
+  height: 25px;
+  width: 50%;
+}
+
+/* INPUT SAVED USER INFO  */
+.userData {
+  height: 30px;
+  padding-left: 2rem;
+}
+
+/* INPUT OPTIONS  */
+.inputSelect_top {
+  margin: 3rem 0 1rem;
+}
+.inputSelect {
+  margin: 1rem 0;
+}
+
+.select {
+  padding: 0.5rem;
+  border-radius: var(--borderRadius-card);
+  border: var(--border-card) var(--color-primary-dark);
+  background-color: var(--color-primary-dark);
+  color: var(--color-white);
+  font-weight: 600;
+}
+.select:hover,
+.select:active,
+.options_li {
+  cursor: pointer;
+}
+
+.options_ul {
+  justify-content: flex-start;
+  gap: var(--gap-pc);
+  margin: 1rem 0;
+}
+
+.options_li {
+  color: var(--color-black);
+  border: var(--border-card) var(--color-primary-light);
+  padding: 0.5rem;
+  border-radius: var(--borderRadius-card);
+  width: fit-content;
+  gap: 1rem;
+}
+.options_li span {
+  font-size: 1rem;
+}
+.options_li:hover {
+  cursor: initial;
+}
+.options_li_X:hover {
+  cursor: pointer;
+  background-color: var(--color-primary-light);
 }

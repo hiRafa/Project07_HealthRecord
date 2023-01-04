@@ -91,40 +91,6 @@
   }
 }
 
-/* Navigation 2 */
-
-.nav_account {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  padding: 1rem;
-  height: 5rem;
-}
-
-.nav_account ul {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  margin: 0;
-  padding: 0;
-}
-.nav_account li {
-  list-style: none;
-  background-color: var(--color-primary-light);
-}
-.nav_account a {
-  text-decoration: none;
-  color: #000;
-  font-size: 1rem;
-}
-
-.pagesLayout_main {
-  margin: 1rem auto;
-  width: 90%;
-}
-
 /* Notification  */
 .notification {
   position: fixed;
@@ -180,4 +146,5 @@
   padding: 2rem;
   background-color: black;
   color: var(--color-primary-light);
+  gap: var(--gap-pc);
 }

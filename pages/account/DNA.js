@@ -1,8 +1,16 @@
-import React from "react";
-import PagesLayoutInAccount from "../../components/layout/PagesLayoutInAccount";
+import React, { Fragment } from "react";
+import ProfileTop from "../../components/account/ProfileTop";
+import SectionContainer from "../../components/layout-units/SectionContainer";
 
 const DNAPage = () => {
-  return <PagesLayoutInAccount>DNA</PagesLayoutInAccount>;
+  return (
+    <Fragment>
+      <ProfileTop />
+      <SectionContainer>
+        <h2>DNA</h2>
+      </SectionContainer>
+    </Fragment>
+  );
 };
 
 export default DNAPage;

@@ -2,15 +2,15 @@ import React, { Fragment } from "react";
 import ProfileTop from "../../components/account/ProfileTop";
 import SectionContainer from "../../components/layout-units/SectionContainer";
 
-const LineagePage = () => {
+const AppointmentsPage = () => {
   return (
     <Fragment>
       <ProfileTop />
       <SectionContainer>
-        <h2>Lineage Tree</h2>
+        <h2>Appointments</h2>
       </SectionContainer>
     </Fragment>
   );
 };
 
-export default LineagePage;
+export default AppointmentsPage;

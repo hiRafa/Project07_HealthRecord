@@ -309,7 +309,7 @@
 }
 .section_stories h2 {
   text-align: center;
-  color: var(--color-primary-dark);
+  color: var(--color-primary-main);
   background-color: var(--color-white);
   padding: 1rem 0;
 }
@@ -337,6 +337,11 @@
 .stories_cardsContainer::-webkit-scrollbar {
   /* Hide scrollbar for Chrome, Safari and Opera */
   display: none;
+}
+.stories_cardsContainer h2 {
+  position: absolute;
+  top: 0;
+  height: 80px;
 }
 
 .storyCard {
