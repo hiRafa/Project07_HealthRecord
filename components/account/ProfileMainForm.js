@@ -1,126 +1,81 @@
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import classes from "./Account.module.css";
 
-import InputRequired from "../layout-units/InputRequired";
-import InputSaved from "../layout-units/InputSaved";
+import InputReq from "../layout-units/InputReq";
+import InputReqSaved from "../layout-units/InputReqSaved";
 import SectionContainer from "../layout-units/SectionContainer";
-import { useUser } from "../../helpers/firebaseData-helper";
-import { useSession } from "next-auth/react";
 import useNotification from "../../contexts/notifications-context";
 import ButtonAll from "../layout-units/ButtonAll";
 import { togglePrevCurrent } from "../../helpers/general-helper";
+import InputConversion from "../layout-units/InputConversion";
 
 const ProfileMainForm = ({ currentUserEmail }) => {
-  const { userData, isLoading, isError } = useUser();
   const [isEditing, setIsEditing] = useState(false);
+  const [fetchingData, setFetchingData] = useState(true);
   const { successfullNotification, errorNotification } = useNotification();
 
-  const fullNameInputRef = useRef();
-  const addressInputRef = useRef();
-  const dobInputRef = useRef();
-  const sexInputRef = useRef();
-  const weightInputRef = useRef();
-  const heightInputRef = useRef();
-
+  // First Fetch data from api if there is any.
   const [dataFetched, setDataFetched] = useState({});
-  let dataFromChild = {};
-  // useEffect(() => {
-  //   fetch(`/api/userData/${currentUserEmail}`)
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       // then extracting the data, the data was stored as { userData: userData}
-  //       // set the data to a local component state#
-  //       dataFromChild = { ...data.userData };
-  //       // setIsFetchingComments(false);
-  //     });
-  // }, [dataFromChild, dataFetched]);
+  useEffect(() => {
+    if (currentUserEmail)
+      fetch(`/api/userData/${currentUserEmail}`)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          // then extracting the data, the data was stored as { userData: userData}
+          // set the data to a local component state#
+          // console.log(data.userData);
+          setDataFetched({ ...data.userData });
+          setFetchingData(false);
+        });
+  }, [currentUserEmail]);
   // console.log(dataFetched);
 
-  // always initially have the user data, even if it is empty
-  // const [dataFromChild, setDataFromChild] = useState({ ...dummy });
-  // if (userData) {
-  //   dataFromChild = { ...userData.formsample, currentUserEmail };
-  // }
+  // if (dataFetched === null || !dataFetched) return <p>Loading...</p>;
+
+  // Function that it passed to the children.
+  // Used wih onBlur on children inputs
+  // Arguments that are set on the children come back here and are set to a state
 
   const getDataFromChild = (childKey, childValue) => {
-    Object.keys(dataFromChild).forEach((key) => {
-      // console.log(key);
-      // console.log(dataFromChild[key]);
-      // if values are not invalid
-      if (childValue === null || childValue === "" || childValue < 0) {
-        // console.log(dataFromChild);
-        return;
-      }
-      // else if (Object.keys(dataFromChild).length === 0) {
-      // dataFromChild = {
-      //   ...dataFromChild,
-      //   [childKey]: childValue,
-      // };
-      // }
-      // if both keys are equal, then replace value
-      else if (key === childKey) {
-        dataFromChild[key] = childValue;
-        // console.log(dataFromChild);
-      }
-    });
+    if (childValue === null || childValue === "" || childValue < 0) {
+      return;
+    }
+    setDataFetched({ ...dataFetched, [childKey]: childValue });
   };
+  // console.log(dataFetched);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
-    // fetch("/api/userDataForms", {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     currentUserEmail,
-    //     ...dataFromChild,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       return response.json();
-    //     }
-
-    //     return response.json().then((data) => {
-    //       errorNotification(data.message || "Something went wrong!");
-    //     });
-    //   })
-    //   .then(
-    //     // (data) => console.log(data),
-    //     successfullNotification("Success!", "Your comment was registered!")
-    //   )
-    //   .catch((error) => errorNotification("Error!", error));
-
-    fetch(`/api/userData/${currentUserEmail}`)
-      .then((response) => {
-        return response.json();
+    // By clicking on save it wont be editing anymore, so the fetch will be activated
+    if (!isEditing) {
+      fetch("/api/postUserDataFromForms", {
+        method: "POST",
+        body: JSON.stringify({
+          ...dataFetched,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
-      // then extracting the data, the data was stored as { comments: documents}
-      .then((data) => {
-        // set the data to a local component state#
-        dataFromChild = { ...data.userData };
-        console.log(data);
-        // setIsFetchingComments(false);
-      });
-  };
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
 
-  const fetchHandler = () => {
-    fetch(`/api/userData/${currentUserEmail}`)
-      .then((response) => {
-        return response.json();
-      })
-      // then extracting the data, the data was stored as { comments: documents}
-      .then((data) => {
-        // set the data to a local component state#
-        setDataFetched({ ...data.userData });
-        console.log({ ...data.userData });
-        // setIsFetchingComments(false);
-      });
-    console.log(dataFetched);
+          return response.json().then((data) => {
+            errorNotification(data.message || "Something went wrong!");
+          });
+        })
+        .then(
+          // (data) => console.log(data),
+          successfullNotification("Success!", "Your comment was registered!")
+        )
+        .catch((error) => errorNotification("Error!", error));
+      console.log(dataFetched);
+    }
   };
 
   const inputs = [
@@ -128,28 +83,24 @@ const ProfileMainForm = ({ currentUserEmail }) => {
       type: "text",
       label: "Full Name",
       id: "fullname",
-      reference: fullNameInputRef,
-      data: dataFromChild.fullname,
+      data: dataFetched.fullname,
     },
     {
       type: "text",
       label: "Current Address",
       id: "address",
-      reference: addressInputRef,
-      data: dataFromChild.address,
+      data: dataFetched.address,
     },
     {
       type: "date",
       label: "Date of Birth",
       id: "dob",
-      reference: dobInputRef,
-      data: dataFromChild.dob,
+      data: dataFetched.dob,
     },
     {
       label: "Current Biological Sex",
       id: "sex",
-      reference: sexInputRef,
-      data: dataFromChild.sex,
+      data: dataFetched.sex,
       list: "sex",
       options: [
         "Female",
@@ -160,52 +111,66 @@ const ProfileMainForm = ({ currentUserEmail }) => {
         "Male Trans",
       ],
     },
+  ];
+
+  const inputsConvert = [
     {
       type: "number",
       label: "Weight",
       id: "weight",
-      reference: weightInputRef,
-      data: dataFromChild.weight,
+      measureMain: "Kg",
+      measureAlt: "Lbs",
+      data: dataFetched.weight,
     },
     {
       type: "number",
       label: "Height",
       id: "height",
-      reference: heightInputRef,
-      data: dataFromChild.height,
+      measureMain: "Cm",
+      measureAlt: "Ft",
+      data: dataFetched.height,
     },
   ];
 
   return (
     <SectionContainer className={`flex_column ${classes.section_accountinfo}`}>
       <h2>Main</h2>
-      <form onSubmit={submitHandler} className={classes.maininfo_form}>
-        {isEditing
-          ? inputs.map((input) => (
-              <InputRequired
+      {fetchingData && <p>Loading...</p>}
+      {!fetchingData && (
+        <form onSubmit={submitHandler} className={classes.maininfo_form}>
+          {isEditing &&
+            inputs.map((input) => (
+              <InputReq
                 input={input}
                 key={input.label}
                 getDataFromChild={getDataFromChild}
               />
-            ))
-          : inputs.map((input) => (
-              <InputSaved
-                label={input.label}
-                htmlFor={input.id}
-                data={input.data}
-                className
-                key={input.id}
+            ))}
+          {isEditing &&
+            inputsConvert.map((inputConvert) => (
+              <InputConversion
+                inputConvert={inputConvert}
+                key={inputConvert.label}
+                getDataFromChild={getDataFromChild}
               />
             ))}
 
-        <button>Collect Data from Children</button>
-      </form>
-      <ButtonAll
-        text={isEditing ? "Save" : "Edit"}
-        onClick={() => togglePrevCurrent(setIsEditing)}
-        className={`${classes.buttonSave}`}
-      />
-      <button onClick={fetchHandler}>fetch</button>
+          {!isEditing &&
+            inputs.map((input) => (
+              <InputReqSaved input={input} key={input.id} />
+            ))}
+          {!isEditing &&
+            inputsConvert.map((input) => (
+              <InputReqSaved input={input} key={input.id} />
+            ))}
+
+          <ButtonAll
+            text={isEditing ? "Save" : "Edit"}
+            onClick={() => togglePrevCurrent(setIsEditing)}
+            className={`${classes.buttonSave}`}
+          />
+        </form>
+      )}
     </SectionContainer>
   );
 };

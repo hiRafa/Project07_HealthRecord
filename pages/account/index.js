@@ -17,8 +17,8 @@ const ProfilePage = () => {
     <Fragment>
       <ProfileTop />
       <ProfileMainForm currentUserEmail={currentUserEmail} />
-      <ProfileRecordsForm />
-      <ProfileSelectingForm />
+      <ProfileRecordsForm currentUserEmail={currentUserEmail} />
+      <ProfileSelectingForm currentUserEmail={currentUserEmail} />
     </Fragment>
   );
 };

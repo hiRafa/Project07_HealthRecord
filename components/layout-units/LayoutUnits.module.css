@@ -118,8 +118,27 @@
 
 /* INPUT SAVED USER INFO  */
 .userData {
+  min-width: 100px;
   height: 30px;
   padding-left: 2rem;
+}
+
+/* INPUT CONVERT */
+.inputConvertContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.inputConvert {
+  width: 5%;
+  min-width: 60px;
+}
+.inputConvertContainer p {
+  width: 30px;
+  min-width: fit-content;
+}
+
+.buttonConvert {
 }
 
 /* INPUT OPTIONS  */

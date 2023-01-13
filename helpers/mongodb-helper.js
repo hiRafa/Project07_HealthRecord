@@ -13,6 +13,18 @@ export async function connectToMongoDB() {
 export async function registerNewsLetterUser(client, collection, email) {
   return await client.db().collection(collection).insertOne(email);
 }
+// export async function fetchUserData(userEmail, setData) {
+//   const response = await fetch(`/api/userData/${userEmail}`);
+//   if (!response.ok) {
+//     throw new Error("Something is not right");
+//   }
+//   const responseOk = await response.json();
+
+//   // then extracting the data, the data was stored as { userData: userData}
+//   // set the data to a local component state#
+//   // console.log(data.userData);
+//   setData({ ...responseOk.userData });
+// }
 
 // export async function getUserData(client, collection, filter = {}, sort) {
 //   return await client

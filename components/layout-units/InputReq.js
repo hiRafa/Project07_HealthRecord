@@ -1,7 +1,8 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import { togglePrevCurrent } from "../../helpers/general-helper";
 import classes from "./LayoutUnits.module.css";
 
-const InputRequired = ({ input, getDataFromChild }) => {
+const InputReq = ({ input, getDataFromChild }) => {
   const {
     label,
     htmlFor,
@@ -16,9 +17,9 @@ const InputRequired = ({ input, getDataFromChild }) => {
     options,
   } = input;
 
-  const inputRef = useRef();
+  if (id === "weight" || id === "height") return;
 
-  // console.log(data);
+  const inputRef = useRef();
 
   // LABEL
   const labelCustom = (
@@ -80,4 +81,4 @@ const InputRequired = ({ input, getDataFromChild }) => {
   );
 };
 
-export default InputRequired;
+export default InputReq;
