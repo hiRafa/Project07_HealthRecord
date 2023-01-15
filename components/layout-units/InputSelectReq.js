@@ -1,17 +1,25 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import ButtonAll from "./ButtonAll";
 import classes from "./LayoutUnits.module.css";
-import { togglePrevCurrent } from "../../helpers/general-helper";
+import {
+  profileFormSubmitHandler,
+  togglePrevCurrent,
+} from "../../helpers/general-helper";
+import useNotification from "../../contexts/notifications-context";
 
-const InputSelectReq = ({ input }) => {
+const InputSelectReq = ({ input, dataFetched }) => {
+  const { id, data, label, options } = input;
+  const { successfullNotification, errorNotification } = useNotification();
+
   const inputRef = useRef();
   const [isEditing, setIsEditing] = useState(false);
-  const [selectedOptions, setSelectedOptions] = useState([
-    ...input.dummyData.map((data) => data),
-  ]);
+  const [selectedOptions, setSelectedOptions] = useState();
+  useEffect(() => {
+    setSelectedOptions(data);
+    console.log(selectedOptions);
+  }, [data]);
   // State with the user data if there is any, if not it is an empty array
   // Same state that will be updated and posted on the database
-  // console.log(selectedOptions);
 
   const onAddtoAnswersArray = () => {
     if (selectedOptions.includes(inputRef.current.value)) {
@@ -34,54 +42,29 @@ const InputSelectReq = ({ input }) => {
   // onClick={() => onDeleteFromAnswersArray(option)} function is passing that key
   // toe the function and based on that the array is filtered.
 
-  const showSelectedOptions = (
-    <ul className={`flex_center ${classes.options_ul}`}>
-      {selectedOptions.map((option) => {
-        if (!isEditing) {
-          return (
-            <li key={option} className={`flex_center ${classes.options_li}`}>
-              {option}
-            </li>
-          );
-        } else {
-          return (
-            <li
-              className={`flex_center ${classes.options_li} ${classes.options_li_X}`}
-              onClick={() => onDeleteFromAnswersArray(option)}
-              key={option}
-              // passing the option/key as a value to the function to delete the corresponding element from the array
-            >
-              {option}
-              <span
-                className={`material-symbols-outlined ${classes.slider_icon}`}
-              >
-                cancel
-              </span>
-            </li>
-          );
-        }
-      })}
-    </ul>
-  );
-  // showing all selected options inside the state array
-  // based on different rules of true or false the array will show accordingly.
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-  };
+  let dataToServer = {};
 
   return (
     <Fragment>
       <form
-        onSubmit={submitHandler}
-        key={input.id}
+        onSubmit={(event) => {
+          event.preventDefault();
+          dataToServer = { ...dataFetched, [input.id]: selectedOptions };
+          !isEditing &&
+            profileFormSubmitHandler(
+              dataToServer,
+              successfullNotification,
+              errorNotification
+            );
+        }}
+        key={id}
         className={` ${classes.inputSelect_top} `}
       >
-        <h4>{input.label}</h4>
+        <h4>{label}</h4>
         <div className={`flex_start ${classes.inputSelect} `}>
           {isEditing && (
             <select ref={inputRef} className={`flex_center ${classes.select}`}>
-              {input.options.map((option) => (
+              {options.map((option) => (
                 <option
                   value={option}
                   key={option}
@@ -93,13 +76,45 @@ const InputSelectReq = ({ input }) => {
             </select>
           )}
           <ButtonAll
-            text={isEditing ? "Save" : "Edit"}
+            text={isEditing ? "Save" : "Select"}
             onClick={() => togglePrevCurrent(setIsEditing)}
             className={`${classes.buttonSave}`}
           />
         </div>
-        {input.dummyData && !isEditing && showSelectedOptions}
-        {isEditing && showSelectedOptions}
+        {data && (
+          // showing all selected options inside the state array
+          <ul className={`flex_center ${classes.options_ul}`}>
+            {selectedOptions &&
+              selectedOptions.map((option) => {
+                if (!isEditing) {
+                  return (
+                    <li
+                      key={option}
+                      className={`flex_center ${classes.options_li}`}
+                    >
+                      {option}
+                    </li>
+                  );
+                } else if (isEditing) {
+                  return (
+                    <li
+                      className={`flex_center ${classes.options_li} ${classes.options_li_X}`}
+                      onClick={() => onDeleteFromAnswersArray(option)}
+                      key={option}
+                      // passing the option/key as a value to the function to delete the corresponding element from the array
+                    >
+                      {option}
+                      <span
+                        className={`material-symbols-outlined ${classes.slider_icon}`}
+                      >
+                        cancel
+                      </span>
+                    </li>
+                  );
+                }
+              })}
+          </ul>
+        )}
       </form>
     </Fragment>
   );

@@ -13,7 +13,7 @@ async function handler(req, res) {
   if (req.method === "POST") {
     const { ...dataFetched } = req.body;
     console.log(dataFetched);
-    console.log(dataFetched.email);
+    // console.log(dataFetched.email);
     const emailForFilter = dataFetched.email;
 
     delete dataFetched._id;

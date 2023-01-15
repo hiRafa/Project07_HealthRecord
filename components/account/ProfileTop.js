@@ -3,8 +3,10 @@ import Head from "next/head";
 import React, { Fragment } from "react";
 import SectionContainer from "../layout-units/SectionContainer";
 import classes from "./Account.module.css";
+import { useRouter } from "next/router";
 
 const ProfileTop = () => {
+  const router = useRouter();
   let currentDate = new Date();
   // let userTimeZone = currentDate.getTimezoneOffset() / 60; // return timezone in minutes, divide by 60 for hours
   // const timeElapsed = currentDate.now();
@@ -20,6 +22,12 @@ const ProfileTop = () => {
   // console.log(currentDate.getFullYear());
   // console.log(currentDate.getTime());
   // console.log(userTimeZone);
+  const accountRoute = "/account";
+  const lineageRoute = "/account/lineage";
+  const DNARoute = "/account/DNA";
+  const appointmentsRoute = "/account/appointments";
+  const dietRoute = "/account/diet";
+  const settingsRoute = "/account/settings";
 
   return (
     <Fragment>
@@ -33,28 +41,57 @@ const ProfileTop = () => {
       </Head>
       <SectionContainer>
         <h1>Welcome to your profile</h1>
-        {/* <p>{currentFormatDate}</p> */}
       </SectionContainer>
       <SectionContainer>
         <nav className={`section_container ${classes.nav_account}`}>
           <ul>
-            <Link href="/account">
-              <li className={`showOnPc  ${classes.navLink}`}>Main</li>
+            <Link href={accountRoute}>
+              <li
+                className={`showOnPc ${classes.navLink} 
+                ${router.route === accountRoute && classes.navLink_active}`}
+              >
+                Main
+              </li>
             </Link>
-            <Link href="/account/lineage">
-              <li className={`showOnPc  ${classes.navLink}`}>Lineage</li>
+            <Link href={lineageRoute}>
+              <li
+                className={`showOnPc  ${classes.navLink}
+                ${router.route === lineageRoute && classes.navLink_active}`}
+              >
+                Lineage
+              </li>
             </Link>
-            <Link href="/account/DNA">
-              <li className={`showOnPc  ${classes.navLink}`}>DNA</li>
+            <Link href={DNARoute}>
+              <li
+                className={`showOnPc  ${classes.navLink}
+               ${router.route === DNARoute && classes.navLink_active}`}
+              >
+                DNA
+              </li>
             </Link>
-            <Link href="/account/appointments">
-              <li className={`showOnPc  ${classes.navLink}`}>Appointments</li>
+            <Link href={appointmentsRoute}>
+              <li
+                className={`showOnPc  ${classes.navLink}
+               ${router.route === appointmentsRoute && classes.navLink_active}`}
+              >
+                Appointments
+              </li>
             </Link>
-            <Link href="/account/diet">
-              <li className={`showOnPc  ${classes.navLink}`}>Diet</li>
+            <Link href={dietRoute}>
+              <li
+                className={`showOnPc  ${classes.navLink}
+               ${router.route === dietRoute && classes.navLink_active}`}
+              >
+                Diet
+              </li>
             </Link>
-            <Link href="/account/settings">
-              <li className={`showOnPc  ${classes.navLink}`}>Settings</li>
+            <Link href={settingsRoute}>
+              <li
+                className={`showOnPc  ${classes.navLink}
+               ${router.route === settingsRoute && classes.navLink_active}`}
+              >
+                Settings
+              </li>
             </Link>
           </ul>
         </nav>

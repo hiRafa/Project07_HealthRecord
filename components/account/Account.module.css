@@ -16,7 +16,7 @@
   margin: 0;
   padding: 0;
 }
-.nav_account li {
+.navLink {
   padding: 0.5rem;
   list-style: none;
   border-top-left-radius: var(--borderRadius-card);
@@ -27,11 +27,22 @@
   display: flex;
   justify-content: center;
 }
+.navLink:hover {
+  color: white;
+  border-color: white;
+}
 
-.nav_account a {
+.navLink a {
   text-decoration: none;
   color: #000;
   font-size: 1rem;
+}
+
+.navLink_active {
+  color: var(--color-primary-dark);
+  border-color: white;
+  background-color: white;
+  font-weight: 700;
 }
 
 .pagesLayout_main {
