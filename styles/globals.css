@@ -53,9 +53,6 @@ a {
 li {
   list-style: none;
 }
-li:hover {
-  cursor: pointer;
-}
 
 * {
   box-sizing: border-box;
@@ -95,9 +92,16 @@ button {
   border-radius: var(--borderRadius-button);
   padding: 0.5rem 1rem;
   font-weight: 700;
+  transition: var(--transition-25ms);
 }
 button:hover {
   cursor: pointer;
+  background-color: var(--color-tertiary-light);
+  color: var(--color-white);
+  transition: var(--transition-25ms);
+}
+button:active {
+  background-color: var(--color-primary-dark);
 }
 
 section {
@@ -154,6 +158,23 @@ section {
 }
 .showOnMobile {
   display: none;
+}
+
+.material-symbols-outlined:hover {
+  color: var(--color-tertiary-light);
+  user-select: none; /* Standard syntax */
+}
+.hoverClass {
+  transition: var(--transition-25ms);
+}
+.hoverClass:hover {
+  cursor: pointer;
+  background-color: var(--color-tertiary-light);
+  transition: var(--transition-25ms);
+}
+.hoverClass:active {
+  cursor: pointer;
+  background-color: var(--color-tertiary-light);
 }
 
 @media screen and (max-width: 768px) {

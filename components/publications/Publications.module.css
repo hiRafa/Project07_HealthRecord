@@ -1,6 +1,7 @@
 .section_top {
   color: var(--color-white);
   gap: 1rem;
+  margin: 0 auto 3rem;
 }
 
 .section_top p {
@@ -13,16 +14,19 @@
 }
 .pub_navUL {
   gap: var(--gap-pc);
+  margin: 2rem 0;
 }
 .pub_navUL_li {
-  background-color: var(--color-white);
+  background-color: var(--color-primary-main);
   padding: 1rem 2rem;
-  margin: 2rem 0;
   border-radius: var(--borderRadius-button);
 }
 
 .activeLi {
-  background-color: var(--color-primary-light);
+  background-color: var(--color-white);
+}
+.activeLi:hover {
+  background-color: var(--color-white);
 }
 
 /* CARDS LIST  */
@@ -37,7 +41,7 @@
   padding: 2rem;
   width: 45%;
   min-width: 500px;
-  height: 32vh;
+  height: 300px;
   min-height: 100%;
   overflow: hidden;
   border-radius: var(--borderRadius-card);
@@ -88,12 +92,21 @@
   align-self: flex-end;
   justify-self: flex-end;
 }
+@media screen and (max-width: 768px) {
+  .publications_card {
+    height: 40vh;
+    min-width: 300px;
+    width: 100%;
+  }
+  .pub_navUL_li {
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+  }
+}
 
 /* Publications DETAILS  */
 .pub_details_container {
   gap: var(--gap-pc);
-}
-.pub_details_top {
 }
 
 .details_body_by {

@@ -16,11 +16,11 @@ const InputSelectReq = ({ input, dataFetched }) => {
   const [selectedOptions, setSelectedOptions] = useState();
   useEffect(() => {
     setSelectedOptions(data);
+
     console.log(selectedOptions);
   }, [data]);
   // State with the user data if there is any, if not it is an empty array
   // Same state that will be updated and posted on the database
-
   const onAddtoAnswersArray = () => {
     if (selectedOptions.includes(inputRef.current.value)) {
       return;
@@ -81,9 +81,14 @@ const InputSelectReq = ({ input, dataFetched }) => {
             className={`${classes.buttonSave}`}
           />
         </div>
+
         {data && (
           // showing all selected options inside the state array
           <ul className={`flex_center ${classes.options_ul}`}>
+            {selectedOptions && selectedOptions.length === 0 && (
+              <p>{`No ${id} registered`}</p>
+            )}
+
             {selectedOptions &&
               selectedOptions.map((option) => {
                 if (!isEditing) {

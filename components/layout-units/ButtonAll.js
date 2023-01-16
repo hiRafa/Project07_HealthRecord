@@ -5,7 +5,7 @@ import classes from "./LayoutUnits.module.css";
 const ButtonAll = ({ text, className, onClick, href }) => {
   if (href) {
     return (
-      <Link href={href}>
+      <Link href={href} className={`${classes.parent_buttonAll}`}>
         <button className={`${className} ${classes.buttonAll}`}>{text}</button>
       </Link>
     );

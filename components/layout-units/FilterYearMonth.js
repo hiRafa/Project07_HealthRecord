@@ -26,7 +26,7 @@ const FilterYearMonth = ({ currentYear, currentMonth }) => {
 
   return (
     <form className={classes.form} onSubmit={submitHandler}>
-      <div className={classes.controls}>
+      <div className={`flex_center flex_column_mobile ${classes.controls}`}>
         <div className={classes.control}>
           <label htmlFor="year" />
           <select id="year" ref={yearInputRef}>
@@ -57,8 +57,8 @@ const FilterYearMonth = ({ currentYear, currentMonth }) => {
             <option value="12">Dec</option>
           </select>
         </div>
+        <ButtonAll text={`Search`} />
       </div>
-      <ButtonAll text={`Search`} />
     </form>
   );
 };

@@ -12,10 +12,9 @@ const SectionTopPub = ({ humanReadableDate }) => {
         className={` flex_center flex_column ${classes.section_top}`}
       >
         <h1>Publications </h1>
-        <ButtonAll href="/publicationslist" text={"Show all events"} />
-
         <p>{`Publications found for ${humanReadableDate}`}</p>
         <FilterYearMonth />
+        <ButtonAll href="/publicationslist" text={"Show all events"} />
       </SectionContainer>
     );
   } else {

@@ -49,23 +49,6 @@ const PublicationsListPage = ({ articles, stories }) => {
     />
   ));
 
-  // test;
-  // let filteredArticles = articles
-  //   .map((art) => {
-  //     // console.log(formatDate(art.date));
-  //     const year = +art.date.toString().slice(0, 4);
-  //     const month = +art.date.toString().substring(4, 6);
-  //     const key = art.id;
-  //     // console.log(year, month);
-  //     return { year, month, ...art, key };
-  //   })
-  //   .filter((date) => {
-  //     // console.log(date);
-  //     return date.year === 2021 && date.month === 10;
-  //   });
-  // console.log(filteredArticles);
-  // // classes
-
   return (
     <Fragment>
       <Head>
@@ -78,11 +61,11 @@ const PublicationsListPage = ({ articles, stories }) => {
 
       <section>
         <nav className={` ${classes.publications_nav} `}>
-          <ul className={`flex_center ${classes.pub_navUL} `}>
+          <ul className={`flex_center  ${classes.pub_navUL} `}>
             <li
-              className={` ${classes.pub_navUL_li} ${
+              className={`hoverClass ${classes.pub_navUL_li} ${
                 showPublications === 0 && classes.activeLi
-              }`}
+              } `}
               onClick={() => {
                 setShowPublications(0);
               }}
@@ -90,7 +73,7 @@ const PublicationsListPage = ({ articles, stories }) => {
               All
             </li>
             <li
-              className={`${classes.pub_navUL_li} ${
+              className={`hoverClass ${classes.pub_navUL_li} ${
                 showPublications === 1 && classes.activeLi
               }`}
               onClick={() => {
@@ -100,7 +83,7 @@ const PublicationsListPage = ({ articles, stories }) => {
               Articles
             </li>
             <li
-              className={`${classes.pub_navUL_li} ${
+              className={`hoverClass ${classes.pub_navUL_li} ${
                 showPublications === 2 && classes.activeLi
               }`}
               onClick={() => {
