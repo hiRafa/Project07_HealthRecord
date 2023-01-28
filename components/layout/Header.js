@@ -21,77 +21,79 @@ const Header = () => {
     signOut();
   };
 
+  const links = [
+    { pageTitle: "Home", link: "/", icon: "home_health" },
+    {
+      pageTitle: "Health Centers!",
+      link: "/healthcenters",
+      icon: "emoji_transportation",
+    },
+    { pageTitle: "Publications", link: "/publicationslist", icon: "cognition" },
+  ];
+
+  let logOutLink, accountLink;
+  if (session) {
+    logOutLink = (
+      <li className={` animWindow ${classes.navLink}`} onClick={handleSignout}>
+        <span class="material-symbols-outlined navIcons">directions_run</span>
+        <Link href="/">Log out</Link>
+      </li>
+    );
+    accountLink = (
+      <li className={` animWindow ${classes.navLink}`}>
+        <Link href="/account">
+          <span class="material-symbols-outlined navIcons">
+            medical_information
+          </span>
+          Account
+        </Link>
+      </li>
+    );
+  } else {
+    accountLink = (
+      <li className={` animWindow ${classes.navLink}`}>
+        <Link href="/">
+          <span class="material-symbols-outlined navIcons">
+            medical_information
+          </span>
+          Account
+        </Link>
+      </li>
+    );
+  }
+
   return (
     <header className={classes.header}>
       <img className={`${classes.bg_img}`} />
       <div className={classes.logo}>
         <Link href="/">Logo</Link>
       </div>
-      <nav className={`flex_center  ${classes.navigation}`}>
-        <ul className={` ${classes.navLink}`}>
-          <li className={`showOnPc ${classes.navLink}`}>
-            <Link href="/">Home</Link>
-          </li>
-          <li className={`showOnPc  ${classes.navLink}`}>
-            {session ? (
-              <Link href="/account">Account</Link>
-            ) : (
-              <Link href="/">Account</Link>
-            )}
-          </li>
-          <li className={`showOnPc  ${classes.navLink}`}>
-            <Link href="/centers">Health Centers!</Link>
-          </li>
-          <li className={`showOnPc  ${classes.navLink}`}>
-            <Link href="/publicationslist">Publications</Link>
-          </li>
-
-          {/* Log Out and Menu */}
-          {session && (
-            <li
-              className={`showOnPc  ${classes.navLink}`}
-              onClick={handleSignout}
-            >
-              <Link href="/">Log out</Link>
+      <nav className={`flex_center ${classes.navigation}`}>
+        {openNav && <Backdrop onClick={handlecloseNav} />}
+        <ul
+          className={`${classes.navUl} ${openNav && classes.navUlMobile}`}
+          onClick={() => setOpenNav(false)}
+        >
+          {links.map((link) => (
+            <li className={`animWindow ${classes.navLink}`}>
+              <Link href={link.link}>
+                <span class="material-symbols-outlined navIcons">
+                  {link.icon}
+                </span>
+                {link.pageTitle}
+              </Link>
             </li>
-          )}
-          <li
-            className={`showOnMobile  ${classes.navLink} ${classes.navMenu_button}`}
-            onClick={handleopenNav}
-          >
-            Menu
-          </li>
-          {openNav && <Backdrop onClick={handlecloseNav} />}
-          {openNav && (
-            <div className={`flex_column ${classes.navMobile}`}>
-              <li className={`showOnMobile ${classes.navLink}`}>
-                <Link href="/">Home</Link>
-              </li>
-              <li className={`showOnMobile  ${classes.navLink}`}>
-                {session ? (
-                  <Link href="/account">Account</Link>
-                ) : (
-                  <Link href="/">Account</Link>
-                )}
-              </li>
-              <li className={`showOnMobile  ${classes.navLink}`}>
-                <Link href="/centers">Health Centers!</Link>
-              </li>
-              <li className={`showOnMobile  ${classes.navLink}`}>
-                <Link href="/publicationslist">Publications</Link>
-              </li>
-
-              {session && (
-                <li
-                  className={`showOnMobile  ${classes.navLink}`}
-                  onClick={handleSignout}
-                >
-                  <Link href="/">Log out</Link>
-                </li>
-              )}
-            </div>
-          )}
+          ))}
+          {accountLink}
+          {logOutLink}
         </ul>
+
+        <div
+          className={`showOnMobile animWindow ${classes.navLink} ${classes.navMenu_button}`}
+          onClick={handleopenNav}
+        >
+          <span class="material-symbols-outlined navIcons">menu_open</span>
+        </div>
       </nav>
     </header>
   );

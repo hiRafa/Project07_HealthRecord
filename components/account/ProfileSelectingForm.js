@@ -30,7 +30,19 @@ const ProfileSelectingForm = ({ dataFromPar }) => {
       label: "Any health conditions?",
       id: "conditions",
       data: dataFetched.conditions,
-      options: ["Heart Problems", "Altism", "Lung", "Osteoporosis", "Diabetes"],
+      options: [
+        "Heart Problems",
+        "Lung",
+        "Osteoporosis",
+        "Diabetes",
+        "High Blood Pressure",
+      ],
+    },
+    {
+      label: "Neurodiverse?",
+      id: "neurodiversities",
+      data: dataFetched.neurodiversities,
+      options: ["ADHD", "Altism", "Dyslexia", "Alzheimer", "Parkinson"],
     },
   ];
 

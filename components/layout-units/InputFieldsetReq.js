@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import classes from "./LayoutUnits.module.css";
 
 const InputFieldsetReq = ({ input, getDataFromChild, isEditing }) => {
-  const { data, name, legend, classNameLabel, classNameInput } = input;
+  const { data, name, legend, icon, classNameLabel, classNameInput } = input;
   const inputRefYes = useRef();
   const inputRefNo = useRef();
 
@@ -54,7 +54,8 @@ const InputFieldsetReq = ({ input, getDataFromChild, isEditing }) => {
           />
         </div>
       ) : (
-        <p className={`flex_center ${classes.fieldset_option}`}>
+        <p className={`flex_start ${classes.fieldset_option}`}>
+          <span class="material-symbols-outlined">{icon}</span>
           {data === true ? "Yes" : "No"}
         </p>
       )}

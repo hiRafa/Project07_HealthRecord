@@ -35,16 +35,19 @@ const ProfileRecordsForm = ({ dataFromPar }) => {
       legend: "Smoke tabaco?",
       data: dataFetched.tabaco,
       name: "tabaco",
+      icon: "smoking_rooms",
     },
     {
       legend: "Pregnant?",
       data: dataFetched.pregnant,
       name: "pregnant",
+      icon: "breastfeeding",
     },
     {
       legend: "Are you on drugs?",
       data: dataFetched.drugs,
       name: "drugs",
+      icon: "mixture_med",
     },
   ];
 

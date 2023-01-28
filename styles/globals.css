@@ -4,7 +4,7 @@
   --color-primary-transparency: #3e31a330;
   --color-primary-dark: #1f6153;
   --color-primary-light: #84e5d0;
-  --color-primary-waves: #1f4d619a;
+  --color-primary-waves: #84e5d025;
 
   --color-secondary-main: #40b5ed;
   --color-secondary-transparency: #f7de390a;
@@ -44,6 +44,12 @@ body {
   overflow-x: hidden;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* min-height: 100vh;
+  min-height: 100dvh; */
+}
+body #__next {
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 a {
@@ -177,7 +183,27 @@ section {
   background-color: var(--color-tertiary-light);
 }
 
+.glass_bg {
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.76);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+.navIcons {
+  font-size: 2rem;
+  color: var(--color-primary-main);
+  border: 3px solid var(--color-primary-main);
+  padding: 0.5rem;
+  border-radius: var(--borderRadius-card);
+}
+
 @media screen and (max-width: 768px) {
+  :root {
+    --top-bottom-spacing: 2rem;
+  }
   .flex_column_mobile {
     display: flex;
     flex-direction: column;
@@ -188,4 +214,30 @@ section {
   .showOnMobile {
     display: block;
   }
+}
+
+/* Animation */
+
+.animWindow {
+  line-height: 1.2em;
+  background: conic-gradient(
+        from -135deg at 100% 50%,
+        var(--color-tertiary-light) 90deg,
+        #0000 0
+      )
+      0 var(--p, 0%) / var(--s, 0%) 200% no-repeat,
+    conic-gradient(
+        from -135deg at 1.2em 50%,
+        #0000 90deg,
+        var(--color-tertiary-light) 0
+      )
+      100% var(--p, 0%) / var(--s, 0%) 200% no-repeat;
+  transition: 0.4s ease-in, background-position 0s;
+}
+.animWindow:hover {
+  --p: 100%;
+  --s: calc(70% + 0.61em);
+}
+.animWindow:hover > * {
+  color: var(--color-white);
 }

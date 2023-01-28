@@ -69,16 +69,16 @@
   min-height: 50%;
 }
 .wave1 {
-  fill: var(--color-secondary-waves);
+  fill: var(--color-primary-waves);
 }
 .wave2 {
-  fill: var(--color-secondary-waves);
+  fill: var(--color-primary-waves);
 }
 .wave3 {
-  fill: var(--color-secondary-waves);
+  fill: var(--color-primary-waves);
 }
 .wave4 {
-  fill: var(--color-secondary-waves);
+  fill: var(--color-primary-waves);
 }
 
 /* ----------- Account Log in Register */
