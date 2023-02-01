@@ -3,14 +3,10 @@
 .header {
   position: relative;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 1rem 10%;
+  padding: 1rem 4rem;
   height: 5rem;
   /* background-color: var(--color-primary-dark); */
   z-index: 10;
-  transition: var(--transition);
 }
 
 .logo {
@@ -43,9 +39,13 @@
 }
 .navigation {
   position: relative;
-  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 20;
   height: 100%;
   align-items: center;
+  width: 100%;
 }
 .navUl {
   display: flex;
@@ -53,34 +53,52 @@
   align-items: center;
   height: 100%;
 }
-.navLink {
-  list-style: none;
-  padding: 0.5rem 1rem;
+
+.navLi a {
+  font-weight: 600;
+  font-size: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  border: 3px solid var(--color-primary-main);
   border-radius: var(--borderRadius-button);
-}
-.navLink:hover {
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
-.navigation a {
-  text-decoration: none;
-  color: black;
-  font-size: 1.5rem;
+.navLi a:hover {
+  cursor: pointer;
+  color: white;
 }
 
 .navIcons {
-  font-size: 2.5rem;
+  font-size: 24px;
   color: var(--color-primary-main);
+  padding: 2px;
+  border-radius: var(--borderRadius-card);
 }
+
 .navMenuIcon {
   color: var(--color-white);
 }
 .navMenu_button {
-  position: relative;
-  z-index: 100;
+  display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
+  .header {
+    padding: 0;
+    margin: 0 auto;
+  }
+  .navigation {
+    width: 90%;
+    margin: 0 auto;
+  }
+  .navLi_text {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 430px) {
   .logo {
     font-size: 2.5rem;
   }
@@ -91,26 +109,30 @@
     position: absolute;
     right: 0;
     top: 0;
-
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-
     padding: 1rem;
-    z-index: 100;
-    gap: 2rem;
-    filter: drop-shadow(0 0 4px var(--color-primary-light));
-    height: 40vh;
-    background: rgba(255, 255, 255, 0.76);
-    border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
-    border: 1px solid rgba(255, 255, 255, 1);
+    z-index: 110;
+    color: white;
   }
 
   .navigation a {
     font-size: 1.25rem;
+  }
+
+  .navIcons {
+    font-size: 2vw;
+    padding: 0.5rem;
+  }
+
+  .navMenu_button {
+    display: block;
+    position: relative;
+    z-index: 1;
+    padding: 0.5rem 0.75rem;
+    border: 3px solid var(--color-primary-main);
+    border-radius: var(--borderRadius-button);
   }
 }
 

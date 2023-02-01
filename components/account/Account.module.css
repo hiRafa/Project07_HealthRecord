@@ -8,7 +8,7 @@
   margin: 2rem 0 0;
 }
 
-.nav_account ul {
+.nav_accountUl {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -16,6 +16,7 @@
   margin: 0;
   padding: 0;
 }
+
 .navLink {
   padding: 0.5rem;
   list-style: none;
@@ -24,8 +25,7 @@
   border: var(--border-card) var(--color-primary-main);
   border-bottom: none;
   color: var(--color-primary-light);
-  display: flex;
-  justify-content: center;
+
 }
 .navLink:hover {
   color: var(--color-tertiary-light);
@@ -78,13 +78,13 @@
 }
 
 @media screen and (max-width: 768px) {
-  .nav_account ul {
+  .nav_accountUl {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: auto;
   }
 }
 @media screen and (max-width: 376px) {
-  .nav_account ul {
+  .nav_accountUl {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
   }

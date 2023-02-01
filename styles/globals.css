@@ -192,13 +192,6 @@ section {
   -webkit-backdrop-filter: blur(3px);
   border: 1px solid rgba(255, 255, 255, 1);
 }
-.navIcons {
-  font-size: 2rem;
-  color: var(--color-primary-main);
-  border: 3px solid var(--color-primary-main);
-  padding: 0.5rem;
-  border-radius: var(--borderRadius-card);
-}
 
 @media screen and (max-width: 768px) {
   :root {
@@ -220,6 +213,7 @@ section {
 
 .animWindow {
   line-height: 1.2em;
+  /* border-radius: var(--border-card); */
   background: conic-gradient(
         from -135deg at 100% 50%,
         var(--color-tertiary-light) 90deg,
@@ -227,7 +221,7 @@ section {
       )
       0 var(--p, 0%) / var(--s, 0%) 200% no-repeat,
     conic-gradient(
-        from -135deg at 1.2em 50%,
+        from -135deg at 40px 50%,
         #0000 90deg,
         var(--color-tertiary-light) 0
       )
@@ -236,8 +230,10 @@ section {
 }
 .animWindow:hover {
   --p: 100%;
-  --s: calc(70% + 0.61em);
+  --s: calc(70% + 40px);
 }
+
 .animWindow:hover > * {
   color: var(--color-white);
+  border-radius: var(--border-card);
 }

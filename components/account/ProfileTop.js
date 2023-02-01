@@ -22,12 +22,15 @@ const ProfileTop = () => {
   // console.log(currentDate.getFullYear());
   // console.log(currentDate.getTime());
   // console.log(userTimeZone);
-  const accountRoute = "/account";
-  const lineageRoute = "/account/lineage";
-  const DNARoute = "/account/DNA";
-  const appointmentsRoute = "/account/appointments";
-  const dietRoute = "/account/diet";
-  const settingsRoute = "/account/settings";
+
+  const accountNav = [
+    { pageTitle: "Main", link: "/account" },
+    { pageTitle: "Appointments", link: "/account/appointments" },
+    { pageTitle: "Lineage", link: "/account/lineage" },
+    { pageTitle: "DNA", link: "/account/DNA" },
+    { pageTitle: "Meals", link: "/account/meals" },
+    { pageTitle: "Settings", link: "/account/settings" },
+  ];
 
   return (
     <Fragment>
@@ -44,55 +47,18 @@ const ProfileTop = () => {
       </SectionContainer>
       <SectionContainer>
         <nav className={`section_container ${classes.nav_account}`}>
-          <ul>
-            <Link href={accountRoute}>
-              <li
-                className={`showOnPc ${classes.navLink} 
-                ${router.route === accountRoute && classes.navLink_active}`}
-              >
-                Main
-              </li>
-            </Link>
-            <Link href={lineageRoute}>
-              <li
-                className={`showOnPc  ${classes.navLink}
-                ${router.route === lineageRoute && classes.navLink_active}`}
-              >
-                Lineage
-              </li>
-            </Link>
-            <Link href={DNARoute}>
-              <li
-                className={`showOnPc  ${classes.navLink}
-               ${router.route === DNARoute && classes.navLink_active}`}
-              >
-                DNA
-              </li>
-            </Link>
-            <Link href={appointmentsRoute}>
-              <li
-                className={`showOnPc  ${classes.navLink}
-               ${router.route === appointmentsRoute && classes.navLink_active}`}
-              >
-                Appointments
-              </li>
-            </Link>
-            <Link href={dietRoute}>
-              <li
-                className={`showOnPc  ${classes.navLink}
-               ${router.route === dietRoute && classes.navLink_active}`}
-              >
-                Diet
-              </li>
-            </Link>
-            <Link href={settingsRoute}>
-              <li
-                className={`showOnPc  ${classes.navLink}
-               ${router.route === settingsRoute && classes.navLink_active}`}
-              >
-                Settings
-              </li>
-            </Link>
+          <ul className={`${classes.nav_accountUl}`}>
+            {accountNav.map((path) => (
+              <Link href={path.link}>
+                <li
+                  className={`flex_center ${classes.navLink} 
+                ${router.route === path.link && classes.navLink_active}`}
+                >
+                  <span class="material-symbols-outlined">genetics</span>
+                  {path.pageTitle}
+                </li>
+              </Link>
+            ))}
           </ul>
         </nav>
       </SectionContainer>

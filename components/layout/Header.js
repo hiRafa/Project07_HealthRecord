@@ -22,79 +22,74 @@ const Header = () => {
   };
 
   const links = [
-    { pageTitle: "Home", link: "/", icon: "home_health" },
+    { pageTitle: "Home", link: "/", icon: "real_estate_agent" },
     {
-      pageTitle: "Health Centers!",
-      link: "/healthcenters",
+      pageTitle: "Consult!",
+      link: "/consult",
       icon: "emoji_transportation",
     },
     { pageTitle: "Publications", link: "/publicationslist", icon: "cognition" },
   ];
 
-  let logOutLink, accountLink;
-  if (session) {
-    logOutLink = (
-      <li className={` animWindow ${classes.navLink}`} onClick={handleSignout}>
+  let navLinks = links.map((link) => (
+    <li className={`animWindow ${classes.navLi}`}>
+      <Link href={link.link}>
+        <span class="material-symbols-outlined navIcons">{link.icon}</span>
+        <span class={classes.navLi_text}>{link.pageTitle}</span>
+      </Link>
+    </li>
+  ));
+
+  let accountLink = (
+    <li className={` animWindow ${classes.navLi}`}>
+      <Link href={session ? "/account" : "/"}>
+        <span class="material-symbols-outlined navIcons">
+          medical_information
+        </span>
+        <span class={classes.navLi_text}>Account</span>
+      </Link>
+    </li>
+  );
+
+  let logOutLink = (
+    <li className={` animWindow ${classes.navLi}`} onClick={handleSignout}>
+      <Link href="/">
         <span class="material-symbols-outlined navIcons">directions_run</span>
-        <Link href="/">Log out</Link>
-      </li>
-    );
-    accountLink = (
-      <li className={` animWindow ${classes.navLink}`}>
-        <Link href="/account">
-          <span class="material-symbols-outlined navIcons">
-            medical_information
-          </span>
-          Account
-        </Link>
-      </li>
-    );
-  } else {
-    accountLink = (
-      <li className={` animWindow ${classes.navLink}`}>
-        <Link href="/">
-          <span class="material-symbols-outlined navIcons">
-            medical_information
-          </span>
-          Account
-        </Link>
-      </li>
-    );
-  }
+        <span class={classes.navLi_text}>Log out</span>
+      </Link>
+    </li>
+  );
+
+  let menuLink = (
+    <div
+      className={`animWindow ${classes.navLi} ${classes.navMenu_button}`}
+      onClick={handleopenNav}
+    >
+      <a>
+        <span class="material-symbols-outlined navIcons">menu_open</span>
+      </a>
+    </div>
+  );
 
   return (
     <header className={classes.header}>
       <img className={`${classes.bg_img}`} />
-      <div className={classes.logo}>
-        <Link href="/">Logo</Link>
-      </div>
       <nav className={`flex_center ${classes.navigation}`}>
-        {openNav && <Backdrop onClick={handlecloseNav} />}
+        <div className={classes.logo}>
+          <Link href="/">Logo</Link>
+        </div>
         <ul
           className={`${classes.navUl} ${openNav && classes.navUlMobile}`}
           onClick={() => setOpenNav(false)}
         >
-          {links.map((link) => (
-            <li className={`animWindow ${classes.navLink}`}>
-              <Link href={link.link}>
-                <span class="material-symbols-outlined navIcons">
-                  {link.icon}
-                </span>
-                {link.pageTitle}
-              </Link>
-            </li>
-          ))}
+          {navLinks}
           {accountLink}
-          {logOutLink}
+          {session && logOutLink}
         </ul>
 
-        <div
-          className={`showOnMobile animWindow ${classes.navLink} ${classes.navMenu_button}`}
-          onClick={handleopenNav}
-        >
-          <span class="material-symbols-outlined navIcons">menu_open</span>
-        </div>
+        {menuLink}
       </nav>
+      {openNav && <Backdrop onClick={handlecloseNav} />}
     </header>
   );
 };

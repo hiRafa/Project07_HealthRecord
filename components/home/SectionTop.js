@@ -30,7 +30,11 @@ const SectionTop = ({ children }) => {
           <use href="#gentle-wave" x="48" y="7" className={classes.wave4} />
         </g>
       </svg>
-      <SectionContainer className={`flex_center flex_column ${classes.topIn}`}>
+      <SectionContainer
+        className={`flex_center flex_column ${classes.topIn} ${
+          session && classes.topIn_glass
+        }  `}
+      >
         <h1>Welcome to your Medical Records platform at Health Memory</h1>
         <div
           className={`${classes.topIn_body} flex_center flex_column_mobile `}

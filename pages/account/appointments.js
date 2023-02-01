@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
-import UserCalendar from "../../components/account/appointments/UserCalendar";
+import ProfileAppointments from "../../components/account/appointments/ProfileAppointments";
+import UserCalendar from "../../components/consult/BusinessCalendar";
 import ProfileTop from "../../components/account/ProfileTop";
 import SectionContainer from "../../components/layout-units/SectionContainer";
 
@@ -7,10 +8,7 @@ const AppointmentsPage = () => {
   return (
     <Fragment>
       <ProfileTop />
-      <SectionContainer>
-        <h2>Appointments</h2>
-        <UserCalendar />
-      </SectionContainer>
+      <ProfileAppointments />
     </Fragment>
   );
 };
