@@ -159,3 +159,34 @@
   cursor: pointer;
   background-color: var(--color-primary-light);
 }
+
+/* Calendar */
+.calendar {
+  border-radius: 4px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border: 1px solid rgba(255, 255, 255, 1);
+}
+
+/* TIME PICKER */
+.timepicker {
+  gap: 1.5rem;
+}
+.timepicker p {
+  color: var(--color-white);
+  padding-left: 4px;
+}
+
+.hour_select {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 4px;
+}
+.hour_select:focus {
+  background-color: white;
+}
+.hour_option {
+}

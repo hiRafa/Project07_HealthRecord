@@ -118,3 +118,87 @@ export async function getFilteredPublications({ selectedYear, selectedMonth }) {
 
   return filteredPub;
 }
+
+export async function getProfessionals() {
+  const response = await fetch(
+    "https://project-healthrecords-default-rtdb.asia-southeast1.firebasedatabase.app/professionals.json"
+  );
+
+  // Always input .json at the end of the url
+  if (!response.ok) {
+    throw new Error("Something is not right");
+  }
+
+  const Professionals = await response.json();
+  // console.log(Professionals);
+
+  const allProfessionalsArr = [];
+  Object.keys(Professionals).forEach((key) => {
+    // console.log(key); // printing all key of objects on first level
+    // console.log(Professionals[key]); // printing all objects on first level
+    if (typeof Professionals[key] === "object" && Professionals[key] !== null) {
+      allProfessionalsArr.push({
+        id: key,
+        ...Professionals[key],
+      });
+    }
+  });
+  // console.log(allProfessionalsArr);
+  return allProfessionalsArr;
+}
+
+export async function getFacilities() {
+  const response = await fetch(
+    "https://project-healthrecords-default-rtdb.asia-southeast1.firebasedatabase.app/facilities.json"
+  );
+
+  // Always input .json at the end of the url
+  if (!response.ok) {
+    throw new Error("Something is not right");
+  }
+
+  const Facilities = await response.json();
+  // console.log(Facilities);
+
+  const allFacilitiesArr = [];
+  Object.keys(Facilities).forEach((key) => {
+    // console.log(key); // printing all key of objects on first level
+    // console.log(Facilities[key]); // printing all objects on first level
+    if (typeof Facilities[key] === "object" && Facilities[key] !== null) {
+      allFacilitiesArr.push({
+        id: key,
+        ...Facilities[key],
+      });
+    }
+  });
+  // console.log(allFacilitiesArr);
+  return allFacilitiesArr;
+}
+
+// export async function getData(fireBasePath) {
+//   const response = await fetch(
+//     `https://project-healthrecords-default-rtdb.asia-southeast1.firebasedatabase.app/${fireBasePath}.json`
+//   );
+
+//   // Always input .json at the end of the url
+//   if (!response.ok) {
+//     throw new Error("Something is not right");
+//   }
+
+//   const Data = await response.json();
+//   // console.log(Data);
+
+//   const allDataArr = [];
+//   Object.keys(Data).forEach((key) => {
+//     // console.log(key); // printing all key of objects on first level
+//     // console.log(Data[key]); // printing all objects on first level
+//     if (typeof Data[key] === "object" && Data[key] !== null) {
+//       allDataArr.push({
+//         id: key,
+//         ...Data[key],
+//       });
+//     }
+//   });
+//   // console.log(allDataArr);
+//   return allDataArr;
+// }

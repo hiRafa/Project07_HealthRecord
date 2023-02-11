@@ -3,9 +3,7 @@
 .header {
   position: relative;
   width: 100%;
-  padding: 1rem 4rem;
   height: 5rem;
-  /* background-color: var(--color-primary-dark); */
   z-index: 10;
 }
 
@@ -41,11 +39,14 @@
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
   z-index: 20;
   height: 100%;
   align-items: center;
   width: 100%;
+  padding: 1rem 4rem;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  background: rgba(255, 255, 255, 0.25);
 }
 .navUl {
   display: flex;
@@ -84,15 +85,19 @@
   display: none;
 }
 
+@media only screen and (max-width: 1140px) {
+  .navigation {
+    padding: 1rem 0;
+    width: 90%;
+    margin: 0 auto;
+  }
+}
 @media only screen and (max-width: 1024px) {
   .header {
     padding: 0;
     margin: 0 auto;
   }
-  .navigation {
-    width: 90%;
-    margin: 0 auto;
-  }
+
   .navLi_text {
     display: none;
   }

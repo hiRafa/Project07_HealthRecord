@@ -26,9 +26,13 @@ const Header = () => {
     {
       pageTitle: "Consult!",
       link: "/consult",
-      icon: "emoji_transportation",
+      icon: "event_available",
     },
-    { pageTitle: "Publications", link: "/publicationslist", icon: "cognition" },
+    {
+      pageTitle: "Publications",
+      link: "/publicationslist",
+      icon: "history_edu",
+    },
   ];
 
   let navLinks = links.map((link) => (
@@ -43,9 +47,7 @@ const Header = () => {
   let accountLink = (
     <li className={` animWindow ${classes.navLi}`}>
       <Link href={session ? "/account" : "/"}>
-        <span class="material-symbols-outlined navIcons">
-          medical_information
-        </span>
+        <span class="material-symbols-outlined navIcons">cognition</span>
         <span class={classes.navLi_text}>Account</span>
       </Link>
     </li>
@@ -72,9 +74,9 @@ const Header = () => {
   );
 
   return (
-    <header className={classes.header}>
+    <header className={`${classes.header} `}>
       <img className={`${classes.bg_img}`} />
-      <nav className={`flex_center ${classes.navigation}`}>
+      <nav className={`flex_center  ${classes.navigation}`}>
         <div className={classes.logo}>
           <Link href="/">Logo</Link>
         </div>

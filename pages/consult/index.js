@@ -1,10 +1,27 @@
 import Head from "next/head";
 import React, { Fragment } from "react";
-import BusinessCalendar from "../../components/consult/BusinessCalendar";
+import FacilitiesList from "../../components/consult/FacilitiesList";
 import FilterConsult from "../../components/consult/FilterConsult";
+import ProfessionalsList from "../../components/consult/ProfessionalsList";
 import SectionContainer from "../../components/layout-units/SectionContainer";
+import {
+  getFacilities,
+  getProfessionals,
+} from "../../helpers/firebaseData-helper";
 
-const Centers = () => {
+export async function getStaticProps() {
+  const professionalsData = await getProfessionals();
+  const facilitiesData = await getFacilities();
+  return {
+    props: {
+      professionalsData: professionalsData,
+      facilitiesData: facilitiesData,
+    },
+  };
+}
+const Consult = (props) => {
+  const { professionalsData, facilitiesData } = props;
+
   return (
     <Fragment>
       <Head>
@@ -13,14 +30,18 @@ const Centers = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SectionContainer>
-        <h1>Find your treatment!</h1>
+        <h1>Find your professional!</h1>
+        <p>Below you will find our registered professionals and facilities</p>
         <FilterConsult />
       </SectionContainer>
-      <SectionContainer>
-        <BusinessCalendar />
-      </SectionContainer>
+      {facilitiesData.map((facility) => (
+        <FacilitiesList facility={facility} />
+      ))}
+      {professionalsData.map((professional) => (
+        <ProfessionalsList professional={professional} />
+      ))}
     </Fragment>
   );
 };
 
-export default Centers;
+export default Consult;

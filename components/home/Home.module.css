@@ -315,11 +315,14 @@
 .section_stories {
   position: relative;
 }
-.section_stories h2 {
+.stories_h2 {
   text-align: center;
-  color: var(--color-primary-main);
-  background-color: var(--color-white);
+  color: var(--color-primary-light);
+  background-color: var(--color-primary-waves);
   padding: 1rem 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
 }
 .stories_bg {
   position: absolute;

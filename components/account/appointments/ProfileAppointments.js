@@ -12,7 +12,6 @@ const ProfileAppointments = () => {
       <h2>ProfileAppointments</h2>
       <CalendarAll setShowTimes={setShowTimes} />
       {showTimes && <p>No Appointments yet!</p>}
-      <BusinessCalendar />
     </SectionContainer>
   );
 };

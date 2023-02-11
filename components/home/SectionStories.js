@@ -64,7 +64,9 @@ const SectionStories = ({ userStories }) => {
 
   return (
     <section className={`${classes.section_stories}`}>
-      <h2>Check out the stories users are sharing with us!</h2>
+      <h2 className={`${classes.stories_h2} glass_bg`}>
+        Check out the stories users are sharing with us!
+      </h2>
       <ul
         className={`flex_center ${classes.stories_cardsContainer}`}
         ref={cardsContainerRef}
