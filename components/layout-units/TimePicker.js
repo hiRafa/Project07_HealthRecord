@@ -13,6 +13,7 @@ const TimePicker = ({ props, selectedWeekday }) => {
     profOpenHours,
     professional,
   } = props;
+  console.log("Gui;herme Freitas");
   // console.log(facilityMinHr);
   // console.log(facilityMaxHr);
   // console.log(typeof facilityMinHr, typeof facilityMaxHr);
