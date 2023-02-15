@@ -75,8 +75,8 @@ const Header = () => {
 
   return (
     <header className={`${classes.header} `}>
-      <img className={`${classes.bg_img}`} />
       <nav className={`flex_center  ${classes.navigation}`}>
+        <img className={`${classes.bg_img}`} />
         <div className={classes.logo}>
           <Link href="/">Logo</Link>
         </div>

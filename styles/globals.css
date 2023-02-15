@@ -34,6 +34,14 @@
   --top-bottom-spacing: 3rem;
   --boxShadow: 0px 0px 15px;
   --padding3: 3rem;
+
+  --fSize: 1rem;
+  --fSize25: 0.25rem;
+  --fSize50: 0.5rem;
+  --fSize75: 0.75rem;
+  --fSize125: 1.25rem;
+  --fSize150: 1.5rem;
+  --fSize175: 1.75rem;
 }
 
 html,
@@ -198,8 +206,8 @@ section {
     --top-bottom-spacing: 2rem;
   }
   .flex_column_mobile {
-    display: flex;
-    flex-direction: column;
+    display: flex !important;
+    flex-direction: column !important;
   }
   .showOnPc {
     display: none;

@@ -46,7 +46,22 @@
   width: 80%;
   padding: 1rem 0.5rem;
   border-radius: 4px;
+  font-size: var(--fSize125);
 }
 .facility_select:focus {
   background-color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .consult_cardContainer h2 {
+    text-align: center;
+  }
+  .consult_cardGrid {
+    margin: 0 auto;
+    width: fit-content;
+    gap: 1rem;
+  }
+  .facility_select {
+    font-size: var(--fSize);
+  }
 }

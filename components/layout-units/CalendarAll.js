@@ -6,13 +6,8 @@ import TimePicker from "./TimePicker";
 import classes from "./LayoutUnits.module.css";
 
 const CalendarAll = (props) => {
-  // const {
-  //   facilityMinHr,
-  //   facilityMaxHr,
-  //   profOpenHours,
-  //   facilityClosedDays,
-  //   facilityClosedDaysEmergency,
-  // } = props;
+  // passing props directly to TimePicker, the last component in this tree
+  // props contains data from any of the parents
 
   const [dateValue, dateOnChange] = useState(new Date());
 
@@ -27,19 +22,19 @@ const CalendarAll = (props) => {
   };
 
   return (
-    <div className={`flex_start `}>
+    <div className={`${classes.calendarContainer} `}>
       <Calendar
         value={dateValue}
         onChange={dateOnChange}
         minDate={new Date(2020, 0, 0)}
         maxDate={new Date(2040, 0, 0)}
         minDetail={"decade"}
-        calendarType={"Hebrew"}
+        calendarType={"ISO 8601"}
         onClickDay={(e) => {
           setShowTimes(true);
           getCalendarWeekDay(e);
         }}
-        className={`${classes.calendar} glass_bg`}
+        className={`${classes.calendar} `}
       />
       {showTimes && (
         <aside className={`flex_column `}>

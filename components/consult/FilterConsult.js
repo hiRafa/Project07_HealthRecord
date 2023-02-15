@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { onFindPublication } from "../../helpers/general-helper";
+// import { onFindPublication } from "../../helpers/general-helper";
 
 import classes from "../layout-units/LayoutUnits.module.css";
 
@@ -19,9 +19,16 @@ const FilterConsult = ({ currentYear, currentMonth }) => {
     const selectedMonth = businessInputRef.current.value;
 
     // getting method from parent
-    if (selectedMonth !== "")
-      onFindPublication(router, selectedYear, selectedMonth);
-    else if (selectedMonth === "") onFindPublication(router, selectedYear);
+    import("../../helpers/general-helper").then((module) => {
+      if (selectedMonth !== "")
+        module.onFindPublication(router, selectedYear, selectedMonth);
+      else if (selectedMonth === "")
+        module.onFindPublication(router, selectedYear);
+    });
+
+    // if (selectedMonth !== "")
+    //   onFindPublication(router, selectedYear, selectedMonth);
+    // else if (selectedMonth === "") onFindPublication(router, selectedYear);
   }
 
   return (

@@ -161,14 +161,20 @@
 }
 
 /* Calendar */
+.calendarContainer {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
 .calendar {
   border-radius: 4px;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.76);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  border: 1px solid rgba(255, 255, 255, 1);
+  -webkit-backdrop-filter: blur(3px) !important;
+  border: 1px solid rgba(255, 255, 255, 1) !important;
+  background: rgba(255, 255, 255, 0.76) !important;
+  border-radius: 8px;
 }
 
 /* TIME PICKER */
@@ -182,11 +188,22 @@
 
 .hour_select {
   padding: 0.5rem 1rem;
-  font-size: 1.25rem;
+  font-size: var(--fSize125);
   border-radius: 4px;
 }
 .hour_select:focus {
   background-color: white;
 }
 .hour_option {
+}
+
+@media only screen and (max-width: 1024px) {
+  .calendarContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: fit-content;
+  }
+}
+@media only screen and (max-width: 768px) {
 }

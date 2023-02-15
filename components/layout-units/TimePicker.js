@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import ButtonAll from "./ButtonAll";
 import classes from "./LayoutUnits.module.css";
 
@@ -6,13 +6,18 @@ const TimePicker = ({ props, selectedWeekday }) => {
   let {
     facilityMinHr,
     facilityMaxHr,
-    profOpenHours,
     facilityClosedDays,
     facilityClosedDaysEmergency,
+    facilSpecialistRef,
+    facility,
+    profOpenHours,
+    professional,
   } = props;
   // console.log(facilityMinHr);
   // console.log(facilityMaxHr);
   // console.log(typeof facilityMinHr, typeof facilityMaxHr);
+  // console.log(selectedWeekday);
+  // console.log(profOpenHours);
   let hourOptions = [];
   let minutesArr = [];
   if (facilityMinHr || facilityMaxHr) {
@@ -47,9 +52,25 @@ const TimePicker = ({ props, selectedWeekday }) => {
     minutesArr = [0, 15, 30, 45];
   }
 
-  // console.log(selectedWeekday);
-  // console.log(profOpenHours);
-
+  const hourRef = useRef();
+  const minRef = useRef();
+  const subtmitHandler = (e) => {
+    e.preventDefault();
+    console.log("sending to database");
+    if (facility) {
+      // data to fetch POST if facility
+      // facilSpecialistRef,
+      // facility,
+      console.log(facilSpecialistRef.current.value);
+      console.log(facility);
+      console.log(hourRef.current.value);
+      console.log(minRef.current.value);
+    } else if (professional) {
+      //data to fetch POST if professional
+      // professional,
+      console.log(professional);
+    }
+  };
   return (
     <Fragment>
       <div className={`${classes.timepicker} flex_center `}>
@@ -58,6 +79,7 @@ const TimePicker = ({ props, selectedWeekday }) => {
             <select
               id="hour"
               className={` ${classes.hour_select} flex_column glass_bg`}
+              ref={hourRef}
             >
               {hourOptions}
             </select>
@@ -66,16 +88,22 @@ const TimePicker = ({ props, selectedWeekday }) => {
         ) : (
           <div>
             <p>
-              This specialist is not available on{" "}
-              {selectedWeekday.toUpperCase()}{" "}
+              {`This place/specialist is not available on 
+              ${selectedWeekday.toUpperCase()}`}
             </p>
-            <p>{facilityClosedDaysEmergency && `Only for emergencies`}</p>
+            <p>
+              {facilityClosedDaysEmergency &&
+                `Only for emergencies, call emergency number`}
+            </p>
           </div>
         )}
 
         {hourOptions.length > 0 && (
           <div className="flex_center">
-            <select className={` ${classes.hour_select} flex_column glass_bg`}>
+            <select
+              className={` ${classes.hour_select} flex_column glass_bg`}
+              ref={minRef}
+            >
               {minutesArr.map((min) => (
                 <option className={classes.hour_option}>{min}</option>
               ))}
@@ -84,7 +112,9 @@ const TimePicker = ({ props, selectedWeekday }) => {
           </div>
         )}
       </div>
-      <ButtonAll text={"Confirm"} />
+      {hourOptions.length > 0 && (
+        <ButtonAll text={"Confirm"} onClick={subtmitHandler} />
+      )}
     </Fragment>
   );
 };

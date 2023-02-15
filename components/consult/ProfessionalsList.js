@@ -4,22 +4,42 @@ import classes from "./Consult.module.css";
 import CalendarAll from "../layout-units/CalendarAll";
 
 const ProfessionalsList = ({ professional }) => {
+  const { photo, name, speciality, review, online, website, email } =
+    professional;
   // console.log(professional);
 
   return (
-    <SectionContainer className={`${classes.consult_cardContainer} glass_bg`}>
-      <div className={` ${classes.consult_cardGrid}`}>
+    <SectionContainer className={`${classes.consult_cardContainer} glass_bg `}>
+      <div className={` ${classes.consult_cardGrid} flex_column_mobile`}>
         <div className={classes.pro_info}>
           {/* <div className={` flex_center ${classes.info_title}`}> */}
           <div className={` ${classes.imgdiv}`}>
-            <img src={professional.photo} />
+            <img src={photo} />
           </div>
-          <h2>{professional.name}</h2>
+          <h2>{name}</h2>
           {/* </div> */}
-          <p>{professional.review}</p>
-          <p>Online sessions: {professional.online === true ? `yes` : `no`}</p>
+          <h3>{speciality}</h3>
+          <p>{review}</p>
+          <p>Online sessions: {online === true ? `yes` : `no`}</p>
+          {website && (
+            <a
+              href={website}
+              target="_blank"
+              className={`${classes.facility_maps}`}
+            >
+              My page
+            </a>
+          )}
+          {email && (
+            <a target="_blank" className={`${classes.facility_maps}`}>
+              {email}
+            </a>
+          )}
         </div>
-        <CalendarAll profOpenHours={professional.openHours} />
+        <CalendarAll
+          profOpenHours={professional.openHours}
+          professional={professional}
+        />
       </div>
     </SectionContainer>
   );
