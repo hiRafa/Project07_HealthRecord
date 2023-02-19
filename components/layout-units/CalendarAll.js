@@ -22,7 +22,7 @@ const CalendarAll = (props) => {
   };
 
   return (
-    <div className={`${classes.calendarContainer} `}>
+    <div className={`${classes.calendarContainer} glass_bg`}>
       <Calendar
         value={dateValue}
         onChange={dateOnChange}
@@ -34,11 +34,15 @@ const CalendarAll = (props) => {
           setShowTimes(true);
           getCalendarWeekDay(e);
         }}
-        className={`${classes.calendar} `}
+        className={`${classes.calendar} ${props.className}`}
       />
       {showTimes && (
-        <aside className={`flex_column `}>
-          <TimePicker props={props} selectedWeekday={selectedWeekday} />
+        <aside className={`${classes.timeContainer} flex_column `}>
+          <TimePicker
+            props={props}
+            selectedWeekday={selectedWeekday}
+            dateValue={dateValue}
+          />
           <ButtonAll text={"Close"} onClick={() => setShowTimes(false)} />
         </aside>
       )}

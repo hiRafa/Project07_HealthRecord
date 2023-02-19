@@ -6,9 +6,13 @@ import useNotification from "../../contexts/notifications-context";
 import Header from "./Header";
 import Notification from "./Notification";
 import NewsletterSignup from "./NewsLetterSignup";
+import Backdrop from "./Backdrop";
+import modalContxt from "../../contexts/modal-context";
 
 const PagesLayoutApp = (props) => {
   const { activeNotification } = useNotification();
+  const { modalIsOpen, toggleModal } = modalContxt();
+
   //   console.log(activeNotification);
 
   return (
@@ -17,6 +21,7 @@ const PagesLayoutApp = (props) => {
 
       <main className={classes.main}>
         {props.children}
+        {modalIsOpen && <Backdrop onClick={() => toggleModal()} />}
         {activeNotification && (
           <Notification
             title={activeNotification.title}

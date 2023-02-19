@@ -4,7 +4,7 @@
   --color-primary-transparency: #3e31a330;
   --color-primary-dark: #1f6153;
   --color-primary-light: #84e5d0;
-  --color-primary-waves: #84e5d025;
+  --color-primary-waves: #84e5d03a;
 
   --color-secondary-main: #40b5ed;
   --color-secondary-transparency: #f7de390a;
@@ -32,7 +32,8 @@
 
   --gap-pc: 2rem;
   --top-bottom-spacing: 3rem;
-  --boxShadow: 0px 0px 15px;
+  --boxShadow8: 0px 0px 8px;
+  --boxShadow: 0px 0px 16px;
   --padding3: 3rem;
 
   --fSize: 1rem;
@@ -42,6 +43,9 @@
   --fSize125: 1.25rem;
   --fSize150: 1.5rem;
   --fSize175: 1.75rem;
+
+  --glass-bg1: rgba(255, 255, 255, 0.7);
+  --glass-bg2: #1f615321;
 }
 
 html,
@@ -87,13 +91,13 @@ li {
 
 main {
   padding: var(--top-bottom-spacing) 0;
-  background-color: var(--color-primary-dark);
+  /* background-color: var(--color-primary-dark); */
 }
 
 h1 {
   text-align: center;
   font-size: 32px;
-  color: var(--color-white);
+  color: var(--color-primary-dark);
 }
 h2 {
   margin-bottom: 1rem;
@@ -159,7 +163,8 @@ section {
 
 .backdrop {
   position: fixed;
-  z-index: 15;
+  display: block;
+  z-index: 90;
   background-color: rgba(0, 0, 0, 0.75);
   width: 100%;
   height: 100vh;
@@ -193,7 +198,7 @@ section {
 
 .glass_bg {
   /* From https://css.glass */
-  background: rgba(255, 255, 255, 0.76);
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(3px);
@@ -235,13 +240,64 @@ section {
       )
       100% var(--p, 0%) / var(--s, 0%) 200% no-repeat;
   transition: 0.4s ease-in, background-position 0s;
+  border-radius: var(--borderRadius-card);
 }
 .animWindow:hover {
   --p: 100%;
   --s: calc(70% + 40px);
 }
 
-.animWindow:hover > * {
+.animWindow:hover > * > * {
   color: var(--color-white);
   border-radius: var(--border-card);
+}
+
+/* -------- WAVES  */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+    transform: translate3d(-90px, 0, 0);
+  }
+  100% {
+    transform: translate3d(85px, 0, 0);
+  }
+}
+
+.waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  min-height: 50%;
+  z-index: -1;
+}
+.wave1 {
+  fill: var(--color-primary-waves);
+}
+.wave2 {
+  fill: var(--color-primary-waves);
+}
+.wave3 {
+  fill: var(--color-primary-waves);
+}
+.wave4 {
+  fill: var(--color-primary-waves);
 }

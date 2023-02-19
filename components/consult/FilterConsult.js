@@ -6,7 +6,7 @@ import classes from "../layout-units/LayoutUnits.module.css";
 import { useRouter } from "next/router";
 import ButtonAll from "../layout-units/ButtonAll";
 
-const FilterConsult = ({ currentYear, currentMonth }) => {
+const FilterConsult = ({ currentYear, currentMonth, className }) => {
   const router = useRouter();
 
   const specialityInputRef = useRef();
@@ -32,7 +32,7 @@ const FilterConsult = ({ currentYear, currentMonth }) => {
   }
 
   return (
-    <form className={classes.form} onSubmit={submitHandler}>
+    <form className={`${classes.filter} ${className}`} onSubmit={submitHandler}>
       <div className={`flex_center flex_column_mobile ${classes.controls}`}>
         <div className={classes.control}>
           <label htmlFor="speciality" />

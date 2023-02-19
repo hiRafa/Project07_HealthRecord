@@ -23,15 +23,17 @@ const FacilitiesList = (props) => {
   // Optional chaining operator "?", avoidding if statement
 
   return (
-    <SectionContainer className={` ${classes.consult_cardContainer} glass_bg`}>
-      <h2>{facility.name}</h2>
+    <SectionContainer
+      className={` ${classes.consult_cardContainer}   glass_bg`}
+    >
       <form
-        className={` ${classes.consult_cardGrid} flex_column_mobile`}
+        className={` ${classes.consult_cardGrid}  flex_column_mobile`}
         onSubmit={(e) => {
           e.preventDefault();
         }}
       >
-        <div className={classes.pro_info}>
+        <div className={`${classes.pro_info} `}>
+          <h2>{facility.name}</h2>
           <p>{`${facility.country}, ${facility.city}`}</p>
           <a
             href={facility.maps}

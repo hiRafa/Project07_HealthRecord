@@ -2,8 +2,10 @@ import { Fragment } from "react";
 
 import Head from "next/head";
 import SectionFeaturedArticles from "../components/home/SectionFeaturedArticles";
-import SectionTop from "../components/home/SectionTop";
+import HomeTop from "../components/home/HomeTop";
 import SectionStories from "../components/home/SectionStories";
+
+import SectionTop from "../components/layout/SectionTop";
 
 import {
   getFeaturedArticles,
@@ -35,7 +37,7 @@ export default function HomePage(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SectionTop />
+      <SectionTop>{<HomeTop />}</SectionTop>
       <SectionFeaturedArticles featuredArticles={featuredArticles} />
       <SectionStories userStories={userStories} />
     </Fragment>

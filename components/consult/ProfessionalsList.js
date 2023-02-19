@@ -12,14 +12,16 @@ const ProfessionalsList = ({ professional }) => {
     <SectionContainer className={`${classes.consult_cardContainer} glass_bg `}>
       <div className={` ${classes.consult_cardGrid} flex_column_mobile`}>
         <div className={classes.pro_info}>
-          {/* <div className={` flex_center ${classes.info_title}`}> */}
-          <div className={` ${classes.imgdiv}`}>
-            <img src={photo} />
+          <div className={` flex_start ${classes.info_title}`}>
+            <div className={` ${classes.imgdiv}`}>
+              <img src={photo} />
+            </div>
+            <div>
+              <h2>{name}</h2>
+              <h3>{speciality}</h3>
+              <p>{review}</p>
+            </div>
           </div>
-          <h2>{name}</h2>
-          {/* </div> */}
-          <h3>{speciality}</h3>
-          <p>{review}</p>
           <p>Online sessions: {online === true ? `yes` : `no`}</p>
           {website && (
             <a

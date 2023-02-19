@@ -1,4 +1,7 @@
-import React, { Fragment, useEffect, useRef } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
+import modalContxt from "../../contexts/modal-context";
+import { togglePrevCurrent } from "../../helpers/general-helper";
+import Backdrop from "../layout/Backdrop";
 import ButtonAll from "./ButtonAll";
 import classes from "./LayoutUnits.module.css";
 
@@ -12,8 +15,11 @@ const TimePicker = ({ props, selectedWeekday }) => {
     facility,
     profOpenHours,
     professional,
+    dateValue,
   } = props;
-  console.log("Gui;herme Freitas");
+  const { modalIsOpen, toggleModal } = modalContxt();
+  const [confirmConsult, setConfirmConsult] = useState(false);
+
   // console.log(facilityMinHr);
   // console.log(facilityMaxHr);
   // console.log(typeof facilityMinHr, typeof facilityMaxHr);
@@ -55,8 +61,10 @@ const TimePicker = ({ props, selectedWeekday }) => {
 
   const hourRef = useRef();
   const minRef = useRef();
-  const subtmitHandler = (e) => {
+  const submitHandler = (e) => {
     e.preventDefault();
+    toggleModal();
+    setConfirmConsult(true);
     console.log("sending to database");
     if (facility) {
       // data to fetch POST if facility
@@ -72,6 +80,7 @@ const TimePicker = ({ props, selectedWeekday }) => {
       console.log(professional);
     }
   };
+
   return (
     <Fragment>
       <div className={`${classes.timepicker} flex_center `}>
@@ -92,6 +101,7 @@ const TimePicker = ({ props, selectedWeekday }) => {
               {`This place/specialist is not available on 
               ${selectedWeekday.toUpperCase()}`}
             </p>
+            <br />
             <p>
               {facilityClosedDaysEmergency &&
                 `Only for emergencies, call emergency number`}
@@ -114,8 +124,16 @@ const TimePicker = ({ props, selectedWeekday }) => {
         )}
       </div>
       {hourOptions.length > 0 && (
-        <ButtonAll text={"Confirm"} onClick={subtmitHandler} />
+        <ButtonAll text={"Confirm"} onClick={submitHandler} />
       )}
+      {/* {confirmConsult && (
+        <div className={classes.consultConfirmation}>
+          <ButtonAll
+            text={`Confirm Consult for: ${hourRef.current.value}hrs ${minRef.current.value}min on ${dateValue} `}
+          />
+          <ButtonAll text={`Cancel`} />
+        </div>
+      )} */}
     </Fragment>
   );
 };

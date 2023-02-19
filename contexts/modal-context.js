@@ -7,11 +7,15 @@ export const ModalContextProvider = (props) => {
 
   const openModalHandler = () => {
     setmodalIsOpen(true);
-    console.log(`open`);
+    // console.log(`open`);
   };
 
   const closeModalHandler = () => {
     setmodalIsOpen(false);
+  };
+
+  const toggleModal = () => {
+    setmodalIsOpen((prevState) => !prevState);
   };
 
   return (
@@ -21,6 +25,7 @@ export const ModalContextProvider = (props) => {
         setmodalIsOpen,
         openModalHandler,
         closeModalHandler,
+        toggleModal,
       }}
     >
       {props.children}
