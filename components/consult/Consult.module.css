@@ -2,8 +2,15 @@
   color: var(--color-primary-dark);
   text-align: center;
 }
+
 .consultTop > * {
   padding-bottom: 1rem;
+}
+.consultTopInner {
+  gap: 2rem;
+}
+.consultTopInner > * {
+  gap: 1rem;
 }
 .filterConsult {
   margin: 0 auto;
@@ -70,6 +77,10 @@
 }
 
 @media only screen and (max-width: 768px) {
+  .consultTopInner {
+    flex-direction: column-reverse !important;
+  }
+
   .consult_cardContainer h2 {
     text-align: center;
   }

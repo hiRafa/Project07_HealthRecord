@@ -27,7 +27,7 @@ async function signUp(enteredEmail, enteredPassword) {
   return data;
 }
 
-const AccountAccess = () => {
+const AccountAccess = ({ extraInfo, routerPush }) => {
   const [isLogin, setisLogin] = useState(true);
   const { successfullNotification, errorNotification } = useNotification();
   // console.log(errorNotification);
@@ -66,7 +66,7 @@ const AccountAccess = () => {
       }).then((data) => (response = data));
       // console.log(response);
       if (response.ok || response.status === 302) {
-        router.push("/account");
+        router.push(routerPush);
         router.reload();
         successfullNotification("Log in sucessful!");
       } else {
@@ -141,6 +141,7 @@ const AccountAccess = () => {
               : "Or Login with existing account"}
           </p>
         </div>
+        {extraInfo && <p className={classes.account_extraInfo}>{extraInfo}</p>}
       </form>
     </section>
   );

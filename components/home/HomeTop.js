@@ -28,7 +28,9 @@ const HomeTop = () => {
             specialists available for online consultation* <br />
           </p>
         </div>
-        {status !== "authenticated" && <AccountAccess />}
+        {status !== "authenticated" && (
+          <AccountAccess routerPush={"/account"} />
+        )}
       </div>
     </SectionContainer>
   );

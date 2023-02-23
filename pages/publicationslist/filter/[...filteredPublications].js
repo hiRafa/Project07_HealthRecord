@@ -70,9 +70,9 @@ function ProductsFilteredPage(props) {
   const { filteredPublications, selectedDate, hasError } = props;
   // console.log(filteredPublications);
   // console.log(selectedDate);
-  let humanReadableDate;
+  let filterDateFormated;
   if (selectedDate.selectedYear && selectedDate.selectedMonth) {
-    humanReadableDate = new Date(
+    filterDateFormated = new Date(
       selectedDate.selectedYear,
       selectedDate.selectedMonth - 1
     ).toLocaleDateString("en-US", {
@@ -80,7 +80,7 @@ function ProductsFilteredPage(props) {
       year: "numeric",
     });
   } else if (selectedDate.selectedYear) {
-    humanReadableDate = selectedDate.selectedYear;
+    filterDateFormated = selectedDate.selectedYear;
   }
 
   let pageHead = (
@@ -119,7 +119,7 @@ function ProductsFilteredPage(props) {
       <Fragment>
         {pageHead}
         <FilterYearMonth />
-        <p>{`No publications were found for:  ${humanReadableDate}`}</p>
+        <p>{`No publications were found for:  ${filterDateFormated}`}</p>
       </Fragment>
     );
   }
@@ -131,7 +131,7 @@ function ProductsFilteredPage(props) {
   return (
     <div>
       {pageHead}
-      <SectionTopPub humanReadableDate={humanReadableDate} />
+      <SectionTopPub filterDateFormated={filterDateFormated} />
 
       <PublicationsList>
         {filteredPublications.map((story) => (

@@ -6,12 +6,12 @@ import FilterYearMonth from "../layout-units/FilterYearMonth";
 import SectionContainer from "../layout-units/SectionContainer";
 import SectionTop from "../layout/SectionTop";
 
-const SectionTopPub = ({ humanReadableDate }) => {
-  if (humanReadableDate) {
+const SectionTopPub = ({ filterDateFormated }) => {
+  if (filterDateFormated) {
     return (
       <SectionTop className={` flex_center flex_column ${classes.section_top}`}>
         <h1>Publications </h1>
-        <p>{`Publications found for ${humanReadableDate}`}</p>
+        <p>{`Publications found for ${filterDateFormated}`}</p>
         <FilterYearMonth />
         <ButtonAll href="/publicationslist" text={"Show all events"} />
       </SectionTop>

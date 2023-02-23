@@ -93,6 +93,9 @@
   cursor: pointer;
   color: var(--color-tertiary-light);
 }
+.account_extraInfo {
+  max-width: 200px;
+}
 .searchORlogin {
   display: grid;
   grid-template-columns: repeat(2, 1fr);

@@ -4,10 +4,12 @@ import "react-calendar/dist/Calendar.css";
 import ButtonAll from "./ButtonAll";
 import TimePicker from "./TimePicker";
 import classes from "./LayoutUnits.module.css";
+import { useSession } from "next-auth/react";
 
 const CalendarAll = (props) => {
   // passing props directly to TimePicker, the last component in this tree
   // props contains data from any of the parents
+  const { data: session, status } = useSession();
 
   const [dateValue, dateOnChange] = useState(new Date());
 
@@ -36,7 +38,7 @@ const CalendarAll = (props) => {
         }}
         className={`${classes.calendar} ${props.className}`}
       />
-      {showTimes && (
+      {session && showTimes && (
         <aside className={`${classes.timeContainer} flex_column `}>
           <TimePicker
             props={props}
@@ -45,6 +47,14 @@ const CalendarAll = (props) => {
           />
           <ButtonAll text={"Close"} onClick={() => setShowTimes(false)} />
         </aside>
+      )}
+      {!session && selectedWeekday && (
+        <a href="#consultop" className={`${classes.calendarLogIn} flex_center`}>
+          Log in or create an account first
+          <span class="material-symbols-outlined">
+            keyboard_double_arrow_up
+          </span>
+        </a>
       )}
     </div>
   );

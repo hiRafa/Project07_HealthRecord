@@ -1,11 +1,12 @@
+import { useSession } from "next-auth/react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
 import modalContxt from "../../contexts/modal-context";
-import { togglePrevCurrent } from "../../helpers/general-helper";
-import Backdrop from "../layout/Backdrop";
+import useNotification from "../../contexts/notifications-context";
+import { profileFormSubmitHandler } from "../../helpers/general-helper";
 import ButtonAll from "./ButtonAll";
 import classes from "./LayoutUnits.module.css";
 
-const TimePicker = ({ props, selectedWeekday }) => {
+const TimePicker = ({ props, selectedWeekday, dateValue }) => {
   let {
     facilityMinHr,
     facilityMaxHr,
@@ -15,10 +16,10 @@ const TimePicker = ({ props, selectedWeekday }) => {
     facility,
     profOpenHours,
     professional,
-    dateValue,
   } = props;
-  const { modalIsOpen, toggleModal } = modalContxt();
   const [confirmConsult, setConfirmConsult] = useState(false);
+  const { data: session, status } = useSession();
+  const { successfullNotification, errorNotification } = useNotification();
 
   // console.log(facilityMinHr);
   // console.log(facilityMaxHr);
@@ -42,7 +43,7 @@ const TimePicker = ({ props, selectedWeekday }) => {
         </option>
       ));
     }
-    minutesArr = [0, 30];
+    minutesArr = ["00", 30];
   } else if (profOpenHours) {
     let helper = [];
     Object.keys(profOpenHours).forEach((keyWeekDay) => {
@@ -56,24 +57,57 @@ const TimePicker = ({ props, selectedWeekday }) => {
         {+hour}
       </option>
     ));
-    minutesArr = [0, 15, 30, 45];
+    minutesArr = ["00", 15, 30, 45];
   }
-
   const hourRef = useRef();
   const minRef = useRef();
+
+  const [dataFetched, setDataFetched] = useState({});
+  const [currentUserEmail, setCurrentUserEmail] = useState();
+  let scheduleID = `${dateValue.toISOString().split("T")[0].replace("-", "")}`;
+  useEffect(() => {
+    if (session) setCurrentUserEmail(session.user.email);
+    setDataFetched({
+      email: currentUserEmail,
+      selectedSchedule: {
+        [scheduleID.replace("-", "")]: {
+          professionalName: facility.name,
+          professionalID: facility.id,
+          professionalSpeciality: facilSpecialistRef.current.value,
+          hour: hourRef.current.value,
+          time: minRef.current.value,
+        },
+      },
+    });
+  }, [
+    currentUserEmail,
+    facility,
+    facilSpecialistRef,
+    hourRef,
+    minRef,
+    session,
+  ]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    toggleModal();
-    setConfirmConsult(true);
-    console.log("sending to database");
+    // toggleModal();
+    // console.log(dateValue);
+    // console.log("sending to database");
     if (facility) {
+      console.log(facility);
+      console.log(facility.name);
       // data to fetch POST if facility
+      profileFormSubmitHandler(
+        dataFetched,
+        successfullNotification,
+        errorNotification
+      );
       // facilSpecialistRef,
       // facility,
-      console.log(facilSpecialistRef.current.value);
+      // console.log(facilSpecialistRef.current.value);
       console.log(facility);
-      console.log(hourRef.current.value);
-      console.log(minRef.current.value);
+      // console.log(hourRef.current.value);
+      // console.log(minRef.current.value);
     } else if (professional) {
       //data to fetch POST if professional
       // professional,
@@ -81,6 +115,11 @@ const TimePicker = ({ props, selectedWeekday }) => {
     }
   };
 
+  // let selectedDateFormat = new Date(
+  //   (dateValue.getFullYear(),
+  //   dateValue.getMonth(),
+  //   dateValue.getDate()).
+  // );
   return (
     <Fragment>
       <div className={`${classes.timepicker} flex_center `}>
@@ -123,17 +162,27 @@ const TimePicker = ({ props, selectedWeekday }) => {
           </div>
         )}
       </div>
-      {hourOptions.length > 0 && (
-        <ButtonAll text={"Confirm"} onClick={submitHandler} />
+      {session && hourOptions.length > 0 && (
+        <ButtonAll text={"Confirm"} onClick={() => setConfirmConsult(true)} />
       )}
-      {/* {confirmConsult && (
-        <div className={classes.consultConfirmation}>
+
+      {confirmConsult && (
+        <div
+          className={`${classes.consultConfirmation} flex_center`}
+          onClick={() => {
+            setConfirmConsult(false);
+          }}
+        >
           <ButtonAll
-            text={`Confirm Consult for: ${hourRef.current.value}hrs ${minRef.current.value}min on ${dateValue} `}
+            text={`Confirm Consult for: ${hourRef.current.value}:${
+              minRef.current.value
+            } on 
+         ${dateValue.toDateString()}`}
+            onClick={(e) => submitHandler(e)}
           />
           <ButtonAll text={`Cancel`} />
         </div>
-      )} */}
+      )}
     </Fragment>
   );
 };
