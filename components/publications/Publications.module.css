@@ -46,7 +46,7 @@
   overflow: hidden;
   border-radius: var(--borderRadius-card);
   position: relative;
-  border: var(--border-card) transparent;
+  border: var(--border-card) var(--color-primary-dark);
   transition: var(--transition-25ms);
 }
 .publications_card:hover {

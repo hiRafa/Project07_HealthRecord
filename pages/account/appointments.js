@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import ProfileAppointments from "../../components/account/appointments/ProfileAppointments";
-import UserCalendar from "../../components/consult/BusinessCalendar";
 import ProfileTop from "../../components/account/ProfileTop";
 import SectionContainer from "../../components/layout-units/SectionContainer";
 

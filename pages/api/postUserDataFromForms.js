@@ -20,32 +20,41 @@ async function handler(req, res) {
     delete dataFetched.email;
 
     let result;
-    // result = MongoClientConnection.db()
-    //   .collection("users")
-    //   .updateOne(
-    //     { email: currentUserEmail },
-    //     {
-    //       $set: {
-    //         ...data,
-    //       },
-    //     }
-    //   );
-    // console.log(result);
-    try {
-      result = await MongoClientConnection.db()
-        .collection("users")
-        .updateOne(
-          { email: emailForFilter },
-          {
-            $set: {
-              ...dataFetched,
-            },
-          }
-        );
-      res.status(201).json({ message: "Data Saved" });
-    } catch (error) {
-      res.status(500).json({ message: "Saving Form Failed" });
-    }
+    if (dataFetched.name) {
+        try {
+          result = await MongoClientConnection.db()
+            .collection("users")
+            .updateOne(
+              { email: emailForFilter },
+              {
+                $set: {
+                  ...dataFetched,
+                },
+              }
+              // { upsert: true }
+            );
+          res.status(201).json({ message: "Data Saved" });
+        } catch (error) {
+          res.status(500).json({ message: "Saving Form Failed" });
+        }
+      }
+    else {
+      try {
+          result = await MongoClientConnection.db()
+            .collection("users")
+            .updateOne(
+              { email: emailForFilter },
+              {
+                $push: {
+                  "selectedSchedule": dataFetched
+                },
+              }
+            );
+          res.status(201).json({ message: "Data Saved" });
+        } catch (error) {
+          res.status(500).json({ message: "Saving Form Failed" });
+      }
+    }  
   }
 
   //   MongoClientConnection.close();

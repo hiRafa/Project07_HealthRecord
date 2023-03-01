@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import SectionContainer from "../../layout-units/SectionContainer";
-import UserCalendar from "../../consult/BusinessCalendar";
 import classes from "./Appointments.module.css";
-import BusinessCalendar from "../../consult/BusinessCalendar";
 import CalendarAll from "../../layout-units/CalendarAll";
 
 const ProfileAppointments = () => {

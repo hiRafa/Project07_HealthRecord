@@ -22,7 +22,6 @@ const CalendarAll = (props) => {
     );
     // console.log(selectedWeekday)
   };
-
   return (
     <div className={`${classes.calendarContainer} glass_bg`}>
       <Calendar

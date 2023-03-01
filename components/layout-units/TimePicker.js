@@ -62,56 +62,70 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
   const hourRef = useRef();
   const minRef = useRef();
 
-  const [dataFetched, setDataFetched] = useState({});
   const [currentUserEmail, setCurrentUserEmail] = useState();
-  let scheduleID = `${dateValue.toISOString().split("T")[0].replace("-", "")}`;
+  const [dataFetched, setDataFetched] = useState();
   useEffect(() => {
+    // let monthPlus1 = dateValue.getMonth()+1
+    let scheduleID = `${dateValue.getFullYear()}${dateValue.getMonth()}${dateValue.getDate()}`;
     if (session) setCurrentUserEmail(session.user.email);
-    setDataFetched({
-      email: currentUserEmail,
-      selectedSchedule: {
-        [scheduleID.replace("-", "")]: {
+    if (facility) {
+      setDataFetched({
+        email: currentUserEmail,
+        [scheduleID+facility.id]: {
           professionalName: facility.name,
           professionalID: facility.id,
           professionalSpeciality: facilSpecialistRef.current.value,
-          hour: hourRef.current.value,
-          time: minRef.current.value,
+          hour: hourRef?.current?.value,
+          time: minRef?.current?.value,
+          day: dateValue.getDate(),
+          month: dateValue.getMonth()+1,
+          year: dateValue.getFullYear()
         },
-      },
-    });
+      });
+    } else if (professional) {
+      setDataFetched({
+        email: currentUserEmail,
+        [scheduleID+professional.id]: {
+          professionalName: professional.name,
+          professionalID: professional.id,
+          professionalSpeciality: professional.speciality,
+          hour: hourRef?.current?.value,
+          time: minRef?.current?.value,
+        },
+      });
+    console.log(scheduleID)}
   }, [
+    session,
     currentUserEmail,
+    dateValue,
     facility,
     facilSpecialistRef,
+    professional,
     hourRef,
     minRef,
-    session,
   ]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // toggleModal();
     // console.log(dateValue);
     // console.log("sending to database");
     if (facility) {
-      console.log(facility);
-      console.log(facility.name);
       // data to fetch POST if facility
       profileFormSubmitHandler(
         dataFetched,
         successfullNotification,
         errorNotification
       );
-      // facilSpecialistRef,
-      // facility,
       // console.log(facilSpecialistRef.current.value);
-      console.log(facility);
-      // console.log(hourRef.current.value);
-      // console.log(minRef.current.value);
+      // console.log(facility);
     } else if (professional) {
       //data to fetch POST if professional
-      // professional,
-      console.log(professional);
+      profileFormSubmitHandler(
+        dataFetched,
+        successfullNotification,
+        errorNotification
+      );
+      // console.log(professional);
     }
   };
 
