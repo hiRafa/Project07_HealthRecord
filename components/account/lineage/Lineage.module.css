@@ -1,0 +1,79 @@
+/* lineage page  */
+.lineageGrid {
+  display: grid;
+  grid-template-columns: 30% 1fr;
+}
+
+/* components  */
+/* form */
+.form > * {
+  width: 100%;
+}
+.label {
+}
+
+/* tree */
+.tree {
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  place-items: center;
+}
+.tree > div {
+  width: 100%;
+}
+
+.grandpsMom {
+  grid-area: 1 / 1 / 2 / 2;
+  justify-content: space-around;
+}
+.grandpsDad {
+  grid-area: 1 / 2 / 2 / 3;
+  justify-content: space-around;
+}
+.mom {
+  grid-area: 2 / 1 / 3 / 2;
+}
+.dad {
+  grid-area: 2 / 2 / 3 / 3;
+}
+.me {
+  grid-area: 3 / 1 / 4 / 3;
+}
+.children {
+  grid-area: 4 / 1 / 5 / 3;
+}
+.grandchildren {
+  grid-area: 5 / 1 / 6 / 3;
+}
+
+.splideCSS {
+  grid-area: 6 / 1 / 7 / 3;
+  width: 100%;
+}
+.splideSlideCSS {
+  display: flex;
+  justify-content: center;
+}
+
+.familyMember {
+  text-align: center;
+}
+
+.photo {
+  height: 120px;
+  width: 120px;
+  border-radius: var(--borderRadius-rounded);
+  background-color: pink;
+}
+
+/* -------- Splide */
+.splide {
+}
+
+.splideIn {
+}
+.splideIn img {
+}

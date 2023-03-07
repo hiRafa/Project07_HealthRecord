@@ -15,46 +15,47 @@ async function handler(req, res) {
     console.log(dataFetched);
     console.log(dataFetched.email);
     const emailForFilter = dataFetched.email;
-
+    console.log(emailForFilter);
     delete dataFetched._id;
     delete dataFetched.email;
 
     let result;
     if (dataFetched.name) {
-        try {
-          result = await MongoClientConnection.db()
-            .collection("users")
-            .updateOne(
-              { email: emailForFilter },
-              {
-                $set: {
-                  ...dataFetched,
-                },
-              }
-              // { upsert: true }
-            );
-          res.status(201).json({ message: "Data Saved" });
-        } catch (error) {
-          res.status(500).json({ message: "Saving Form Failed" });
-        }
-      }
-    else {
       try {
-          result = await MongoClientConnection.db()
-            .collection("users")
-            .updateOne(
-              { email: emailForFilter },
-              {
-                $push: {
-                  "selectedSchedule": dataFetched
-                },
-              }
-            );
-          res.status(201).json({ message: "Data Saved" });
-        } catch (error) {
-          res.status(500).json({ message: "Saving Form Failed" });
+        result = await MongoClientConnection.db()
+          .collection("users")
+          .updateOne(
+            { email: emailForFilter },
+            {
+              $set: {
+                ...dataFetched,
+              },
+            }
+            // { upsert: true }
+          );
+        res.status(201).json({ message: "Data Saved" });
+      } catch (error) {
+        res.status(500).json({ message: "Saving Form Failed" });
       }
-    }  
+    } else {
+      try {
+        result = await MongoClientConnection.db()
+          .collection("users")
+          .updateOne(
+            { email: emailForFilter },
+            {
+              $push: {
+                // selectedSchedule needs to be "inside".
+                // when VS code saves it removes.
+                selectedSchedule: { ...dataFetched },
+              },
+            }
+          );
+        res.status(201).json({ message: "Data Saved" });
+      } catch (error) {
+        res.status(500).json({ message: "Saving Form Failed" });
+      }
+    }
   }
 
   //   MongoClientConnection.close();

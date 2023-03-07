@@ -24,8 +24,7 @@
   border-top-right-radius: var(--borderRadius-card);
   border: var(--border-card) var(--color-primary-main);
   border-bottom: none;
-  color: var(--color-primary-light);
-
+  color: var(--color-primary-dark);
 }
 .navLink:hover {
   color: var(--color-tertiary-light);
@@ -39,10 +38,10 @@
 }
 
 .navLink_active {
-  color: var(--color-primary-dark);
   border-color: white;
-  background-color: white;
+  background-color: var(--color-primary-main);
   font-weight: 700;
+  color: var(--color-black);
 }
 
 .pagesLayout_main {

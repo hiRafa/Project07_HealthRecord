@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@next/react-refresh-utils": "^13.0.6",
+    "@splidejs/react-splide": "^0.7.12",
     "bcryptjs": "^2.4.3",
     "dns": "file:./src/mock/dns",
     "eslint-config-next": "^13.0.6",

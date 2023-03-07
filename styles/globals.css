@@ -26,7 +26,7 @@
   --border-card: 2px solid;
   --borderRadius-card: 10px;
   --borderRadius-button: 5px;
-  --borderRadius-rounded: 50px;
+  --borderRadius-rounded: 50%;
   --transition: all 1s linear;
   --transition-25ms: all 0.25s linear;
 
@@ -144,6 +144,11 @@ section {
   justify-content: center;
   align-items: center;
 }
+.flex_end {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
 .flex_column {
   display: flex;
   flex-direction: column;
@@ -206,6 +211,30 @@ section {
   -webkit-backdrop-filter: blur(3px);
   border: 1px solid rgba(255, 255, 255, 1);
 }
+/* Calendar */
+.calendar {
+  padding: 1rem;
+  border: none !important;
+  background-color: transparent !important;
+  height: 100%;
+}
+
+.calendarContainer {
+  display: flex;
+  border-radius: 0 !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .calendarContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: fit-content;
+  }
+  .calendar {
+    width: 100% !important;
+  }
+}
 
 @media screen and (max-width: 768px) {
   :root {
@@ -223,7 +252,7 @@ section {
   }
 }
 
-/* Animation */
+/* --------------- Animation */
 
 .animWindow {
   line-height: 1.2em;

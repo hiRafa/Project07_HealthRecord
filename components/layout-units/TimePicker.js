@@ -61,72 +61,39 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
   }
   const hourRef = useRef();
   const minRef = useRef();
+  const [hourValue, setHourValue] = useState();
 
   const [currentUserEmail, setCurrentUserEmail] = useState();
-  const [dataFetched, setDataFetched] = useState();
   useEffect(() => {
-    // let monthPlus1 = dateValue.getMonth()+1
-    let scheduleID = `${dateValue.getFullYear()}${dateValue.getMonth()}${dateValue.getDate()}`;
     if (session) setCurrentUserEmail(session.user.email);
-    if (facility) {
-      setDataFetched({
-        email: currentUserEmail,
-        [scheduleID+facility.id]: {
-          professionalName: facility.name,
-          professionalID: facility.id,
-          professionalSpeciality: facilSpecialistRef.current.value,
-          hour: hourRef?.current?.value,
-          time: minRef?.current?.value,
-          day: dateValue.getDate(),
-          month: dateValue.getMonth()+1,
-          year: dateValue.getFullYear()
-        },
-      });
-    } else if (professional) {
-      setDataFetched({
-        email: currentUserEmail,
-        [scheduleID+professional.id]: {
-          professionalName: professional.name,
-          professionalID: professional.id,
-          professionalSpeciality: professional.speciality,
-          hour: hourRef?.current?.value,
-          time: minRef?.current?.value,
-        },
-      });
-    console.log(scheduleID)}
-  }, [
-    session,
-    currentUserEmail,
-    dateValue,
-    facility,
-    facilSpecialistRef,
-    professional,
-    hourRef,
-    minRef,
-  ]);
+  }, [session, currentUserEmail]);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    // console.log(dateValue);
-    // console.log("sending to database");
-    if (facility) {
-      // data to fetch POST if facility
-      profileFormSubmitHandler(
-        dataFetched,
-        successfullNotification,
-        errorNotification
-      );
-      // console.log(facilSpecialistRef.current.value);
-      // console.log(facility);
-    } else if (professional) {
-      //data to fetch POST if professional
-      profileFormSubmitHandler(
-        dataFetched,
-        successfullNotification,
-        errorNotification
-      );
-      // console.log(professional);
-    }
+    let scheduleID = `${dateValue.getFullYear()}${dateValue.getMonth()}${dateValue.getDate()}${
+      facility ? facility.id : professional.id
+    }`;
+    let dataFetched = {
+      email: currentUserEmail,
+      [scheduleID]: {
+        professionalName: facility ? facility.name : professional.name,
+        professionalID: facility ? facility.id : professional.id,
+        professionalSpeciality: facility
+          ? facilSpecialistRef.current.value
+          : professional.speciality,
+        day: dateValue.getDate(),
+        month: dateValue.getMonth() + 1,
+        year: dateValue.getFullYear(),
+        hour: hourRef.current.value,
+        min: minRef.current.value,
+      },
+    };
+    console.log(dataFetched);
+    profileFormSubmitHandler(
+      dataFetched,
+      successfullNotification,
+      errorNotification
+    );
   };
 
   // let selectedDateFormat = new Date(
@@ -138,16 +105,29 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
     <Fragment>
       <div className={`${classes.timepicker} flex_center `}>
         {hourOptions.length > 0 ? (
-          <div className="flex_center">
-            <select
-              id="hour"
-              className={` ${classes.hour_select} flex_column glass_bg`}
-              ref={hourRef}
-            >
-              {hourOptions}
-            </select>
-            <p>Hrs</p>
-          </div>
+          <Fragment>
+            <div className="flex_center">
+              <select
+                id="hour"
+                className={` ${classes.hour_select} flex_column glass_bg`}
+                ref={hourRef}
+              >
+                {hourOptions}
+              </select>
+              <p>Hrs</p>
+            </div>
+            <div className="flex_center">
+              <select
+                className={` ${classes.hour_select} flex_column glass_bg`}
+                ref={minRef}
+              >
+                {minutesArr.map((min) => (
+                  <option className={classes.hour_option}>{min}</option>
+                ))}
+              </select>
+              <p>Min</p>
+            </div>
+          </Fragment>
         ) : (
           <div>
             <p>
@@ -159,20 +139,6 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
               {facilityClosedDaysEmergency &&
                 `Only for emergencies, call emergency number`}
             </p>
-          </div>
-        )}
-
-        {hourOptions.length > 0 && (
-          <div className="flex_center">
-            <select
-              className={` ${classes.hour_select} flex_column glass_bg`}
-              ref={minRef}
-            >
-              {minutesArr.map((min) => (
-                <option className={classes.hour_option}>{min}</option>
-              ))}
-            </select>
-            <p>Min</p>
           </div>
         )}
       </div>

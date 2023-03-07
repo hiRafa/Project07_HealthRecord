@@ -16,12 +16,19 @@ const CalendarAll = (props) => {
   const [showTimes, setShowTimes] = useState(false);
   const [selectedWeekday, setSelectedWeekday] = useState("");
 
+  const tileDisabled = ({ activeStartDate, date, view }) => {
+    // console.log(new Date());
+    // console.log(date);
+    return date < new Date();
+  };
+  // console.log(new Datxe());
   const getCalendarWeekDay = (e) => {
     setSelectedWeekday(
       e.toLocaleDateString("en-US", { weekday: "short" }).toLowerCase()
     );
     // console.log(selectedWeekday)
   };
+
   return (
     <div className={`${classes.calendarContainer} glass_bg`}>
       <Calendar
@@ -35,7 +42,8 @@ const CalendarAll = (props) => {
           setShowTimes(true);
           getCalendarWeekDay(e);
         }}
-        className={`${classes.calendar} ${props.className}`}
+        className={`calendar ${props.className}`}
+        tileDisabled={tileDisabled}
       />
       {session && showTimes && (
         <aside className={`${classes.timeContainer} flex_column `}>

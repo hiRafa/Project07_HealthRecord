@@ -2,6 +2,20 @@
   padding: var(--padding3);
   background-color: white;
 }
-.calendarDiv {
-    
+.appointmentContainer {
+  display: grid;
+  grid-template-columns: 35% 1fr;
+}
+.appointmentCard {
+  border: var(--border-card) var(--color-primary-main);
+  padding: 1rem;
+  border-radius: var(--borderRadius-card);
+  gap: 0.5rem;
+}
+.appointmentDate {
+  gap: 0.5rem;
+  font-weight: 700;
+}
+.appointmentCalendar {
+  width: 100%;
 }
