@@ -1,18 +1,25 @@
+import { useSession } from "next-auth/react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
+import useNotification from "../../../contexts/notifications-context";
+import { profileFormSubmitHandler } from "../../../helpers/general-helper";
 import ButtonAll from "../../layout-units/ButtonAll";
 import classes from "./Lineage.module.css";
 const geneOptions = [
   "mother",
   "father",
-  "grandmother",
-  "grandfather",
-  "sibling",
+  "grandmother(mother)",
+  "grandmother(father)",
+  "grandfather(mother)",
+  "grandfather(father)",
   "child",
+  "grandchild",
 ];
 
 const loveOptions = [
-  "dad",
-  "mom",
+  "family",
+  "friend",
+  "daddy",
+  "mamma",
   "grandma",
   "grandpa",
   "brother",
@@ -21,37 +28,44 @@ const loveOptions = [
   "cousin",
   "aunty",
   "uncle",
-  "friend",
-  "custom",
+  "niece",
+  "nephew",
+  "child",
+  "grandchild",
+  "master",
+  "pupil",
 ];
 
 const FamilyForm = ({ geneline, loveline }) => {
   // const theiremail = useRef();
   const nameRef = useRef();
   const relationshipRef = useRef();
-  const disordersRef = useRef();
-  const strengthsRef = useRef();
+  const disordersRef = useRef(null);
+  const strengthsRef = useRef(null);
 
+  const { successfullNotification, errorNotification } = useNotification();
+  const { data: session, status } = useSession();
   const [currentUserEmail, setCurrentUserEmail] = useState();
-  const [dataFetched, setDataFetched] = useState();
   useEffect(() => {
-    if (loveline) {
-      setDataFetched({
-        email: currentUserEmail,
-        loveline: {
-          [nameRef?.current?.value]: {
-            relationship: relationshipRef?.current?.value,
-            disorders: disordersRef?.current?.value,
-            strengths: strengthsRef?.current?.value,
-          },
-        },
-      });
-    } else if (geneline) {
-    }
-  }, [nameRef, relationshipRef, relationshipRef, disordersRef, strengthsRef]);
+    if (session) setCurrentUserEmail(session.user.email);
+  }, [session, currentUserEmail]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    let dataFetched = {
+      email: currentUserEmail,
+      member: nameRef.current.value,
+      relationship: relationshipRef.current.value,
+      disorders: disordersRef.current.value,
+      strengths: strengthsRef.current.value,
+    };
+    if (geneline) {
+      console.log(geneline, loveline)
+      dataFetched.geneline = true
+    } else if (loveline) {
+      console.log(geneline, loveline)
+      dataFetched.loveline = true
+    }
 
     profileFormSubmitHandler(
       dataFetched,
@@ -73,6 +87,7 @@ const FamilyForm = ({ geneline, loveline }) => {
         {loveline &&
           loveOptions.map((option) => <option value={option}>{option}</option>)}
       </select>
+
       <div>
         <label htmlFor={"name"} className={`${classes.label}`}>
           Name (given or nickname)*
@@ -83,11 +98,11 @@ const FamilyForm = ({ geneline, loveline }) => {
         <label htmlFor={"healthdisorder"} className={`${classes.label}`}>
           Health Disorders
         </label>
-        <input type="text" ref={disordersRef} required className={``} />
+        <input type="text" ref={disordersRef} className={``} />
         <label htmlFor={"healthstrengths"} className={`${classes.label}`}>
           Health Strengths
         </label>
-        <input type="text" ref={strengthsRef} required className={``} />
+        <input type="text" ref={strengthsRef} className={``} />
       </Fragment>
       <ButtonAll text="Register Family Member" />
       <p>*required fields</p>

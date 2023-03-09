@@ -37,6 +37,44 @@ async function handler(req, res) {
       } catch (error) {
         res.status(500).json({ message: "Saving Form Failed" });
       }
+    }  else if (dataFetched.geneline) {
+      delete dataFetched.loveline;
+      try {
+        result = await MongoClientConnection.db()
+          .collection("users")
+          .updateOne(
+            { email: emailForFilter },
+            {
+              $push: {
+                // geneline needs to be "inside".
+                // when VS code saves it removes.
+                "geneline": dataFetched,
+              },
+            }
+          );
+        res.status(201).json({ message: "Data Saved" });
+      } catch (error) {
+        res.status(500).json({ message: "Saving Form Failed" });
+      }
+    } else if (dataFetched.loveline) {
+      delete dataFetched.loveline;
+      try {
+        result = await MongoClientConnection.db()
+          .collection("users")
+          .updateOne(
+            { email: emailForFilter },
+            {
+              $push: {
+                // loveline needs to be between quotes"inside".
+                // when VS code saves it removes.
+                "loveline": dataFetched,
+              },
+            }
+          );
+        res.status(201).json({ message: "Data Saved" });
+      } catch (error) {
+        res.status(500).json({ message: "Saving Form Failed" });
+      }
     } else {
       try {
         result = await MongoClientConnection.db()
@@ -47,7 +85,7 @@ async function handler(req, res) {
               $push: {
                 // selectedSchedule needs to be "inside".
                 // when VS code saves it removes.
-                selectedSchedule: { ...dataFetched },
+                "selectedSchedule": { ...dataFetched },
               },
             }
           );
