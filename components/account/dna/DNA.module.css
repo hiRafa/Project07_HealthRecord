@@ -1,0 +1,9 @@
+.DNAlist {
+    gap: 1rem;
+    background-color: var(--color-primary-main);
+}
+
+.DNAlogo {
+    width: 80px;
+    height: 80px;
+}

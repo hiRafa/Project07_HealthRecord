@@ -1,0 +1,31 @@
+export const geneOptions = [
+    "mother",
+    "father",
+    "grandmother(mother)",
+    "grandmother(father)",
+    "grandfather(mother)",
+    "grandfather(father)",
+    "child",
+    "grandchild",
+  ];
+  
+export const loveOptions = [
+    "family",
+    "friend",
+    "daddy",
+    "mamma",
+    "grandma",
+    "grandpa",
+    "brother",
+    "sister",
+    "sibling",
+    "cousin",
+    "aunty",
+    "uncle",
+    "niece",
+    "nephew",
+    "child",
+    "grandchild",
+    "master",
+    "pupil",
+  ];

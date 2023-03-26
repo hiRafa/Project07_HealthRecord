@@ -61,7 +61,6 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
   }
   const hourRef = useRef();
   const minRef = useRef();
-  const [hourValue, setHourValue] = useState();
 
   const [currentUserEmail, setCurrentUserEmail] = useState();
   useEffect(() => {

@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import DNA from "../../components/account/dna/DNA";
 import ProfileTop from "../../components/account/ProfileTop";
 import SectionContainer from "../../components/layout-units/SectionContainer";
 
@@ -8,6 +9,7 @@ const DNAPage = () => {
       <ProfileTop />
       <SectionContainer>
         <h2>DNA</h2>
+        <DNA/>
       </SectionContainer>
     </Fragment>
   );

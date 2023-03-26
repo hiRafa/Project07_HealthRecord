@@ -4,39 +4,9 @@ import useNotification from "../../../contexts/notifications-context";
 import { profileFormSubmitHandler } from "../../../helpers/general-helper";
 import ButtonAll from "../../layout-units/ButtonAll";
 import classes from "./Lineage.module.css";
-const geneOptions = [
-  "mother",
-  "father",
-  "grandmother(mother)",
-  "grandmother(father)",
-  "grandfather(mother)",
-  "grandfather(father)",
-  "child",
-  "grandchild",
-];
+import { geneOptions, loveOptions } from "../../../helpers/data-helper";
 
-const loveOptions = [
-  "family",
-  "friend",
-  "daddy",
-  "mamma",
-  "grandma",
-  "grandpa",
-  "brother",
-  "sister",
-  "sibling",
-  "cousin",
-  "aunty",
-  "uncle",
-  "niece",
-  "nephew",
-  "child",
-  "grandchild",
-  "master",
-  "pupil",
-];
-
-const FamilyForm = ({ geneline, loveline }) => {
+const FamilyForm = ({ geneline, loveline, userGeneline }) => {
   // const theiremail = useRef();
   const nameRef = useRef();
   const relationshipRef = useRef();
@@ -60,11 +30,11 @@ const FamilyForm = ({ geneline, loveline }) => {
       strengths: strengthsRef.current.value,
     };
     if (geneline) {
-      console.log(geneline, loveline)
-      dataFetched.geneline = true
+      console.log(geneline, loveline);
+      dataFetched.geneline = true;
     } else if (loveline) {
-      console.log(geneline, loveline)
-      dataFetched.loveline = true
+      console.log(geneline, loveline);
+      dataFetched.loveline = true;
     }
 
     profileFormSubmitHandler(
@@ -73,6 +43,20 @@ const FamilyForm = ({ geneline, loveline }) => {
       errorNotification
     );
   };
+
+  let geneOptionsFilter = [];
+  Object.keys(userGeneline).forEach((key) => {
+    geneOptionsFilter.push(userGeneline[key].relationship);
+  });
+  let geneOptionsDifference = geneOptions.filter((x) => {
+    if (x === "child" || x === "grandchild") {
+      return true;
+    } else if (!geneOptionsFilter.includes(x)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
   return (
     <form className={`${classes.form} `} onSubmit={submitHandler}>
@@ -83,9 +67,11 @@ const FamilyForm = ({ geneline, loveline }) => {
         required
       >
         {geneline &&
-          geneOptions.map((option) => <option value={option}>{option}</option>)}
+          geneOptionsDifference.map((option) => (
+            <option value={option} key={option}>{option}</option>
+          ))}
         {loveline &&
-          loveOptions.map((option) => <option value={option}>{option}</option>)}
+          loveOptions.map((option) => <option value={option} key={option}>{option}</option>)}
       </select>
 
       <div>

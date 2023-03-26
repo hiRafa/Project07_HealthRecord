@@ -2,63 +2,32 @@ import React from "react";
 import classes from "./Lineage.module.css";
 import { SplideTrack, Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
+import { geneOptions, loveOptions } from "../../../helpers/data-helper";
 
-const Geneline = () => {
+const Geneline = (props) => {
+  const userData = props.userData;
+  const genelineData = props.userGeneline;
+  let familyData = [];
+  Object.keys(genelineData).forEach((key) => {
+    let relationshipFormat = genelineData[key].relationship
+      .replace("(", "")
+      .replace(")", "");
+    familyData.push(
+      <div className={`${classes.familyMember} ${classes[relationshipFormat]}`}>
+        <img className={`${classes.photo}`} />
+        <h4>{genelineData[key].member}</h4>
+        <h5>{genelineData[key].relationship}</h5>
+      </div>
+    );
+  });
+
   return (
     <div className={`${classes.tree} `}>
-      <div className={`${classes.grandpsMom} flex_center`}>
-        <div className={`${classes.familyMember} `}>
-          <img className={`${classes.photo}`} />
-          <h4>Name Name</h4>
-        </div>
-        <div className={`${classes.familyMember} `}>
-          <img className={`${classes.photo}`} />
-          <h4>Name Name</h4>
-        </div>
-      </div>
-
-      <div className={`${classes.grandpsDad} flex_center`}>
-        <div className={`${classes.familyMember} `}>
-          <img className={`${classes.photo}`} />
-          <h4>Name Name</h4>
-        </div>
-        <div className={`${classes.familyMember} `}>
-          <img className={`${classes.photo}`} />
-          <h4>Name Name</h4>
-        </div>
-      </div>
-
-      <div className={`${classes.mom} ${classes.familyMember}`}>
+      {familyData}
+      <div className={`${classes.familyMember} ${classes.me}`}>
         <img className={`${classes.photo}`} />
-        <h4>Name Name</h4>
+        <h4>{userData.fullname}</h4>
       </div>
-
-      <div className={`${classes.dad} ${classes.familyMember}`}>
-        <img className={`${classes.photo}`} />
-        <h4>Name Name</h4>
-      </div>
-
-      <div className={`${classes.me} `}>
-        <div className={`${classes.familyMember} `}>
-          <img className={`${classes.photo}`} />
-          <h4>Me Me</h4>
-        </div>
-      </div>
-
-      <div className={`${classes.children} `}>
-        <div className={`${classes.familyMember} `}>
-          <img className={`${classes.photo}`} />
-          <h4>Name Name</h4>
-        </div>
-      </div>
-
-      <div className={`${classes.grandchildren} `}>
-        <div className={`${classes.familyMember} `}>
-          <img className={`${classes.photo}`} />
-          <h4>Name Name</h4>
-        </div>
-      </div>
-
       <Splide
         hasTrack={false}
         aria-label="..."
@@ -75,7 +44,7 @@ const Geneline = () => {
               <img
                 src="/bg_dnatree.png"
                 alt="Image 1"
-                class={`${classes.photo}`}
+                className={`${classes.photo}`}
               />
             </SplideSlide>
             <SplideSlide className={classes.splideSlideCSS}>
@@ -85,18 +54,18 @@ const Geneline = () => {
               <img
                 src="/branch-308647.png"
                 alt="Image 1"
-                class={`${classes.photo}`}
+                className={`${classes.photo}`}
               />
             </SplideSlide>
             <SplideSlide className={classes.splideSlideCSS}>
               <img
                 src="/bg_dnatree.png"
                 alt="Image 2"
-                class={`${classes.photo}`}
+                className={`${classes.photo}`}
               />
             </SplideSlide>
             <SplideSlide className={classes.splideSlideCSS}>
-              <img src="/bg_dna.jpg" alt="Image 1" class={`${classes.photo}`} />
+              <img src="/bg_dna.jpg" alt="Image 1" className={`${classes.photo}`} />
             </SplideSlide>
           </SplideTrack>
 

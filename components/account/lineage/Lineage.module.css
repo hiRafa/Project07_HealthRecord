@@ -13,44 +13,48 @@
 }
 
 /* tree */
+
 .tree {
   display: grid;
-  grid-template-columns: repeat(2, 50%);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(6, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  gap: 2rem;
   place-items: center;
 }
 .tree > div {
   width: 100%;
 }
 
-.grandpsMom {
+.grandmothermother {
   grid-area: 1 / 1 / 2 / 2;
-  justify-content: space-around;
 }
-.grandpsDad {
+.grandfathermother {
   grid-area: 1 / 2 / 2 / 3;
-  justify-content: space-around;
 }
-.mom {
-  grid-area: 2 / 1 / 3 / 2;
+.grandmotherfather {
+  grid-area: 1 / 3 / 2 / 4;
 }
-.dad {
-  grid-area: 2 / 2 / 3 / 3;
+.grandfatherfather {
+  grid-area: 1 / 4 / 2 / 5;
+}
+.mother {
+  grid-area: 2 / 1 / 3 / 3;
+}
+.father {
+  grid-area: 2 / 3 / 3 / 5;
 }
 .me {
-  grid-area: 3 / 1 / 4 / 3;
+  grid-area: 3 / 2 / 4 / 4;
 }
-.children {
-  grid-area: 4 / 1 / 5 / 3;
+.child {
+  grid-area: 4 / 1 / 5 / 5;
 }
-.grandchildren {
-  grid-area: 5 / 1 / 6 / 3;
+.grandchild {
+  grid-area: 5 / 1 / 6 / 5;
 }
 
 .splideCSS {
-  grid-area: 6 / 1 / 7 / 3;
+  grid-area: 6 / 1 / 7 / 5;
   width: 100%;
 }
 .splideSlideCSS {
