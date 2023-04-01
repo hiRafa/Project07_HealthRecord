@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 export async function connectToMongoDB() {
   const MongoClientConnection = await MongoClient.connect(
     "mongodb+srv://hirafa:academind123@maincluster.cbw0nhb.mongodb.net/main?retryWrites=true&w=majority"
+    // "mongodb+srv://hirafa:<password><password>@maincluster.cbw0nhb.mongodb.net/?retryWrites=true&w=majority"
   );
   return MongoClientConnection;
   // it is possible to create an extra collection by inserting a title here mongodb.net/(inserthere)?retryWrites

@@ -55,7 +55,7 @@ const InputFieldsetReq = ({ input, getDataFromChild, isEditing }) => {
         </div>
       ) : (
         <p className={`flex_start ${classes.fieldset_option}`}>
-          <span class="material-symbols-outlined">{icon}</span>
+          <span className="material-symbols-outlined">{icon}</span>
           {data === true ? "Yes" : "No"}
         </p>
       )}

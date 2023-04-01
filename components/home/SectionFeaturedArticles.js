@@ -14,7 +14,7 @@ const SectionFeaturedArticles = ({ featuredArticles }) => {
   const goToSlide = (slideIndex) => {
     setCurrentIndex(slideIndex);
   };
-  console.log(currentIndex);
+  // console.log(currentIndex);
 
   const containerIcons = featuredArticles.map((article, iconIndex) => (
     <span

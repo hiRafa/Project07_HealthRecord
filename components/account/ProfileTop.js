@@ -49,12 +49,12 @@ const ProfileTop = () => {
         <nav className={`section_container ${classes.nav_account}`}>
           <ul className={`${classes.nav_accountUl}`}>
             {accountNav.map((path) => (
-              <Link href={path.link}>
+              <Link href={path.link} key={path.pageTitle}>
                 <li
                   className={`flex_center ${classes.navLink} 
                 ${router.route === path.link && classes.navLink_active}`}
                 >
-                  <span class="material-symbols-outlined">genetics</span>
+                  <span className="material-symbols-outlined">genetics</span>
                   {path.pageTitle}
                 </li>
               </Link>

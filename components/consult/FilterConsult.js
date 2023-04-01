@@ -6,7 +6,7 @@ import classes from "../layout-units/LayoutUnits.module.css";
 import { useRouter } from "next/router";
 import ButtonAll from "../layout-units/ButtonAll";
 
-const FilterConsult = ({ currentYear, currentMonth, className }) => {
+const FilterConsult = ({ className }) => {
   const router = useRouter();
 
   const specialityInputRef = useRef();
@@ -25,10 +25,6 @@ const FilterConsult = ({ currentYear, currentMonth, className }) => {
       else if (selectedMonth === "")
         module.onFindPublication(router, selectedYear);
     });
-
-    // if (selectedMonth !== "")
-    //   onFindPublication(router, selectedYear, selectedMonth);
-    // else if (selectedMonth === "") onFindPublication(router, selectedYear);
   }
 
   return (

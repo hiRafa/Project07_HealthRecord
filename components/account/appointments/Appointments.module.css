@@ -1,6 +1,6 @@
 .appointmentLayout {
   padding: var(--padding3);
-  background-color: white;
+  background-color: var(--color-white);
 }
 .appointmentContainer {
   display: grid;

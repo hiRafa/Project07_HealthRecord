@@ -43,7 +43,6 @@ const SectionStories = ({ userStories }) => {
 
   // list of items
   const { openModalHandler, modalIsOpen } = modalCtxt();
-  console.log(openModalHandler);
   const userStory = userStories.map((story) => (
     <li
       onClick={openModalHandler}

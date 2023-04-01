@@ -1,6 +1,5 @@
 import { useSession } from "next-auth/react";
 import React, { Fragment, useEffect, useRef, useState } from "react";
-import modalContxt from "../../contexts/modal-context";
 import useNotification from "../../contexts/notifications-context";
 import { profileFormSubmitHandler } from "../../helpers/general-helper";
 import ButtonAll from "./ButtonAll";
@@ -70,8 +69,8 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     let scheduleID = `${dateValue.getFullYear()}${dateValue.getMonth()}${dateValue.getDate()}${
-      facility ? facility.id : professional.id
-    }`;
+      hourRef.current.value
+    }${minRef.current.value}`;
     let dataFetched = {
       email: currentUserEmail,
       [scheduleID]: {
@@ -87,7 +86,7 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
         min: minRef.current.value,
       },
     };
-    console.log(dataFetched);
+    // console.log(dataFetched);
     profileFormSubmitHandler(
       dataFetched,
       successfullNotification,

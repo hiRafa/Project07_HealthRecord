@@ -1,70 +1,68 @@
-import React, { Fragment, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SectionContainer from "../../layout-units/SectionContainer";
 import classes from "./Appointments.module.css";
 import { Calendar } from "react-calendar";
 import CalendarAll from "../../layout-units/CalendarAll";
 import ButtonAll from "../../layout-units/ButtonAll";
-import togglePrevCurrent from "../../../helpers/general-helper";
+import { fetchUserData } from "../../../helpers/general-helper";
+import { useSession } from "next-auth/react";
 
+const ProfileAppointments = () => {
+  const { data: session, status } = useSession();
+  const [dataFetched, setDataFetched] = useState(null);
+  const [currentUserEmail, setCurrentUserEmail] = useState();
 
-const ProfileAppointments = ({ dataFetched }) => {
-  const { selectedSchedule } = dataFetched;
+  const memoizedFetchUserData = useCallback(() => {
+    fetchUserData(currentUserEmail, setDataFetched);
+  }, [currentUserEmail]);
+
+  useEffect(() => {
+    if (session) setCurrentUserEmail(session.user.email);
+    memoizedFetchUserData();
+  }, [session, memoizedFetchUserData]);
+
   const [showTimes, setShowTimes] = useState(false);
   const [dateValue, dateOnChange] = useState(new Date());
   const [newAppointmentsState, setNewAppointmentsState] = useState(true);
 
-  let arr = [];
-  selectedSchedule &&
-    selectedSchedule.map((appointment) =>
-      Object.keys(appointment).forEach((key) =>
-        arr.push(
-          <article
-            className={`flex_column ${classes.appointmentCard}`}
-            key={`${appointment[key].year}${appointment[key].month}${appointment[key].day}`}
-          >
-            <h3>{appointment[key].professionalName}</h3>
-            <p> {appointment[key].professionalSpeciality}</p>
-            <div className={`flex_end ${classes.appointmentDate}`}>
-              <p>Day: {appointment[key].day}</p>
-              <p>
-                {appointment[key].month}/{appointment[key].year}
-              </p>
-              <p>
-                {appointment[key].hour}:{appointment[key].min}
-              </p>
-            </div>
-          </article>
-        )
-      )
-    );
-  let arrSort, currentDate;
-  let oldAppointments = [];
-  let newAppointments = [];
-  if (arr !== undefined) {
-    arrSort = arr.sort((a, b) => a.key - b.key);
-  }
-  if (arrSort !== undefined) {
-    let dateHelper = new Date();
-    currentDate = `${dateHelper.getFullYear()}${
-      dateHelper.getMonth() + 1
-    }${dateHelper.getDate()}`;
-    // console.log(currentDate);
-    arrSort.map((appointment) => {
-      if (appointment.key < currentDate) {
-        oldAppointments.push(appointment);
-      } else {
-        newAppointments.push(appointment);
-      }
-    });
-    console.log(oldAppointments, newAppointments);
-  }
+  const arr = dataFetched?.selectedSchedule.flatMap((appointment) =>
+    Object.keys(appointment).map((key) => (
+      <article
+        className={`flex_column ${classes.appointmentCard}`}
+        key={`${appointment[key].year}${appointment[key].month}${appointment[key].day}${appointment[key].hour}${appointment[key].min}`}
+      >
+        <h3>{appointment[key].professionalName}</h3>
+        <p>{appointment[key].professionalSpeciality}</p>
+        <div className={`flex_end ${classes.appointmentDate}`}>
+          <p>Day: {appointment[key].day}</p>
+          <p>
+            {appointment[key].month}/{appointment[key].year}
+          </p>
+          <p>
+            {appointment[key].hour}:{appointment[key].min}
+          </p>
+        </div>
+      </article>
+    ))
+  );
+
+  const dateHelper = new Date();
+  const currentDate = `${dateHelper.getFullYear()}${
+    dateHelper.getMonth() + 1
+  }${dateHelper.getDate()}`;
+  const appointments = arr?.sort((a, b) => a.key - b.key) || [];
+  const oldAppointments = appointments.filter(
+    (appointment) => appointment.key < currentDate
+  );
+  const newAppointments = appointments.filter(
+    (appointment) => appointment.key >= currentDate
+  );
 
   return (
     <SectionContainer className={`flex_column ${classes.appointmentLayout}`}>
       <h2>Profile Appointments</h2>
       <div className={`flex_start ${classes.appointmentContainer}`}>
         <div className={`flex_column ${classes.appointmentCardContainer}`}>
-
           {!newAppointmentsState && (
             <div>
               <h3>Past Appointments</h3>
@@ -93,9 +91,9 @@ const ProfileAppointments = ({ dataFetched }) => {
           />
         </div>
         <ButtonAll
-            text={`${newAppointmentsState ? "Past" : "Incoming"}`}
-            onClick={() => setNewAppointmentsState((prevState) => !prevState)}
-          />
+          text={`${newAppointmentsState ? "Past" : "Incoming"}`}
+          onClick={() => setNewAppointmentsState((prevState) => !prevState)}
+        />
       </div>
     </SectionContainer>
   );

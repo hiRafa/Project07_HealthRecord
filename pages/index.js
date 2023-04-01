@@ -24,9 +24,9 @@ export async function getStaticProps() {
 }
 export default function HomePage(props) {
   const { featuredArticles, userStories } = props;
-  console.log(props);
+  // console.log(props);
   // console.log(featuredArticles);
-  console.log(userStories.length);
+  // console.log(userStories.length);
   // const { data: session, status } = useSession();
 
   return (

@@ -7,20 +7,24 @@ import { geneOptions, loveOptions } from "../../../helpers/data-helper";
 const Geneline = (props) => {
   const userData = props.userData;
   const genelineData = props.userGeneline;
+  console.log(genelineData)
   let familyData = [];
-  Object.keys(genelineData).forEach((key) => {
-    let relationshipFormat = genelineData[key].relationship
-      .replace("(", "")
-      .replace(")", "");
-    familyData.push(
-      <div className={`${classes.familyMember} ${classes[relationshipFormat]}`}>
-        <img className={`${classes.photo}`} />
-        <h4>{genelineData[key].member}</h4>
-        <h5>{genelineData[key].relationship}</h5>
-      </div>
-    );
-  });
-
+  if (genelineData) {
+    Object.keys(genelineData).forEach((key) => {
+      let relationshipFormat = genelineData[key].relationship
+        .replace("(", "")
+        .replace(")", "");
+      familyData.push(
+        <div
+          className={`${classes.familyMember} ${classes[relationshipFormat]}`}
+        >
+          <img className={`${classes.photo}`} />
+          <h4>{genelineData[key].member}</h4>
+          <h5>{genelineData[key].relationship}</h5>
+        </div>
+      );
+    });
+  }
   return (
     <div className={`${classes.tree} `}>
       {familyData}
@@ -48,7 +52,11 @@ const Geneline = (props) => {
               />
             </SplideSlide>
             <SplideSlide className={classes.splideSlideCSS}>
-              <img src="/water.jpg" alt="Image 2" class={`${classes.photo}`} />
+              <img
+                src="/water.jpg"
+                alt="Image 2"
+                className={`${classes.photo}`}
+              />
             </SplideSlide>
             <SplideSlide className={classes.splideSlideCSS}>
               <img
@@ -65,7 +73,11 @@ const Geneline = (props) => {
               />
             </SplideSlide>
             <SplideSlide className={classes.splideSlideCSS}>
-              <img src="/bg_dna.jpg" alt="Image 1" className={`${classes.photo}`} />
+              <img
+                src="/bg_dna.jpg"
+                alt="Image 1"
+                className={`${classes.photo}`}
+              />
             </SplideSlide>
           </SplideTrack>
 

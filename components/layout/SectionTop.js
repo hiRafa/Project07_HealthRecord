@@ -1,6 +1,6 @@
 import React from "react";
 import Waves from "../layout-units/Waves";
-import classes from "./layout.module.css";
+import classes from "./Layout.module.css";
 
 const SectionTop = ({ children }) => {
   return (

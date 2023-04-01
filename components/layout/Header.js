@@ -6,6 +6,7 @@ import { useSession, signOut } from "next-auth/react";
 import classes from "./Layout.module.css";
 
 import modalContxt from "../../contexts/modal-context";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Header = () => {
   const [openNav, setOpenNav] = useState(false);
@@ -16,7 +17,9 @@ const Header = () => {
 
   const handleSignout = (e) => {
     e.preventDefault();
-    signOut();
+    signOut({
+      callbackUrl: `${window.location.origin}`
+    });
   };
 
   const links = [
@@ -34,10 +37,10 @@ const Header = () => {
   ];
 
   let navLinks = links.map((link) => (
-    <li className={`animWindow ${classes.navLi} `}>
+    <li className={`animWindow ${classes.navLi} `} key={links.pageTitle}>
       <Link href={link.link}>
-        <span class="material-symbols-outlined navIcons">{link.icon}</span>
-        <span class={classes.navLi_text}>{link.pageTitle}</span>
+        <span className="material-symbols-outlined navIcons">{link.icon}</span>
+        <span className={classes.navLi_text}>{link.pageTitle}</span>
       </Link>
     </li>
   ));
@@ -45,8 +48,8 @@ const Header = () => {
   let accountLink = (
     <li className={` animWindow ${classes.navLi}`}>
       <Link href={session ? "/account" : "/"}>
-        <span class="material-symbols-outlined navIcons">cognition</span>
-        <span class={classes.navLi_text}>Account</span>
+        <span className="material-symbols-outlined navIcons">cognition</span>
+        <span className={classes.navLi_text}>Account</span>
       </Link>
     </li>
   );
@@ -54,8 +57,8 @@ const Header = () => {
   let logOutLink = (
     <li className={` animWindow ${classes.navLi}`} onClick={handleSignout}>
       <Link href="/">
-        <span class="material-symbols-outlined navIcons">directions_run</span>
-        <span class={classes.navLi_text}>Log out</span>
+        <span className="material-symbols-outlined navIcons">directions_run</span>
+        <span className={classes.navLi_text}>Log out</span>
       </Link>
     </li>
   );
@@ -69,7 +72,7 @@ const Header = () => {
       }}
     >
       <a>
-        <span class="material-symbols-outlined navIcons">menu_open</span>
+        <span className="material-symbols-outlined navIcons">menu_open</span>
       </a>
     </div>
   );
@@ -94,6 +97,7 @@ const Header = () => {
           {navLinks}
           {accountLink}
           {session && logOutLink}
+        <ThemeSwitcher/>
         </ul>
         {menuLink}
       </nav>

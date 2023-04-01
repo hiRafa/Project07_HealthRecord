@@ -1,9 +1,18 @@
 .DNAlist {
     gap: 1rem;
+    padding: 1rem 0;
+}
+
+.DNAbutton {
     background-color: var(--color-primary-main);
+    width: fit-content;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    gap: .5rem;
 }
 
 .DNAlogo {
-    width: 80px;
-    height: 80px;
+    width: 25px;
+    height: 25px;
 }

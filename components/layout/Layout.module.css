@@ -51,7 +51,7 @@
   gap: 1rem;
   align-items: center;
   height: 100%;
-  color: white;
+  color: var(--color-white);
   border-radius: 0;
 }
 
@@ -68,7 +68,7 @@
 
 .navLi a:hover {
   cursor: pointer;
-  color: white;
+  color: var(--color-white);
 }
 
 .navIcons {
@@ -157,6 +157,10 @@
   color: var(--color-white);
   padding-bottom: 3rem;
 }
+.section_top > *:last-child {
+  position: relative;
+  z-index: 2;
+}
 
 /* Notification  */
 .notification {
@@ -180,7 +184,7 @@
 .notification h2 {
   margin: 0;
   font-size: 1.25rem;
-  color: white;
+  color: var(--color-white);
 }
 
 .success,
@@ -218,3 +222,22 @@
 
 @media screen and (max-width: 768px) {
 }
+
+.notificationAppointment {
+  position: absolute;
+  width: 100%;
+  top: 5rem; /* adjust as needed to align with the navigation bar */
+  right: 0;
+  background-color: var(--color-white);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  padding: .5rem;
+  z-index: 999;
+  gap:1rem;
+}
+.notificationAppointment > * {
+  margin: 0;
+}
+
+
+
+

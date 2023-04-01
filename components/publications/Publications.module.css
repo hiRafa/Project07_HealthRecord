@@ -48,6 +48,7 @@
   position: relative;
   border: var(--border-card) var(--color-primary-dark);
   transition: var(--transition-25ms);
+  color: var(--color-black)
 }
 .publications_card:hover {
   background-color: var(--color-primary-dark);

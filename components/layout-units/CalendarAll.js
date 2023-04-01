@@ -58,7 +58,7 @@ const CalendarAll = (props) => {
       {!session && selectedWeekday && (
         <a href="#consultop" className={`${classes.calendarLogIn} flex_center`}>
           Log in or create an account first
-          <span class="material-symbols-outlined">
+          <span className="material-symbols-outlined">
             keyboard_double_arrow_up
           </span>
         </a>

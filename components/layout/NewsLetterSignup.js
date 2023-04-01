@@ -44,7 +44,7 @@ function NewsletterSignup() {
         <div className={`flex_column ${classes.newsletter_control}`}>
           <input
             type="email"
-            id="email"
+            id="emailLetter"
             placeholder="Your email"
             aria-label="Your email"
             ref={emailInputRef}

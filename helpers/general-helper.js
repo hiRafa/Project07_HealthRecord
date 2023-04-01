@@ -60,3 +60,19 @@ export const profileFormSubmitHandler = (
     )
     .catch((error) => errorNotification("Error!", error));
 };
+
+export const fetchUserData = (currentUserEmail, setDataFetched) => {
+  if (currentUserEmail) {
+    fetch(`/api/userData/${currentUserEmail}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        // then extracting the data, the data was stored as { userData: userData}
+        // set the data to a local component state#
+        // console.log(data.userData);
+        setDataFetched({ ...data.userData });
+        // setFetchingData(false);
+      });
+  }
+};
