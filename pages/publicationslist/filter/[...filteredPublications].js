@@ -4,11 +4,11 @@ import React, { Fragment } from "react";
 
 import { getFilteredPublications } from "../../../helpers/firebaseData-helper";
 
-import FilterYearMonth from "../../../components/layout-units/FilterYearMonth";
+import FilterYearMonth from "../../../components/publications/FilterYearMonth";
 import PublicationsList from "../../../components/publications/PublicationsList";
 import Head from "next/head";
 import PublicationsCard from "../../../components/publications/PublicationsCard";
-import SectionTopPub from "../../../components/publications/SectionTopPub";
+import SectionTop from "../../../components/layout/SectionTop";
 
 export async function getServerSideProps(context) {
   const { params } = context;
@@ -107,8 +107,11 @@ function ProductsFilteredPage(props) {
     return (
       <Fragment>
         {pageHead}
-        <FilterYearMonth />
-        <p>"Invalid filter. Try again!"</p>
+        <SectionTop
+          publicationPage={true}
+          message={"Invalid filter. Try again!"}
+          selectedDate={filterDateFormated}
+        />
       </Fragment>
     );
   }
@@ -118,8 +121,11 @@ function ProductsFilteredPage(props) {
     return (
       <Fragment>
         {pageHead}
-        <FilterYearMonth />
-        <p>{`No publications were found for:  ${filterDateFormated}`}</p>
+        <SectionTop
+          publicationPage={true}
+          message={`No publications were found for:  ${filterDateFormated}`}
+          selectedDate={filterDateFormated}
+        />
       </Fragment>
     );
   }
@@ -131,7 +137,11 @@ function ProductsFilteredPage(props) {
   return (
     <div>
       {pageHead}
-      <SectionTopPub filterDateFormated={filterDateFormated} />
+      <SectionTop
+        publicationPage={true}
+        message={`Publications found for ${filterDateFormated}`}
+        selectedDate={filterDateFormated}
+      />
 
       <PublicationsList>
         {filteredPublications.map((story) => (

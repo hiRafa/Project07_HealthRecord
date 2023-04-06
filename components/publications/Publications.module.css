@@ -1,13 +1,3 @@
-.section_top {
-  color: var(--color-white);
-  gap: 1rem;
-  margin: 0 auto 3rem;
-}
-
-.section_top p {
-  font-style: italic;
-}
-
 .publications_nav {
   font-size: 1.5rem;
   padding: 0;
@@ -48,7 +38,6 @@
   position: relative;
   border: var(--border-card) var(--color-primary-dark);
   transition: var(--transition-25ms);
-  color: var(--color-black)
 }
 .publications_card:hover {
   background-color: var(--color-primary-dark);
@@ -56,12 +45,18 @@
   border: var(--border-card) var(--color-white);
   transition: var(--transition-25ms);
 }
+.publications_card:hover a > * {
+  color: var(--color-white)
+}
 
 .publications_card a {
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.publications_card a > * {
+  color: var(--color-black)
 }
 
 .card_img {
@@ -124,8 +119,10 @@
   height: 300px;
 }
 .pub_details_body {
-  background-color: var(--color-white);
+  background-color: var(--color-primary-dark);
   padding: var(--padding3);
   border-radius: var(--borderRadius-card);
   gap: var(--gap-pc);
+  color: var(--color-white)
 }
+

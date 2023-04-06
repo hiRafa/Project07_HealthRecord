@@ -2,7 +2,6 @@ import React from "react";
 import classes from "./Lineage.module.css";
 import { SplideTrack, Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
-import { geneOptions, loveOptions } from "../../../helpers/data-helper";
 
 const Geneline = (props) => {
   const userData = props.userData;

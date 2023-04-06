@@ -3,7 +3,7 @@
 .header {
   position: relative;
   width: 100%;
-  height: 5rem;
+  height: var(--header-height);
   z-index: 100;
   background-color: var(--color-primary-dark);
 }
@@ -57,7 +57,7 @@
 
 .navLi a {
   font-weight: 600;
-  font-size: 1.25rem;
+  font-size: 1rem;
   padding: 0.5rem 0.75rem;
   border: 3px solid var(--color-primary-main);
   border-radius: var(--borderRadius-button);
@@ -78,9 +78,7 @@
   border-radius: var(--borderRadius-card);
 }
 
-.navMenuIcon {
-  color: var(--color-white);
-}
+
 .navMenu_button {
   display: none;
 }
@@ -103,7 +101,7 @@
   }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 768px) {
   .logo {
     font-size: 2.5rem;
   }
@@ -113,6 +111,7 @@
   .navUlMobile {
     position: fixed;
     top: 0;
+    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -121,7 +120,7 @@
     padding: 1rem;
     z-index: 110;
     color: var(--color-primary-light);
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: var(--borderRadius-card);
   }
   .navLi {
@@ -142,9 +141,10 @@
     position: relative;
     z-index: 1;
     width: 80px;
+    color: var(--color-white);
   }
   .navMenu_button a span {
-    font-size: 1.5rem;
+    font-size: 2rem;
   }
 }
 
@@ -156,10 +156,43 @@
   position: relative;
   color: var(--color-white);
   padding-bottom: 3rem;
+  text-align: center;
+  gap: 1rem;
+  margin: 0 auto 3rem;
 }
-.section_top > *:last-child {
+
+.section_top p {
+  font-style: italic;
+}
+
+.section_top > *:not(:first-child) {
   position: relative;
   z-index: 2;
+}
+
+.topContainer {
+  color: var(--color-primary-dark);
+  text-align: center;
+}
+
+.topContainer > * {
+  padding-bottom: 1rem;
+}
+.topInner {
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+}
+.topInner > * {
+  gap: 1rem;
+}
+
+.topHome {
+  color: var(--color-primary-dark)
+}
+.topHome_body {
+  gap: 4rem;
+  padding-top: 1rem;
 }
 
 /* Notification  */
@@ -220,24 +253,30 @@
   gap: var(--gap-pc);
 }
 
-@media screen and (max-width: 768px) {
-}
-
 .notificationAppointment {
   position: absolute;
-  width: 100%;
-  top: 5rem; /* adjust as needed to align with the navigation bar */
+  height: fit-content;
+  top: var(--header-height); /* adjust as needed to align with the navigation bar */
   right: 0;
+  left: 0;
   background-color: var(--color-white);
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   padding: .5rem;
   z-index: 999;
-  gap:1rem;
+  gap: 1rem;
+  color: var(--color-primary-dark);
 }
+
 .notificationAppointment > * {
   margin: 0;
 }
 
-
+@media screen and (max-width: 540px) {
+  .notificationAppointment {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .5rem;
+  }
+}
 
 

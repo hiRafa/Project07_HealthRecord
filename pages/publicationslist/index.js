@@ -1,7 +1,6 @@
 import Head from "next/head";
 import React, { Fragment, useState } from "react";
 
-import SectionContainer from "../../components/layout-units/SectionContainer";
 import PublicationsCard from "../../components/publications/PublicationsCard";
 import PublicationsList from "../../components/publications/PublicationsList";
 
@@ -11,7 +10,7 @@ import {
   getFeaturedArticles,
   getUserStories,
 } from "../../helpers/firebaseData-helper";
-import SectionTopPub from "../../components/publications/SectionTopPub";
+import SectionTop from "../../components/layout/SectionTop";
 
 export async function getStaticProps(context) {
   //  featuredProductID identifier on file name
@@ -57,7 +56,7 @@ const PublicationsListPage = ({ articles, stories }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <SectionTopPub />
+      <SectionTop publicationPage={true} />
 
       <section>
         <nav className={` ${classes.publications_nav} `}>

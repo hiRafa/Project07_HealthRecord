@@ -28,8 +28,8 @@ const ProfileTop = () => {
     { pageTitle: "Appointments", link: "/account/appointments" },
     { pageTitle: "Lineage", link: "/account/lineage" },
     { pageTitle: "DNA", link: "/account/DNA" },
-    // { pageTitle: "Meals", link: "/account/meals" },
-    { pageTitle: "Settings", link: "/account/settings" },
+    { pageTitle: "Meals", link: "/account/meals" },
+    // { pageTitle: "Settings", link: "/account/settings" },
   ];
 
   return (

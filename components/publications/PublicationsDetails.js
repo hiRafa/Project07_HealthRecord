@@ -48,7 +48,7 @@ const PublicationsDetails = ({ id, author, image, photo, text, title }) => {
             <img src={`${photo}`} />
           </div>
           <p>{text}</p>
-          <ButtonAll href="/publicationslist" text={"Show all events"} />
+          <ButtonAll href="/publicationslist" text={"Show all publications"} />
         </section>
       </div>
     </Fragment>

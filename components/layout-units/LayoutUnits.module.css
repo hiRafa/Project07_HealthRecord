@@ -28,49 +28,6 @@
   -moz-appearance: textfield;
 }
 
-/* Filter */
-.filter {
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-  padding: 1rem;
-  background-color: var(--color-white);
-  border-radius: 6px;
-  width: 90%;
-  max-width: 40rem;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 0 auto;
-}
-
-.controls {
-  width: 100%;
-  gap: 1rem;
-}
-.controls > * {
-  width: 100%;
-}
-
-.control {
-  flex: 1;
-  gap: 1rem;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.control label {
-  font-weight: bold;
-}
-
-.control select {
-  font: inherit;
-  border-radius: 6px;
-  width: 100%;
-  padding: 0.25rem;
-}
-.filter button {
-  width: 30%;
-  min-width: 100px;
-}
-
 /* INPUT FIELDSET REQUESTED  */
 .fieldset {
   padding: 1rem;

@@ -1,8 +1,8 @@
 import { useSession } from "next-auth/react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SectionContainer from "../layout-units/SectionContainer";
-import AccountAccess from "./AccountAccess";
-import classes from "./Home.module.css";
+import AccountAccess from "../home/AccountAccess";
+import classes from "./Layout.module.css";
 
 const HomeTop = () => {
   const { data: session, status } = useSession();

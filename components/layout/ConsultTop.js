@@ -2,41 +2,33 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import AccountAccess from "../home/AccountAccess";
 import SectionContainer from "../layout-units/SectionContainer";
-import classes from "./Consult.module.css";
+import classes from "./Layout.module.css";
 
-import FilterConsult from "./FilterConsult";
-const ConsultTop = ({ filterOptions }) => {
+import FilterConsult from "../consult/FilterConsult";
+import ButtonAll from "../layout-units/ButtonAll";
+const ConsultTop = ({ selectedFilter, message }) => {
   const { data: session, status } = useSession();
 
-  if (filterOptions) {
+  if (selectedFilter) {
     return (
-      <SectionContainer className={`${classes.consultTop} `}>
-        <a id="consultop" name="consultop"></a>
-        <h1>Find your professional!</h1>
+      <SectionContainer className={`${classes.topContainer} `}>
+        <h1>Find your specialist!</h1>
         <div
-          className={`${classes.consultTopInner} flex_center flex_column_mobile`}
+          className={`${classes.topInner} flex_column `}
         >
-          <div className={`${classes.filterDiv} flex_column`}>
-            <p>{`Publications found for ${filterOptions}`}</p>
             <FilterConsult className={classes.filterConsult} />
-            <ButtonAll href="/consult" text={"Show all professionals"} />
+            <p>{message}</p>
+            <ButtonAll href="/consult" text={"Show all specialists"} />
           </div>
-          <div className={` flex_column`}>
-            <p>
-              Log in or create an account to be able to schedule an appointment
-            </p>
-            {!session && <AccountAccess routerPush={"/consult"} />}
-          </div>
-        </div>
       </SectionContainer>
     );
   } else {
     return (
-      <SectionContainer className={`${classes.consultTop} `}>
+      <SectionContainer className={`${classes.topContainer} `}>
         <a id="consultop" name="consultop"></a>
-        <h1>Find your professional!</h1>
+        <h1>Find your specialist!</h1>
         <div
-          className={`${classes.consultTopInner} flex_center flex_column_mobile`}
+          className={`${classes.topInner} flex_center flex_column_mobile`}
         >
           <div className={`${classes.filterDiv} flex_column`}>
             <p>

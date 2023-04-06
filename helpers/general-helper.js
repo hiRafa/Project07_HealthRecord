@@ -14,18 +14,18 @@ export const formatDate = (date) => {
   });
 };
 
-export function onFindPublication(router, year, month) {
+export function onFindPublication(userouter, folderPath, filter1, filter2) {
   // there has to be two slashes to access [...filteredTransaction]. which is a slug
   // if we only use one slash, then next will access [transactionID] instead
-  if (router && year && month) {
-    const fullPath = `/publicationslist/filter/${year}/${month}`;
-    router.push(fullPath);
-  } else if (router && year) {
-    const fullPath = `/publicationslist/filter/${year}`;
-    router.push(fullPath);
+  if (userouter && filter1 && filter2) {
+    const fullPath = `/${folderPath}/filter/${filter1}/${filter2}`;
+    userouter.push(fullPath);
+  } else if (userouter && filter1) {
+    const fullPath = `/${folderPath}/filter/${filter1}`;
+    userouter.push(fullPath);
   }
 }
-// year month same order as the function in ProductFilter
+// year filter2 same order as the function in ProductFilter
 
 export const togglePrevCurrent = (setState) => {
   setState((prevState) => !prevState);

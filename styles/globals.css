@@ -2,7 +2,7 @@
   /* triad */
   --color-primary-main: #48e0bf;
   --color-primary-transparency: #3e31a330;
-  --color-primary-dark: #1f6153;
+  --color-primary-dark: #1e6e6e;
   --color-primary-light: #84e5d0;
   --color-primary-waves: #84e5d03a;
   
@@ -31,11 +31,13 @@
   --transition: all 1s linear;
   --transition-25ms: all 0.25s linear;
 
+  --max-screen: 2560px;
   --gap-pc: 2rem;
   --top-bottom-spacing: 3rem;
   --boxShadow8: 0px 0px 8px;
   --boxShadow: 0px 0px 16px;
   --padding3: 3rem;
+  --header-height: 4rem;
 
   --fSize: 1rem;
   --fSize25: 0.25rem;
@@ -91,10 +93,19 @@ li {
     background: var(--color-black);
   }
 }
-
+header > * {
+  max-width: var(--max-screen);
+  margin: 0 auto;
+}
 main {
   padding: calc(var(--top-bottom-spacing)*2) 0;
   background-color: var(--color-white);
+  max-width: var(--max-screen);
+  margin: 0 auto;
+}
+footer {
+  max-width: var(--max-screen);
+  margin: 0 auto;
 }
 
 h1 {
@@ -223,6 +234,7 @@ section {
 
 .calendarContainer {
   display: flex;
+  flex-direction: row;
   border-radius: 0 !important;
 }
 
@@ -333,4 +345,56 @@ section {
 }
 .wave4 {
   fill: var(--color-primary-waves);
+}
+
+
+/* SPLIDE JS */
+.splide__arrows  {
+  gap: 1rem;
+  padding: 1rem;
+}
+
+
+/* Filter */
+.filter {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  background-color: var(--color-white);
+  border-radius: 6px;
+  width: 90%;
+  max-width: 40rem;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto;
+}
+
+.filter button {
+  width: 30%;
+  min-width: 100px;
+}
+
+.filter_controls {
+  width: 100%;
+  gap: 1rem;
+}
+.filter_controls > * {
+  width: 100%;
+}
+
+.controls_control {
+  flex: 1;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controls_control label {
+  font-weight: bold;
+}
+
+.controls_control select {
+  font: inherit;
+  border-radius: 6px;
+  width: 100%;
+  padding: 0.25rem;
 }

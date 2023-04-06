@@ -1,22 +1,23 @@
 import { useState, useEffect, Fragment } from "react";
 import ProfileTop from "../../components/account/ProfileTop";
 
-const ThemeSwitcher = () => {
+const ThemeSwitcher = ({ className }) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     const root = document.documentElement;
     if (isDarkMode) {
-    //   root.style.setProperty("--color-primary-main", "#48e0bf");
+      //   root.style.setProperty("--color-primary-main", "#48e0bf");
       root.style.setProperty("--color-primary-dark", "#fff");
       root.style.setProperty("--color-primary-light", "#1e546e");
       root.style.setProperty("--color-white", "#1e546e");
       root.style.setProperty("--color-black", "#fff");
     } else {
-        //   root.style.setProperty("--color-primary-main", "#48e0bf");
-        root.style.setProperty("--color-primary-dark", "#1f6153");
-        root.style.setProperty("--color-primary-light", "#84e5d0");
+      //   root.style.setProperty("--color-primary-main", "#48e0bf");
+      root.style.setProperty("--color-primary-dark", "#1e6e6e");
+      root.style.setProperty("--color-primary-light", "#84e5d0");
       root.style.setProperty("--color-white", "#fff");
+      root.style.setProperty("--color-black", "#000");
     }
   }, [isDarkMode]);
   const toggleTheme = () => {
@@ -25,7 +26,7 @@ const ThemeSwitcher = () => {
 
   return (
     <Fragment>
-      <button onClick={toggleTheme}>
+      <button onClick={toggleTheme} className={className}>
         Switch Mode
       </button>
     </Fragment>

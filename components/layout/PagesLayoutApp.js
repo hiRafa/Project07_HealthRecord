@@ -61,10 +61,9 @@ const PagesLayoutApp = (props) => {
           />
         )}
         {objValues && (
-          <div className={`${classes.notificationAppointment} flex_center`}>
-            <p>Next Appointment: </p>
+          <div className={`${classes.notificationAppointment} flex_center section_container`}>
+            <p>Next Appointment: {objValues.professionalSpeciality} </p>
             <p>{objValues.professionalName}</p>
-            <p>Speciality: {objValues.professionalSpeciality}</p>
             <p>
               Date: {objValues.month}/{objValues.day}/{objValues.year}
             </p>

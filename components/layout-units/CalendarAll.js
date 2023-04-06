@@ -30,7 +30,7 @@ const CalendarAll = (props) => {
   };
 
   return (
-    <div className={`${classes.calendarContainer} glass_bg`}>
+    <div className={`calendarContainer glass_bg`}>
       <Calendar
         value={dateValue}
         onChange={dateOnChange}

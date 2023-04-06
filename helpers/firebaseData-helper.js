@@ -140,6 +140,7 @@ export async function getProfessionals() {
       allProfessionalsArr.push({
         id: key,
         ...Professionals[key],
+        type: "professionals",
       });
     }
   });
@@ -168,37 +169,41 @@ export async function getFacilities() {
       allFacilitiesArr.push({
         id: key,
         ...Facilities[key],
+        type: "facilities",
       });
     }
   });
-  // console.log(allFacilitiesArr);
+  console.log(allFacilitiesArr.id);
   return allFacilitiesArr;
 }
 
-// export async function getData(fireBasePath) {
-//   const response = await fetch(
-//     `https://project-healthrecords-default-rtdb.asia-southeast1.firebasedatabase.app/${fireBasePath}.json`
-//   );
+// --------------------------------------------
+// ----------- FILTER Specialists and Facilities by speciality or type
+export async function getFilteredSpecialists({
+  selectedSpecialist,
+  selectedFacility,
+}) {
+  const professionalsArr = await getProfessionals();
+  const facilitiesArr = await getFacilities();
 
-//   // Always input .json at the end of the url
-//   if (!response.ok) {
-//     throw new Error("Something is not right");
-//   }
+  let filteredSpecialists = [];
 
-//   const Data = await response.json();
-//   // console.log(Data);
+  filteredSpecialists.push(...professionalsArr.filter((obj) => {
+    if (selectedSpecialist && selectedFacility) {
+      return obj.speciality === selectedSpecialist && obj.type === selectedFacility;
+    } else if (selectedSpecialist) {
+      return obj.speciality === selectedSpecialist;
+    }
+  }));
+  
+  filteredSpecialists.push(...facilitiesArr.filter((obj) => {
+    if (selectedSpecialist && selectedFacility) {
+      return obj.speciality.includes(selectedSpecialist) && obj.type === selectedFacility;
+    } else if (selectedFacility) {
+      return obj.speciality.includes(selectedSpecialist);
+    }
+  }));
 
-//   const allDataArr = [];
-//   Object.keys(Data).forEach((key) => {
-//     // console.log(key); // printing all key of objects on first level
-//     // console.log(Data[key]); // printing all objects on first level
-//     if (typeof Data[key] === "object" && Data[key] !== null) {
-//       allDataArr.push({
-//         id: key,
-//         ...Data[key],
-//       });
-//     }
-//   });
-//   // console.log(allDataArr);
-//   return allDataArr;
-// }
+  console.log(filteredSpecialists)
+  return filteredSpecialists;
+}

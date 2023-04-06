@@ -15,39 +15,38 @@ const FilterConsult = ({ className }) => {
   function submitHandler(e) {
     e.preventDefault();
 
-    const selectedYear = specialityInputRef.current.value;
-    const selectedMonth = businessInputRef.current.value;
-
+    const selectedSpeciality = specialityInputRef.current.value;
+    const selectedFacility = businessInputRef.current.value;
     // getting method from parent
     import("../../helpers/general-helper").then((module) => {
-      if (selectedMonth !== "")
-        module.onFindPublication(router, selectedYear, selectedMonth);
-      else if (selectedMonth === "")
-        module.onFindPublication(router, selectedYear);
+      if (selectedFacility !== "")
+        module.onFindPublication(router, "consult", selectedSpeciality, selectedFacility);
+      else if (selectedFacility === "")
+        module.onFindPublication(router, "consult", selectedSpeciality);
     });
   }
 
   return (
-    <form className={`${classes.filter} ${className}`} onSubmit={submitHandler}>
-      <div className={`flex_center flex_column_mobile ${classes.controls}`}>
-        <div className={classes.control}>
+    <form className={`filter ${className}`} onSubmit={submitHandler}>
+      <div className={`flex_center flex_column_mobile filter_controls`}>
+        <div className="controls_control">
           <label htmlFor="speciality" />
           <select id="speciality" ref={specialityInputRef}>
             {/* <option value="">Year</option> */}
-            <option value="">Speciality</option>
-            <option value="gp">GP</option>
-            <option value="ginecologists">Ginecologists</option>
-            <option value="urologists">Urologists</option>
-            <option value="dermathologists">Dermathologists</option>
-            <option value="masseurs">Masseurs</option>
+            <option value="general">GP</option>
+            <option value="ginecologist">Ginecologists</option>
+            <option value="urologist">Urologists</option>
+            <option value="dermathologist">Dermathologists</option>
+            <option value="masseur">Masseurs</option>
+            <option value="psychiatrist">Psychiatrist</option>
           </select>
         </div>
-        <div className={classes.control}>
+        <div className="controls_control">
           <label htmlFor="business" />
           <select id="business" ref={businessInputRef}>
-            <option value="Professionals">Professionals</option>
-            <option value="Clinics">Clinics</option>
-            <option value="Hospitals">Hospitals</option>
+            <option value="">All</option>
+            <option value="professionals">Professionals</option>
+            <option value="facilities">Hospitals</option>
           </select>
         </div>
         <ButtonAll text={`Search`} />

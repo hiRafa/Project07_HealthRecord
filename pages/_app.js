@@ -15,7 +15,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {" "}
       <SessionProvider session={session}>
         <ModalContextProvider>
           <NotificationContextProvider>

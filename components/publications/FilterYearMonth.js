@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import { onFindPublication } from "../../helpers/general-helper";
 
-import classes from "./LayoutUnits.module.css";
+import classes from "./Publications.module.css";
 
-import ButtonAll from "./ButtonAll";
+import ButtonAll from "../layout-units/ButtonAll";
 import { useRouter } from "next/router";
 
 const FilterYearMonth = ({ currentYear, currentMonth }) => {
@@ -20,14 +20,20 @@ const FilterYearMonth = ({ currentYear, currentMonth }) => {
 
     // getting method from parent
     if (selectedMonth !== "")
-      onFindPublication(router, selectedYear, selectedMonth);
-    else if (selectedMonth === "") onFindPublication(router, selectedYear);
+      onFindPublication(
+        router,
+        "publicationslist",
+        selectedYear,
+        selectedMonth
+      );
+    else if (selectedMonth === "")
+      onFindPublication(router, "publicationslist", selectedYear);
   }
 
   return (
-    <form className={classes.filter} onSubmit={submitHandler}>
-      <div className={`flex_center flex_column_mobile ${classes.controls}`}>
-        <div className={classes.control}>
+    <form className="filter" onSubmit={submitHandler}>
+      <div className={`flex_center flex_column_mobile filter_controls`}>
+        <div className="controls_control">
           <label htmlFor="year" />
           <select id="year" ref={yearInputRef}>
             {/* <option value="">Year</option> */}
@@ -39,7 +45,7 @@ const FilterYearMonth = ({ currentYear, currentMonth }) => {
             <option value="2022">2022</option>
           </select>
         </div>
-        <div className={classes.control}>
+        <div className="controls_control">
           <label htmlFor="month" />
           <select id="month" ref={monthInputRef}>
             <option value="">Month</option>

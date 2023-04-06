@@ -4,6 +4,7 @@
   padding: 6rem 0 0;
 }
 
+
 /* HOME  */
 
 .topHome {
@@ -159,7 +160,7 @@
 
 .featured_in h2 {
   text-align: center;
-  color: var(--color-primary-light);
+  color: var(--color-primary-dark);
 }
 
 .featured_sliderContainer {
@@ -262,8 +263,8 @@
 }
 .stories_h2 {
   text-align: center;
-  color: var(--color-primary-light);
-  background-color: var(--color-primary-dark);
+  color: var(--color-primary-dark);
+  background-color: var(--color-white);
   padding: 1rem 0;
   border-radius: 0;
   border-left: none;
@@ -279,44 +280,22 @@
 .stories_cardsContainer {
   padding: 1rem 1rem 2rem;
   width: 100%;
-  margin: auto;
-  justify-content: space-between;
-  position: relative;
-  left: 0;
-  gap: 2rem;
-  overflow-x: scroll;
-  overflow-y: hidden;
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.stories_cardsContainer::-webkit-scrollbar {
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  display: none;
-}
-.stories_cardsContainer h2 {
-  position: absolute;
-  top: 0;
-  height: 80px;
 }
 
 .storyCard {
   width: 30%;
-  min-width: 300px;
   height: 400px;
   box-shadow: var(--boxShadow) var(--color-white);
   border-radius: var(--borderRadius-card);
   background-color: var(--color-primary-dark);
-}
-
-.storyCard_in {
   height: 100%;
   clip-path: inset(2px round var(--borderRadius-card));
-  width: 100%;
   padding: 2rem 1rem;
   color: var(--color-white);
+  width: 250px;
 }
-.storyCard_in::before {
+
+.storyCard::before {
   content: "";
   position: absolute;
   bottom: 0;

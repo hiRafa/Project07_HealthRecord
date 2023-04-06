@@ -14,7 +14,6 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
     facilSpecialistRef,
     facility,
     profOpenHours,
-    professional,
   } = props;
   const [confirmConsult, setConfirmConsult] = useState(false);
   const { data: session, status } = useSession();
@@ -74,11 +73,11 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
     let dataFetched = {
       email: currentUserEmail,
       [scheduleID]: {
-        professionalName: facility ? facility.name : professional.name,
-        professionalID: facility ? facility.id : professional.id,
+        professionalName: facility.name,
+        professionalID: facility.id,
         professionalSpeciality: facility
           ? facilSpecialistRef.current.value
-          : professional.speciality,
+          : facility.speciality,
         day: dateValue.getDate(),
         month: dateValue.getMonth() + 1,
         year: dateValue.getFullYear(),

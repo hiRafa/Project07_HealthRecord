@@ -65,7 +65,7 @@ const Header = () => {
 
   let menuLink = (
     <div
-      className={`animWindow ${classes.navLi} ${classes.navMenu_button}`}
+      className={`animWindow  ${classes.navMenu_button}`}
       onClick={() => {
         !modalIsOpen && toggleModal();
         setOpenNav(true);
@@ -97,8 +97,9 @@ const Header = () => {
           {navLinks}
           {accountLink}
           {session && logOutLink}
-        <ThemeSwitcher/>
+        <ThemeSwitcher className={"showOnPc"}/>
         </ul>
+        <ThemeSwitcher className={"showOnMobile"}/>
         {menuLink}
       </nav>
     </header>
