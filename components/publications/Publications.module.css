@@ -125,4 +125,7 @@
   gap: var(--gap-pc);
   color: var(--color-white)
 }
+.pub_details_body a {
+  margin: 0 auto;
+}
 

@@ -1,7 +1,7 @@
 /* HEADER */
 
 .header {
-  position: relative;
+  position: fixed;
   width: 100%;
   height: var(--header-height);
   z-index: 100;
@@ -69,6 +69,11 @@
 .navLi a:hover {
   cursor: pointer;
   color: var(--color-white);
+}
+
+.navLi_active {
+  color: var(--color-black);
+  background-color: var(--color-primary-main);
 }
 
 .navIcons {
@@ -254,7 +259,7 @@
 }
 
 .notificationAppointment {
-  position: absolute;
+  position: fixed;
   height: fit-content;
   top: var(--header-height); /* adjust as needed to align with the navigation bar */
   right: 0;

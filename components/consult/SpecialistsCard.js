@@ -20,7 +20,35 @@ const FacilitiesList = (props) => {
       consultsArr[i].charAt(0).toUpperCase() + consultsArr[i].slice(1);
   }
 
-  // Optional chaining operator "?", avoidding if statement
+  // Round the star rating value to the nearest half-star
+  const roundedRating = Math.round(facility.review * 2) / 2;
+  console.log(roundedRating);
+
+  // Create a string to store the HTML for the star icons
+  const stars = [];
+
+  // Loop through each star and push the appropriate JSX element based on the rounded rating value
+  for (let i = 1; i <= 5; i++) {
+    if (i <= roundedRating) {
+      stars.push(
+        <i key={i} className="material-symbols-outlined">
+          star
+        </i>
+      ); // Full star
+    } else if (i - 0.5 <= roundedRating) {
+      stars.push(
+        <i key={i} className="material-symbols-outlined">
+          star_half
+        </i>
+      ); // Half star
+    } else {
+      stars.push(
+        <i key={i} className="material-symbols-outlined star-outline">
+          grade
+        </i>
+      ); // Empty star
+    }
+  }
 
   return (
     <SectionContainer className={` ${classes.consult_cardContainer} glass_bg`}>
@@ -32,19 +60,22 @@ const FacilitiesList = (props) => {
       >
         <div className={`${classes.pro_info} `}>
           {facility.photo ? (
-            <div className={` flex_start ${classes.info_title}`}>
-              <div className={` ${classes.imgdiv}`}>
+            <div className={`flex_start `}>
+              <div className={`${classes.imgdiv}`}>
                 <img src={facility.photo} />
               </div>
-              <div>
-                <h2>{facility.name}</h2>
-                <h3>{facility.speciality}</h3>
-                <p>{facility.review}</p>
+              <div className={classes.infodiv}>
+                <h2 className={classes.info_title}>{facility.name}</h2>
+                <h3>
+                  {facility.speciality.charAt(0).toUpperCase() +
+                    facility.speciality.slice(1)}
+                </h3>
+                <div className={`${classes.starsContainer}`}>{stars}</div>
               </div>
             </div>
           ) : (
             <Fragment>
-              <h2>{facility.name}</h2>
+              <h2 className={classes.info_title}>{facility.name}</h2>
               <p>{`${facility.country}, ${facility.city}`}</p>
               {facility.maps && (
                 <a
@@ -55,8 +86,7 @@ const FacilitiesList = (props) => {
                   Address: Maps
                 </a>
               )}
-
-              <p>{facility.review}</p>
+              <div className={`${classes.starsContainer}`}>{stars}</div>
             </Fragment>
           )}
 

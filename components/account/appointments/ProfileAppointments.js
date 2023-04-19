@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useEffect, useState } from "react";
 import SectionContainer from "../../layout-units/SectionContainer";
 import classes from "./Appointments.module.css";
 import { Calendar } from "react-calendar";
@@ -64,16 +64,16 @@ const ProfileAppointments = () => {
       <div className={`flex_start ${classes.appointmentContainer}`}>
         <div className={`flex_column ${classes.appointmentCardContainer}`}>
           {!newAppointmentsState && (
-            <div>
+            <Fragment>
               <h3>Past Appointments</h3>
               {oldAppointments}
-            </div>
+            </Fragment>
           )}
           {newAppointmentsState && (
-            <div>
+            <Fragment>
               <h3>Incoming Appointments</h3>
               {newAppointments}
-            </div>
+            </Fragment>
           )}
         </div>
         <div className={`${classes.calendarContainer} glass_bg`}>

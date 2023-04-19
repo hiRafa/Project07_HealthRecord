@@ -1,3 +1,6 @@
+export const formatText100 = (text) => {
+  return `${text.substring(0, 100)}...`;
+};
 export const formatText300 = (text) => {
   return `${text.substring(0, 300)}...`;
 };

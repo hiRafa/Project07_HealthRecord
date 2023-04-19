@@ -154,8 +154,11 @@ const TimePicker = ({ props, selectedWeekday, dateValue }) => {
             text={`Confirm Consult for: ${hourRef.current.value}:${
               minRef.current.value
             } on 
-         ${dateValue.toDateString()}`}
+         ${dateValue.toDateString()} for ${facility
+          ? facilSpecialistRef.current.value
+          : facility.speciality} Specialist`}
             onClick={(e) => submitHandler(e)}
+            className={classes.confirmationButton}
           />
           <ButtonAll text={`Cancel`} />
         </div>

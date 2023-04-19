@@ -52,7 +52,7 @@ const ProfileRecordsForm = ({ dataFromPar }) => {
   ];
 
   return (
-    <SectionContainer className={`flex_column ${classes.section_noyes}`}>
+    <SectionContainer className={`flex_column consult_border`}>
       <h3>No or Yes Questions</h3>
       <form
         onSubmit={(event) => {

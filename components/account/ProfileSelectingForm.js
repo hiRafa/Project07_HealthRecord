@@ -47,7 +47,7 @@ const ProfileSelectingForm = ({ dataFromPar }) => {
   ];
 
   return (
-    <SectionContainer className={` ${classes.section_accountinfo}`}>
+    <SectionContainer className={`consult_border consult_border-bottom`}>
       <h3>Options Questions</h3>
 
       {inputs.map((input) => (

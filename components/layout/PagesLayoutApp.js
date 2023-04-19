@@ -40,9 +40,13 @@ const PagesLayoutApp = (props) => {
 
   let objValues = null;
   if (dataFetched?.selectedSchedule) {
-    const appointments = dataFetched.selectedSchedule.filter(appointment => Object.keys(appointment)[0] >= currentKey);
+    const appointments = dataFetched.selectedSchedule.filter(
+      (appointment) => Object.keys(appointment)[0] >= currentKey
+    );
     if (appointments.length > 0) {
-      const lowestObj = appointments.reduce((a, b) => Object.keys(a)[0] < Object.keys(b)[0] ? a : b);
+      const lowestObj = appointments.reduce((a, b) =>
+        Object.keys(a)[0] < Object.keys(b)[0] ? a : b
+      );
       objValues = Object.values(lowestObj)[0];
     }
   }
@@ -61,8 +65,15 @@ const PagesLayoutApp = (props) => {
           />
         )}
         {objValues && (
-          <div className={`${classes.notificationAppointment} flex_center section_container`}>
-            <p>Next Appointment: {objValues.professionalSpeciality} </p>
+          <div
+            className={`${classes.notificationAppointment} flex_center section_container`}
+          >
+            <div className="flex_center">
+              <span class="material-symbols-outlined">
+                circle_notifications
+              </span>
+              <p>Next Appointment: {objValues.professionalSpeciality}</p>
+            </div>
             <p>{objValues.professionalName}</p>
             <p>
               Date: {objValues.month}/{objValues.day}/{objValues.year}

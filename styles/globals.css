@@ -5,18 +5,18 @@
   --color-primary-dark: #1e6e6e;
   --color-primary-light: #84e5d0;
   --color-primary-waves: #84e5d03a;
-  
+
   --color-secondary-main: #40b5ed;
   --color-secondary-transparency: #f7de390a;
   --color-secondary-dark: #1e546e;
   --color-secondary-light: #89cff0;
   --color-secondary-waves: #40b6ed6f;
-  
+
   --color-tertiary-main: #d85ee0;
   --color-tertiary-transparency: #f7de390a;
   --color-tertiary-dark: #5d1f61;
   --color-tertiary-light: #e097e5;
-  
+
   --color-dark-nochange: #84e5d03a;
   --color-white: #fff;
   --color-black: #000;
@@ -33,7 +33,7 @@
 
   --max-screen: 2560px;
   --gap-pc: 2rem;
-  --top-bottom-spacing: 3rem;
+  --top-bottom-spacing: 4rem;
   --boxShadow8: 0px 0px 8px;
   --boxShadow: 0px 0px 16px;
   --padding3: 3rem;
@@ -46,6 +46,15 @@
   --fSize125: 1.25rem;
   --fSize150: 1.5rem;
   --fSize175: 1.75rem;
+
+  --step--2: clamp(0.59rem, calc(0.55rem + 0.22vw), 0.72rem);
+  --step--1: clamp(0.67rem, calc(0.59rem + 0.41vw), 0.9rem);
+  --step-0: clamp(0.75rem, calc(0.62rem + 0.65vw), 1.13rem);
+  --step-1: clamp(0.84rem, calc(0.65rem + 0.98vw), 1.41rem);
+  --step-2: clamp(0.95rem, calc(0.67rem + 1.41vw), 1.76rem);
+  --step-3: clamp(1.07rem, calc(0.68rem + 1.96vw), 2.2rem);
+  --step-4: clamp(1.2rem, calc(0.66rem + 2.69vw), 2.75rem);
+  --step-5: clamp(1.35rem, calc(0.63rem + 3.62vw), 3.43rem);
 
   --glass-bg1: rgba(255, 255, 255, 0.7);
   --glass-bg2: #1f615321;
@@ -61,7 +70,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   /* min-height: 100vh;
   min-height: 100dvh; */
-  color: var(--color-black)
+  color: var(--color-black);
 }
 body #__next {
   min-height: 100vh;
@@ -93,12 +102,13 @@ li {
     background: var(--color-black);
   }
 }
+
 header > * {
   max-width: var(--max-screen);
   margin: 0 auto;
 }
 main {
-  padding: calc(var(--top-bottom-spacing)*2) 0;
+  padding: calc(var(--top-bottom-spacing) * 2) 0;
   background-color: var(--color-white);
   max-width: var(--max-screen);
   margin: 0 auto;
@@ -198,10 +208,17 @@ section {
   display: none;
 }
 
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 1;
+}
 .material-symbols-outlined:hover {
   color: var(--color-tertiary-light);
   user-select: none; /* Standard syntax */
 }
+.star-outline {
+  font-variation-settings: "FILL" 0;
+}
+
 .hoverClass {
   transition: var(--transition-25ms);
 }
@@ -347,13 +364,11 @@ section {
   fill: var(--color-primary-waves);
 }
 
-
 /* SPLIDE JS */
-.splide__arrows  {
+.splide__arrows {
   gap: 1rem;
   padding: 1rem;
 }
-
 
 /* Filter */
 .filter {
@@ -397,4 +412,21 @@ section {
   border-radius: 6px;
   width: 100%;
   padding: 0.25rem;
+}
+
+.consult_border {
+  background-color: var(--color-white);
+  padding: var(--padding3);
+  border-left: var(--border-card) var(--color-primary-main);
+  border-right: var(--border-card) var(--color-primary-main);
+}
+.consult_border-bottom {
+  border-bottom: var(--border-card) var(--color-primary-main);
+}
+
+@media screen and (max-width: 1024px) {
+  .consult_border {
+    background-color: var(--color-white);
+    padding: max(3vw, 0.5rem);
+  }
 }

@@ -7,6 +7,8 @@ import {
 } from "../../../helpers/firebaseData-helper";
 
 import PublicationsDetails from "../../../components/publications/PublicationsDetails";
+import { formatText100 } from "../../../helpers/general-helper";
+import HeadCustom from "../../../components/layout/HeadCustom";
 
 export async function getStaticPaths() {
   const allArticles = await getFeaturedArticles();
@@ -50,11 +52,10 @@ const ArticlePage = (props) => {
 
   return (
     <Fragment>
-      <Head>
-        <title>Article: {selectedArticle.title}</title>
-        <meta name="description" content={selectedArticle.title} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadCustom
+        title={`Article: ${selectedArticle.title} (at MyHealth)`}
+        description={formatText100(selectedArticle.text)}
+      />
 
       <PublicationsDetails
         id={selectedArticle.id}

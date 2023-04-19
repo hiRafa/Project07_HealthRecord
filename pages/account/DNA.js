@@ -7,7 +7,7 @@ const DNAPage = () => {
   return (
     <Fragment>
       <ProfileTop />
-      <SectionContainer>
+      <SectionContainer className={"consult_border consult_border-bottom"}>
         <h2>DNA</h2>
         <DNA/>
       </SectionContainer>

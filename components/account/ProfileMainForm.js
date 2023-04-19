@@ -88,7 +88,7 @@ const ProfileMainForm = ({ dataFromPar }) => {
   ];
 
   return (
-    <SectionContainer className={`flex_column ${classes.section_accountinfo}`}>
+    <SectionContainer className={`flex_column consult_border`}>
       <h2>Main</h2>
       <form
         onSubmit={(event) => {

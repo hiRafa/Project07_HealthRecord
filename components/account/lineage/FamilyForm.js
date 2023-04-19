@@ -59,7 +59,7 @@ const FamilyForm = ({ geneline, loveline, userGeneline }) => {
   });
 
   return (
-    <form className={`${classes.form} `} onSubmit={submitHandler}>
+    <form className={`${classes.form}`} onSubmit={submitHandler}>
       <label>Relationship*</label>
       <select
         ref={relationshipRef}
@@ -68,18 +68,22 @@ const FamilyForm = ({ geneline, loveline, userGeneline }) => {
       >
         {geneline &&
           geneOptionsDifference.map((option) => (
-            <option value={option} key={option}>{option}</option>
+            <option value={option} key={option}>
+              {option}
+            </option>
           ))}
         {loveline &&
-          loveOptions.map((option) => <option value={option} key={option}>{option}</option>)}
+          loveOptions.map((option) => (
+            <option value={option} key={option}>
+              {option}
+            </option>
+          ))}
       </select>
 
-      <div>
-        <label htmlFor={"name"} className={`${classes.label}`}>
-          Name (given or nickname)*
-        </label>
-        <input type="text" ref={nameRef} className={``} required />
-      </div>
+      <label htmlFor={"name"} className={`${classes.label}`}>
+        Name (given or nickname)*
+      </label>
+      <input type="text" ref={nameRef} className={``} required />
       <Fragment>
         <label htmlFor={"healthdisorder"} className={`${classes.label}`}>
           Health Disorders
@@ -91,8 +95,8 @@ const FamilyForm = ({ geneline, loveline, userGeneline }) => {
         <input type="text" ref={strengthsRef} className={``} />
       </Fragment>
       <ButtonAll text="Register Family Member" />
-      <p>*required fields</p>
-      <p>Connect accounts functionality to be implemented...</p>
+      <p>*Required fields</p>
+      <p>**Connect accounts functionality to be implemented...</p>
     </form>
   );
 };

@@ -1,15 +1,46 @@
 /* lineage page  */
+.lineageTop {
+  padding-bottom: 0;
+}
 .lineageGrid {
   display: grid;
   grid-template-columns: 30% 1fr;
 }
-
-/* components  */
-/* form */
-.form > * {
+.lineageGrid h2 {
+  text-align: center;
+}
+.lineageGrid h3,
+.lineageGrid h4
+ {
+  text-align: center;
+  font-size: var(--step-1);
+  color: var(--color-primary-dark);
+}
+.lineageGrid h5 {
+  font-size: var(--step-0);
+  color: var(--color-black);
+}
+.lineageTree {
   width: 100%;
 }
-.label {
+/* components  */
+/* form */
+.form {
+  border-right: var(--border-card) var(--color-primary-main);
+  padding-right: var(--padding3);
+  position: sticky;
+  top: 0;
+}
+.form > * {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+.form input,
+.form select {
+  padding: 0.5rem 1rem;
+  width: 100%;
+  border-radius: var(--borderRadius-card);
+  border: 2px solid var(--color-primary-main);
 }
 
 /* tree */
@@ -17,12 +48,35 @@
 .tree {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(6, 1fr);
-  gap: 2rem;
+  grid-template-rows: repeat(5, 1fr);
+  gap: 2vw;
   place-items: center;
-}
-.tree > div {
   width: 100%;
+  position: relative;
+}
+.tree::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../../public/tree-love.png);
+  background-size: cover;
+  background-position: bottom center;
+  filter: blur(4px) saturate(0.5) opacity(.5);
+}
+.tree > * {
+  width: 100%;
+  z-index: 2;
+}
+.tree_love {
+  padding: 3rem 0;
+  grid-template-rows: repeat(
+    5,
+    minmax(0, 1fr)
+  ); /* set the minimum number of rows to 6 */
+  grid-auto-rows: 1fr; /* set the height of additional auto rows to 1fr (or adjust as needed) */
 }
 
 .grandmothermother {
@@ -54,12 +108,14 @@
 }
 
 .splideCSS {
-  grid-area: 6 / 1 / 7 / 5;
   width: 100%;
 }
 .splideSlideCSS {
   display: flex;
   justify-content: center;
+}
+.splideChild > * {
+  text-align: center;
 }
 
 .familyMember {
@@ -67,8 +123,8 @@
 }
 
 .photo {
-  height: 120px;
-  width: 120px;
+  height: min(120px, 16vw);
+  width: min(120px, 16vw);
   border-radius: var(--borderRadius-rounded);
   background-color: pink;
 }
@@ -78,6 +134,58 @@
 }
 
 .splideIn {
+  background: linear-gradient(
+    90deg,
+    var(--color-primary-waves),
+    var(--color-secondary-waves) 100%
+  );
+  padding: 1rem 0;
 }
 .splideIn img {
+}
+
+@media screen and (max-width: 1024px) {
+  .lineageGrid {
+    display: block;
+  }
+  .tree {
+    padding-left: 0;
+    width: 100%;
+  }
+  .form {
+    border-right: none;
+    padding-right: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .form label,
+  .form input,
+  .form select {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .tree {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .tree > * {
+    position: relative;
+    width: 46%;
+    word-break: break-all;
+  }
+  .me,
+  .child,
+  .grandchild {
+    width: 100%;
+  }
+  .tree_love {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .tree_love > * {
+    margin: 0 auto;
+    width: 120px;
+    height: 120px;
+  }
 }

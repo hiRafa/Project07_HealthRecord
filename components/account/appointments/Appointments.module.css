@@ -1,6 +1,9 @@
 .appointmentLayout {
   padding: var(--padding3);
   background-color: var(--color-white);
+  border-left: var(--border-card) var(--color-primary-main);
+  border-right: var(--border-card) var(--color-primary-main);
+  border-bottom: var(--border-card) var(--color-primary-main);
 }
 .appointmentContainer {
   display: grid;

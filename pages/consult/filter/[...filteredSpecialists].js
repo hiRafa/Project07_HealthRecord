@@ -7,6 +7,7 @@ import { getFilteredSpecialists } from "../../../helpers/firebaseData-helper";
 import Head from "next/head";
 import SectionTop from "../../../components/layout/SectionTop";
 import SpecialistsCard from "../../../components/consult/SpecialistsCard";
+import HeadCustom from "../../../components/layout/HeadCustom";
 
 export async function getServerSideProps(context) {
   const { params } = context;
@@ -57,11 +58,12 @@ function ProductsFilteredPage(props) {
     props;
 
   let pageHead = (
-    <Head>
-      <title>Ori Craft & Hobbies - Filtered Products</title>
-      <meta name="description" content={"description"} />
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+    <HeadCustom
+      title={"Health Specialists at your MyHealthJournal Webapp"}
+      description={
+        "Track and manage your health records with ease. Track also your family members health state."
+      }
+    />
   );
 
   // check if filteredSpecialists has been fetched

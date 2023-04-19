@@ -7,8 +7,10 @@ import classes from "./Layout.module.css";
 
 import modalContxt from "../../contexts/modal-context";
 import ThemeSwitcher from "./ThemeSwitcher";
+import { useRouter } from "next/router";
 
 const Header = () => {
+  const router = useRouter();
   const [openNav, setOpenNav] = useState(false);
   const { modalIsOpen, toggleModal } = modalContxt();
   const { data: session, status } = useSession();
@@ -37,7 +39,7 @@ const Header = () => {
   ];
 
   let navLinks = links.map((link) => (
-    <li className={`animWindow ${classes.navLi} `} key={links.pageTitle}>
+    <li className={`animWindow ${classes.navLi} ${router.route === link.link && classes.navLi_active}`} key={links.pageTitle}>
       <Link href={link.link}>
         <span className="material-symbols-outlined navIcons">{link.icon}</span>
         <span className={classes.navLi_text}>{link.pageTitle}</span>
@@ -46,7 +48,7 @@ const Header = () => {
   ));
 
   let accountLink = (
-    <li className={` animWindow ${classes.navLi}`}>
+    <li className={`animWindow ${classes.navLi} ${router.route === "/account" && classes.navLi_active}`}>
       <Link href={session ? "/account" : "/"}>
         <span className="material-symbols-outlined navIcons">cognition</span>
         <span className={classes.navLi_text}>Account</span>
@@ -55,7 +57,7 @@ const Header = () => {
   );
 
   let logOutLink = (
-    <li className={` animWindow ${classes.navLi}`} onClick={handleSignout}>
+    <li className={` animWindow ${classes.navLi} `} onClick={handleSignout}>
       <Link href="/">
         <span className="material-symbols-outlined navIcons">directions_run</span>
         <span className={classes.navLi_text}>Log out</span>

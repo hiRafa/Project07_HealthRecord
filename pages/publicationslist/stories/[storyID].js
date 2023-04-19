@@ -8,6 +8,7 @@ import {
 
 import PublicationsDetails from "../../../components/publications/PublicationsDetails";
 import ButtonAll from "../../../components/layout-units/ButtonAll";
+import HeadCustom from "../../../components/layout/HeadCustom";
 
 export async function getStaticPaths() {
   const allStories = await getUserStories();
@@ -48,11 +49,11 @@ const StoryPage = (props) => {
 
   return (
     <Fragment>
-      <Head>
-        <title>Story: {story.title}</title>
-        <meta name="description" content={story.title} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <HeadCustom
+        title={`Story: ${story.title}`}
+        description={formatText100(story.text)}
+      />
+      
       <PublicationsDetails
         id={story.id}
         title={story.title}

@@ -44,7 +44,7 @@ const LineagePage = () => {
   return (
     <Fragment>
       <ProfileTop />
-      <SectionContainer>
+      <SectionContainer className={`consult_border ${classes.lineageTop}`}>
         <h2>Lineage Tree</h2>
 
         <ButtonAll
@@ -62,19 +62,20 @@ const LineagePage = () => {
           }}
         />
       </SectionContainer>
-      <SectionContainer className={`${classes.lineageGrid}`}>
+
+      <SectionContainer className={`${classes.lineageGrid} consult_border consult_border-bottom`}>
         {(geneline || loveline) && (
           <FamilyForm geneline={geneline} loveline={loveline} userGeneline={userGeneline} />
         )}
         {geneline && (
-          <section>
-            <h3>Geneline</h3>
+          <section className={classes.lineageTree}>
+            <h2>Geneline</h2>
             <Geneline userGeneline={userGeneline} userData={userData}/>
           </section>
         )}
         {loveline && (
-          <section>
-            <h3>Loveline</h3>
+          <section className={classes.lineageTree}>
+            <h2>Loveline</h2>
             <Loveline userLoveline={userLoveline} />
           </section>
         )}
