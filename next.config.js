@@ -13,7 +13,11 @@ module.exports = (phase) => {
         mongodb_password: "academind123",
         mongodb_cluster: "maincluster",
         mongodb_database: "main",
+        NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+        MONGODB_URI: process.env.MONGODB_URI,
+        NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
       },
+      
     };
   }
   //change the below env obj values to any other mongodb username,
@@ -25,6 +29,9 @@ module.exports = (phase) => {
       mongodb_password: "academind123",
       mongodb_cluster: "maincluster",
       mongodb_database: "main",
+      NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+      MONGODB_URI: process.env.MONGODB_URI,
+      NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     },
     eslint: {
       // Warning: This allows production builds to successfully complete even if
