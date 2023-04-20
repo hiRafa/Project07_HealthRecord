@@ -21,7 +21,7 @@ const InputConversion = ({ inputConvert, getDataFromChild }) => {
       setHeightFt(Math.floor(+data * 0.032808));
       setHeightCm(+data);
     }
-  }, [data]);
+  }, [data, id]);
 
   const [isEditingMain, setIsEditingMain] = useState(true);
   // console.log(data);

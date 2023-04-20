@@ -16,10 +16,10 @@ const InputReq = ({ input, getDataFromChild }) => {
     list,
     options,
   } = input;
+  const inputRef = useRef();
 
   if (id === "weight" || id === "height") return;
 
-  const inputRef = useRef();
 
   // LABEL
   const labelCustom = (

@@ -59,7 +59,7 @@ const ProfileAppointments = () => {
   );
 
   return (
-    <SectionContainer className={`flex_column ${classes.appointmentLayout}`}>
+    <SectionContainer className={`flex_column consult_border consult_border-bottom`}>
       <h2>Profile Appointments</h2>
       <div className={`flex_start ${classes.appointmentContainer}`}>
         <div className={`flex_column ${classes.appointmentCardContainer}`}>
@@ -75,7 +75,12 @@ const ProfileAppointments = () => {
               {newAppointments}
             </Fragment>
           )}
+          <ButtonAll
+            text={`${newAppointmentsState ? "Past" : "Incoming"}`}
+            onClick={() => setNewAppointmentsState((prevState) => !prevState)}
+          />
         </div>
+
         <div className={`${classes.calendarContainer} glass_bg`}>
           <Calendar
             value={dateValue}
@@ -90,10 +95,6 @@ const ProfileAppointments = () => {
             className={`calendar ${classes.appointmentCalendar}`}
           />
         </div>
-        <ButtonAll
-          text={`${newAppointmentsState ? "Past" : "Incoming"}`}
-          onClick={() => setNewAppointmentsState((prevState) => !prevState)}
-        />
       </div>
     </SectionContainer>
   );

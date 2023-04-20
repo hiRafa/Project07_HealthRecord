@@ -69,10 +69,10 @@ const PagesLayoutApp = (props) => {
             className={`${classes.notificationAppointment} flex_center section_container`}
           >
             <div className="flex_center">
-              <span class="material-symbols-outlined">
+              <span className="material-symbols-outlined">
                 circle_notifications
               </span>
-              <p>Next Appointment: {objValues.professionalSpeciality}</p>
+              <p className={classes.notificationNext}>Next Appointment: {objValues.professionalSpeciality}</p>
             </div>
             <p>{objValues.professionalName}</p>
             <p>

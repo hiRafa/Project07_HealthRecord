@@ -1,13 +1,5 @@
-.appointmentLayout {
-  padding: var(--padding3);
-  background-color: var(--color-white);
-  border-left: var(--border-card) var(--color-primary-main);
-  border-right: var(--border-card) var(--color-primary-main);
-  border-bottom: var(--border-card) var(--color-primary-main);
-}
-.appointmentContainer {
-  display: grid;
-  grid-template-columns: 35% 1fr;
+.appointmentCardContainer {
+  width: 60%;
 }
 .appointmentCard {
   border: var(--border-card) var(--color-primary-main);
@@ -19,6 +11,22 @@
   gap: 0.5rem;
   font-weight: 700;
 }
+.calendarContainer {
+  width: 40%;
+}
 .appointmentCalendar {
   width: 100%;
+}
+
+@media only screen and (max-width: 1024px) {
+}
+
+@media only screen and (max-width: 768px) {
+  .appointmentCardContainer,
+  .calendarContainer {
+    width: 100%;
+  }
+  .appointmentContainer {
+    flex-direction: column;
+  }
 }

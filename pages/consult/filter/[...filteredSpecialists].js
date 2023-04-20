@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
 function ProductsFilteredPage(props) {
   const { filteredData, selectedSpecialist, selectedFacility, hasError } =
     props;
-
+  console.log(filteredData)
   let pageHead = (
     <HeadCustom
       title={"Health Specialists at your MyHealthJournal Webapp"}
@@ -115,7 +115,7 @@ function ProductsFilteredPage(props) {
       />
 
       {filteredData &&
-        filteredData.map((obj) => <SpecialistsCard facility={obj} />)}
+        filteredData.map((obj) => <SpecialistsCard facility={obj} key={obj.id}/>)}
     </div>
   );
 }

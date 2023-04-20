@@ -12,7 +12,6 @@ import {
 } from "../../helpers/firebaseData-helper";
 import SectionTop from "../../components/layout/SectionTop";
 import HeadCustom from "../../components/layout/HeadCustom";
-import { formatText100 } from "../../helpers/general-helper";
 
 export async function getStaticProps(context) {
   //  featuredProductID identifier on file name

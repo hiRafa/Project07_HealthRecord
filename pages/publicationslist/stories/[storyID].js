@@ -9,6 +9,7 @@ import {
 import PublicationsDetails from "../../../components/publications/PublicationsDetails";
 import ButtonAll from "../../../components/layout-units/ButtonAll";
 import HeadCustom from "../../../components/layout/HeadCustom";
+import { formatText100 } from "../../../helpers/general-helper";
 
 export async function getStaticPaths() {
   const allStories = await getUserStories();

@@ -107,12 +107,11 @@
 
 .featured_in {
   height: 100%;
-  min-height: 700px;
   margin: auto;
   position: relative;
   color: var(--color-white);
   padding: 2rem;
-  gap: var(--gap-pc);
+  gap: 1rem;
   position: relative;
   border-radius: var(--borderRadius-card);
   justify-content: space-between;

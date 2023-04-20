@@ -269,7 +269,7 @@ section {
 
 @media screen and (max-width: 768px) {
   :root {
-    --top-bottom-spacing: 2rem;
+    --top-bottom-spacing: 5rem;
   }
   .flex_column_mobile {
     display: flex !important;
@@ -282,7 +282,11 @@ section {
     display: block;
   }
 }
-
+@media screen and (max-width: 430px) {
+  :root {
+    --top-bottom-spacing: 6rem;
+  }
+}
 /* --------------- Animation */
 
 .animWindow {
