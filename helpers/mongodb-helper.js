@@ -2,9 +2,9 @@ import { MongoClient } from "mongodb";
 import { useSession } from "next-auth/react";
 
 export async function connectToMongoDB() {
-  
-  const MongoClientConnection = await MongoClient.connect(`mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_cluster}.cbw0nhb.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`
-    // "mongodb+srv://hirafa:academind123@maincluster.cbw0nhb.mongodb.net/main?retryWrites=true&w=majority"
+  // const MongoClientConnection = await MongoClient.connect(`mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_cluster}.cbw0nhb.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`
+  const MongoClientConnection = await MongoClient.connect(
+    "mongodb+srv://hirafa:academind123@maincluster.cbw0nhb.mongodb.net/main?retryWrites=true&w=majority"
     // "mongodb+srv://hirafa:<password><password>@maincluster.cbw0nhb.mongodb.net/?retryWrites=true&w=majority"
   );
   return MongoClientConnection;
