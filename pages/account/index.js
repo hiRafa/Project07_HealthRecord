@@ -29,7 +29,7 @@ const ProfilePage = () => {
   if (isLoading) {
     return (
       <Fragment>
-        {/* <ProfileTop /> */}
+        <ProfileTop />
         <SectionContainer className={`flex_column consult_border`}>
           <p>Loading your profile data...</p>
         </SectionContainer>
