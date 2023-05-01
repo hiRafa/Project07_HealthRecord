@@ -29,8 +29,8 @@ const ProfilePage = () => {
   if (isLoading) {
     return (
       <Fragment>
-        <ProfileTop />
-        <p>Loading...</p>;
+        {/* <ProfileTop /> */}
+        <SectionContainer className={`flex_column consult_border`}><p>Loading...</p></SectionContainer>;
       </Fragment>
     );
   }
@@ -39,11 +39,12 @@ const ProfilePage = () => {
     return (
       <Fragment>
         <ProfileTop />
-        <p></p>
+        <p>Error!</p>
       </Fragment>
     );
   }
-  console.log(userData)
+  
+  // console.log(userData)
   return (
     <Fragment>
       <ProfileTop />
