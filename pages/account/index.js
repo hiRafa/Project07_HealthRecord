@@ -30,7 +30,9 @@ const ProfilePage = () => {
     return (
       <Fragment>
         {/* <ProfileTop /> */}
-        <SectionContainer className={`flex_column consult_border`}><p>Loading...</p></SectionContainer>;
+        <SectionContainer className={`flex_column consult_border`}>
+          <p>Loading your profile data...</p>
+        </SectionContainer>
       </Fragment>
     );
   }
@@ -43,7 +45,7 @@ const ProfilePage = () => {
       </Fragment>
     );
   }
-  
+
   // console.log(userData)
   return (
     <Fragment>
@@ -54,7 +56,8 @@ const ProfilePage = () => {
       {!userData.fullname && (
         <SectionContainer className={`flex_column consult_border`}>
           <p>
-            Fill in your basic information in order to register more specific records like health conditions, diseases, pregnancy, etc.
+            Fill in your basic information in order to register more specific
+            records like health conditions, diseases, pregnancy, etc.
           </p>
         </SectionContainer>
       )}

@@ -9,6 +9,7 @@ import PublicationsList from "../../../components/publications/PublicationsList"
 import Head from "next/head";
 import PublicationsCard from "../../../components/publications/PublicationsCard";
 import SectionTop from "../../../components/layout/SectionTop";
+import SectionContainer from "../../../components/layout-units/SectionContainer";
 
 export async function getServerSideProps(context) {
   const { params } = context;
@@ -48,7 +49,7 @@ export async function getServerSideProps(context) {
         selectedDate: { selectedYear, selectedMonth },
       },
     };
-  } else if (selectedYear) {
+  } else if (selectedYear && !selectedMonth) {
     const filteredPublications = await getFilteredPublications({
       selectedYear,
     });
@@ -96,7 +97,9 @@ function ProductsFilteredPage(props) {
     return (
       <Fragment>
         {pageHead}
-        <p className="center">Loading...</p>
+        <SectionContainer className="loading">
+          <p className="center">Loading...</p>
+        </SectionContainer>
       </Fragment>
     );
   }
