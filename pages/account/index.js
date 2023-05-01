@@ -5,6 +5,7 @@ import ProfileYesNoForm from "../../components/account/ProfileYesNoForm";
 import ProfileSelectingForm from "../../components/account/ProfileSelectingForm";
 import { useSession } from "next-auth/react";
 import { useQuery } from "react-query";
+import SectionContainer from "../../components/layout-units/SectionContainer";
 
 const ProfilePage = () => {
   const { data: session } = useSession();
@@ -42,13 +43,20 @@ const ProfilePage = () => {
       </Fragment>
     );
   }
-
+  console.log(userData)
   return (
     <Fragment>
       <ProfileTop />
       <ProfileMainForm dataFromPar={userData} />
-      <ProfileYesNoForm dataFromPar={userData} />
-      <ProfileSelectingForm dataFromPar={userData} />
+      {userData.fullname && <ProfileYesNoForm dataFromPar={userData} />}
+      {userData.fullname && <ProfileSelectingForm dataFromPar={userData} />}
+      {!userData.fullname && (
+        <SectionContainer className={`flex_column consult_border`}>
+          <p>
+            Fill in your basic information in order to register more specific records like health conditions, diseases, pregnancy, etc.
+          </p>
+        </SectionContainer>
+      )}
     </Fragment>
   );
 };

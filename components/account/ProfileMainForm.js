@@ -13,7 +13,7 @@ import {
 import InputConversion from "../layout-units/InputConversion";
 
 const ProfileMainForm = ({ dataFromPar }) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(dataFromPar ? true : false);
   const { successfullNotification, errorNotification } = useNotification();
 
   const [dataFetched, setDataFetched] = useState({ ...dataFromPar });

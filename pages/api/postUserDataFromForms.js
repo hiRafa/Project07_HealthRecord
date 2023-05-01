@@ -12,15 +12,15 @@ async function handler(req, res) {
   }
   if (req.method === "POST") {
     const { ...dataFetched } = req.body;
-    console.log(dataFetched);
-    console.log(dataFetched.email);
+    // console.log(dataFetched);
+    // console.log(dataFetched.email);
     const emailForFilter = dataFetched.email;
-    console.log(emailForFilter);
+    // console.log(emailForFilter);
     delete dataFetched._id;
     delete dataFetched.email;
 
     let result;
-    if (dataFetched.name) {
+    if (dataFetched.fullname) {
       try {
         result = await MongoClientConnection.db()
           .collection("users")
@@ -68,6 +68,24 @@ async function handler(req, res) {
                 // loveline needs to be between quotes"inside".
                 // when VS code saves it removes.
                 "loveline": dataFetched,
+              },
+            }
+          );
+        res.status(201).json({ message: "Data Saved" });
+      } catch (error) {
+        res.status(500).json({ message: "Saving Form Failed" });
+      }
+    }else if (dataFetched.allconditions) {
+      delete dataFetched.allconditions;
+      const key = Object.keys(dataFetched)[0]
+      try {
+        result = await MongoClientConnection.db()
+          .collection("users")
+          .updateOne(
+            { email: emailForFilter },
+            {
+              $push: {
+              [key]: Object.values(dataFetched),
               },
             }
           );

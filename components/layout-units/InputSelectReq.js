@@ -13,24 +13,31 @@ const InputSelectReq = ({ input, dataFetched }) => {
 
   const inputRef = useRef();
   const [isEditing, setIsEditing] = useState(false);
+  // setting the options to a state in order to delete the already chosen options.
+  const [optionsToSelect, setOptionsToSelect] = useState([...options]);
+  // array state for set the user`s previous/current selected options
   const [selectedOptions, setSelectedOptions] = useState([]);
+
   useEffect(() => {
     if (data) {
       setSelectedOptions(data);
-    } else {
-      setSelectedOptions("");
     }
-    console.log(selectedOptions);
+    // console.log(selectedOptions);
   }, [data]);
   // State with the user data if there is any, if not it is an empty array
   // Same state that will be updated and posted on the database
-  console.log(selectedOptions.length);
+  // console.log(selectedOptions.length);
+  // console.log(selectedOptions);
   const onAddtoAnswersArray = () => {
-    if (selectedOptions.includes(inputRef.current.value)) {
-      console.log(`it is returning`);
+    // console.log(selectedOptions);
+    if (selectedOptions.includes(inputRef.current.value) || inputRef.current.value === "select" || inputRef.current.value === "Select") {
+      // console.log(`it is returning`);
       return;
     } else {
+      // set the selected option to the array including the previous selections
       setSelectedOptions([...selectedOptions, inputRef.current.value]);
+      // delete option when choosing one
+      // setOptionsToSelect(optionsToSelect.filter((el, i, arr) => el !== inputRef.current.value));
     }
   };
   // Adding options to the state array in order to send it back to the server when saved
@@ -68,13 +75,16 @@ const InputSelectReq = ({ input, dataFetched }) => {
         <h4>{label}</h4>
         <div className={`flex_start ${classes.inputSelect} `}>
           {isEditing && (
-            <select ref={inputRef} className={`flex_center ${classes.select}`}>
-              {options.map((option) => (
-                <option
-                  value={option}
-                  key={option}
-                  onClick={() => onAddtoAnswersArray()}
-                >
+            <select
+              ref={inputRef}
+              className={`flex_center ${classes.select}`}
+              onChange={() => onAddtoAnswersArray()}
+            >
+              <option value={"select"} key={"select"}>
+                Select
+              </option>
+              {optionsToSelect.map((option) => (
+                <option value={option} key={option}>
                   {option}
                 </option>
               ))}
@@ -90,7 +100,6 @@ const InputSelectReq = ({ input, dataFetched }) => {
           // showing all selected options inside the state array
           <ul className={`flex_center ${classes.options_ul}`}>
             {selectedOptions.length === 0 && <p>{`No ${id} registered`}</p>}
-
             {selectedOptions &&
               selectedOptions.map((option) => {
                 if (!isEditing) {

@@ -64,6 +64,36 @@ export const profileFormSubmitHandler = (
     .catch((error) => errorNotification("Error!", error));
 };
 
+export const optionsFormSubmitHandler = (
+  data,
+  successfullNotification,
+  errorNotification
+) => {
+  fetch("/api/postUserSelectedConditions", {
+    method: "POST",
+    body: JSON.stringify({
+      ...data,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      return response.json().then((data) => {
+        errorNotification(data.message || "Something went wrong!");
+      });
+    })
+    .then(
+      // (data) => console.log(data),
+      successfullNotification("Success!", "Your comment was registered!")
+    )
+    .catch((error) => errorNotification("Error!", error));
+};
+
 export const fetchUserData = (currentUserEmail, setDataFetched) => {
   if (currentUserEmail) {
     fetch(`/api/userData/${currentUserEmail}`)

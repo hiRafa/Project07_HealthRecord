@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
-import ButtonAll from "../layout-units/ButtonAll";
 import InputSelectReq from "../layout-units/InputSelectReq";
 import SectionContainer from "../layout-units/SectionContainer";
-
-import classes from "./Account.module.css";
 
 const ProfileSelectingForm = ({ dataFromPar }) => {
   const [dataFetched, setDataFetched] = useState({});
