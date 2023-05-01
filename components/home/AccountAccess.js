@@ -56,8 +56,8 @@ const AccountAccess = ({ extraInfo, routerPush }) => {
       errorNotification("Weak Password!");
       return;
     }
-    // if trying to log in
-    if (isLogin) {
+    
+    let signInFunction = async () => {
       let response;
       await signIn("credentials", {
         redirect: false,
@@ -73,8 +73,14 @@ const AccountAccess = ({ extraInfo, routerPush }) => {
         errorNotification(response.error);
       }
     }
-    // Sign up conditions
+    
+    
+    // if trying to log in
+    if (isLogin) {
+      signInFunction()
+    }
     else {
+      // Sign up conditions
       const enteredPassword2 = password2InputRef.current.value;
       if (enteredPassword !== enteredPassword2) {
         errorNotification("Passwords not matching");
@@ -85,6 +91,7 @@ const AccountAccess = ({ extraInfo, routerPush }) => {
         const result = await signUp(enteredEmail, enteredPassword);
         // console.log(result);
         successfullNotification(result.message);
+        signInFunction();
       } catch (error) {
         // console.log(error.message);
         // error coming from signUp function ↑ from throw new Error
