@@ -77,47 +77,57 @@ export async function getStoryID(id) {
 
 // --------------------------------------------
 // ----------- FILTER Publications by selectedYear and selectedMonth
+// BEFORE CHAT GPT
+// export async function getFilteredPublications({ selectedYear, selectedMonth }) {
+//   const articlesArr = await getFeaturedArticles();
+//   const storiesArr = await getUserStories();
+//   // console.log(articlesArr)
+//   // console.log(storiesArr)
+//   let filteredPub = [];
+//   const mapFilter = (arr) => {
+//     arr
+//       .map((obj) => {
+//         const year = +obj.date.toString().slice(0, 4);
+//         const month = +obj.date.toString().substring(4, 6);
+//         const key = obj.id;
+
+//         return { year, month, ...obj, key };
+//       })
+//       .filter((obj) => {
+//         if (selectedMonth) {
+//           if (obj.year === selectedYear && obj.month === selectedMonth) {
+//             filteredPub.push(obj);
+//           }
+//         } else {
+//           if (obj.year === selectedYear) {
+//             filteredPub.push(obj);
+//           }
+//         }
+//       });
+//   };
+//   mapFilter(articlesArr);
+//   mapFilter(storiesArr);
+//   // let filteredPub = [filteredArticles, filteredStories];
+
+//   return filteredPub;
+// }
+
+// AFTER CHAT GPT
 export async function getFilteredPublications({ selectedYear, selectedMonth }) {
   const articlesArr = await getFeaturedArticles();
   const storiesArr = await getUserStories();
-
-  let filteredPub = [];
-  articlesArr
-    .map((art) => {
-      const year = +art.date.toString().slice(0, 4);
-      const month = +art.date.toString().substring(4, 6);
-      const key = art.id;
-      // console.log(year, month);
-      return { year, month, ...art, key };
-    })
-    .filter((art) => {
-      // console.log(art);
-      if (art.year === selectedYear && art.month === selectedMonth) {
-        filteredPub.push(art);
-      } else if (art.year === selectedYear) {
-        filteredPub.push(art);
-      }
-    });
-  storiesArr
-    .map((sto) => {
-      const year = +sto.date.toString().slice(0, 4);
-      const month = +sto.date.toString().substring(4, 6);
-      const key = sto.id;
-      // console.log(year, month);
-      return { year, month, ...sto, key };
-    })
-    .filter((sto) => {
-      // console.log(sto);
-      if (sto.year === selectedYear && sto.month === selectedMonth) {
-        filteredPub.push(sto);
-      } else if (sto.year === selectedYear) {
-        filteredPub.push(sto);
-      }
-    });
-  // let filteredPub = [filteredArticles, filteredStories];
+  
+  const filteredPub = [...articlesArr, ...storiesArr].filter(obj => {
+    const year = +obj.date.toString().slice(0, 4);
+    const month = +obj.date.toString().substring(4, 6);
+    // return (!selectedYear || year === selectedYear) && (!selectedMonth || month === selectedMonth);
+    return year === selectedYear && (!selectedMonth || month === selectedMonth);
+  }).map(objFiltered => ({ ...objFiltered, year: +objFiltered.date.toString().slice(0, 4), month: +objFiltered.date.toString().substring(4, 6), key: objFiltered.id }));
 
   return filteredPub;
 }
+
+// -------------- Consultations Professionals and Facilities
 
 export async function getProfessionals() {
   const response = await fetch(
@@ -173,7 +183,7 @@ export async function getFacilities() {
       });
     }
   });
-  console.log(allFacilitiesArr.id);
+  // console.log(allFacilitiesArr.id);
   return allFacilitiesArr;
 }
 
@@ -188,22 +198,31 @@ export async function getFilteredSpecialists({
 
   let filteredSpecialists = [];
 
-  filteredSpecialists.push(...professionalsArr.filter((obj) => {
-    if (selectedSpecialist && selectedFacility) {
-      return obj.speciality === selectedSpecialist && obj.type === selectedFacility;
-    } else if (selectedSpecialist) {
-      return obj.speciality === selectedSpecialist;
-    }
-  }));
-  
-  filteredSpecialists.push(...facilitiesArr.filter((obj) => {
-    if (selectedSpecialist && selectedFacility) {
-      return obj.speciality.includes(selectedSpecialist) && obj.type === selectedFacility;
-    } else if (selectedFacility) {
-      return obj.speciality.includes(selectedSpecialist);
-    }
-  }));
+  filteredSpecialists.push(
+    ...professionalsArr.filter((obj) => {
+      if (selectedSpecialist && selectedFacility) {
+        return (
+          obj.speciality === selectedSpecialist && obj.type === selectedFacility
+        );
+      } else if (selectedSpecialist) {
+        return obj.speciality === selectedSpecialist;
+      }
+    })
+  );
 
-  console.log(filteredSpecialists)
+  filteredSpecialists.push(
+    ...facilitiesArr.filter((obj) => {
+      if (selectedSpecialist && selectedFacility) {
+        return (
+          obj.speciality.includes(selectedSpecialist) &&
+          obj.type === selectedFacility
+        );
+      } else if (selectedFacility) {
+        return obj.speciality.includes(selectedSpecialist);
+      }
+    })
+  );
+
+  // console.log(filteredSpecialists)
   return filteredSpecialists;
 }
