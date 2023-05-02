@@ -23,28 +23,28 @@ const ProfileAppointments = () => {
 
   const [showTimes, setShowTimes] = useState(false);
   const [dateValue, dateOnChange] = useState(new Date());
-  const [newAppointmentsState, setNewAppointmentsState] = useState(true);
-
-  const arr = dataFetched?.selectedSchedule.flatMap((appointment) =>
-    Object.keys(appointment).map((key) => (
-      <article
-        className={`flex_column ${classes.appointmentCard}`}
-        key={`${appointment[key].year}${appointment[key].month}${appointment[key].day}${appointment[key].hour}${appointment[key].min}`}
-      >
-        <h3>{appointment[key].professionalName}</h3>
-        <p>{appointment[key].professionalSpeciality}</p>
-        <div className={`flex_end ${classes.appointmentDate}`}>
-          <p>Day: {appointment[key].day}</p>
-          <p>
-            {appointment[key].month}/{appointment[key].year}
-          </p>
-          <p>
-            {appointment[key].hour}:{appointment[key].min}
-          </p>
-        </div>
-      </article>
-    ))
-  );
+  const [newOldAptState, setnewOldAptState] = useState(true);
+  
+  const arr = dataFetched?.selectedSchedule?.flatMap((appointment) =>
+  Object.keys(appointment).map((key) => (
+    <article
+      className={`flex_column ${classes.appointmentCard}`}
+      key={`${appointment[key].year}${appointment[key].month}${appointment[key].day}${appointment[key].hour}${appointment[key].min}`}
+    >
+      <h3>{appointment[key].professionalName}</h3>
+      <p>{appointment[key].professionalSpeciality}</p>
+      <div className={`flex_end ${classes.appointmentDate}`}>
+        <p>Day: {appointment[key].day}</p>
+        <p>
+          {appointment[key].month}/{appointment[key].year}
+        </p>
+        <p>
+          {appointment[key].hour}:{appointment[key].min}
+        </p>
+      </div>
+    </article>
+  ))
+) || [];
 
   const dateHelper = new Date();
   const currentDate = `${dateHelper.getFullYear()}${
@@ -63,21 +63,21 @@ const ProfileAppointments = () => {
       <h2>Profile Appointments</h2>
       <div className={`flex_start ${classes.appointmentContainer}`}>
         <div className={`flex_column ${classes.appointmentCardContainer}`}>
-          {!newAppointmentsState && (
+          {!newOldAptState && (
             <Fragment>
               <h3>Past Appointments</h3>
               {oldAppointments}
             </Fragment>
           )}
-          {newAppointmentsState && (
+          {newOldAptState && (
             <Fragment>
               <h3>Incoming Appointments</h3>
               {newAppointments}
             </Fragment>
           )}
           <ButtonAll
-            text={`${newAppointmentsState ? "Past" : "Incoming"}`}
-            onClick={() => setNewAppointmentsState((prevState) => !prevState)}
+            text={`${newOldAptState ? "Past" : "Incoming"}`}
+            onClick={() => setnewOldAptState((prevState) => !prevState)}
           />
         </div>
 

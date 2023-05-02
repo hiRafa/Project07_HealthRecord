@@ -57,10 +57,10 @@ export const profileFormSubmitHandler = (
         errorNotification(data.message || "Something went wrong!");
       });
     })
-    .then(
-      // (data) => console.log(data),
-      successfullNotification("Success!", "Your comment was registered!")
-    )
+    .then((data) => {
+      successfullNotification("Success!", "Your data was registered!");
+      window.location.reload();
+    })
     .catch((error) => errorNotification("Error!", error));
 };
 
